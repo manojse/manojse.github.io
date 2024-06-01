@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Message Helper Extension</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 50px 0;
+            background-color: #00695c;
+            color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .header img {
+            width: 120px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+        .header p {
+            font-size: 1.2em;
+        }
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 40px;
+        }
+        .feature {
+            background-color: #fff;
+            width: 45%;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+        .feature h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #00695c;
+        }
+        .feature p {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #666;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+        @media (max-width: 768px) {
+            .feature {
+                width: 100%;
+            }
+        }
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            background-color: #004d40;
+            color: #fff;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="image__3___1_-removebg-preview.png" alt="WhatsApp Message Helper Extension">
+            <h1>WhatsApp Message Helper</h1>
+            <p>Enhance your WhatsApp experience with our powerful Chrome extension</p>
+        </div>
+        <div class="features">
+            <div class="feature">
+                <h2>Hide Messages</h2>
+                <p>Easily hide your sensitive messages from prying eyes with a single click.</p>
+            </div>
+            <div class="feature">
+                <h2>Quick Start Conversations</h2>
+                <p>Start a WhatsApp chat without the hassle of saving the mobile number in your contacts. Just enter the number and start chatting instantly.</p>
+            </div>
+            <div class="feature">
+                <h2>User-Friendly Interface</h2>
+                <p>Simple and intuitive design to make your WhatsApp experience smoother.</p>
+            </div>
+            <div class="feature">
+                <h2>Secure</h2>
+                <p>Your privacy is our priority. The extension operates securely without accessing or storing your data.</p>
+            </div>
+            <div class="feature">
+                <h2>Free to Use</h2>
+                <p>Enjoy all these features without any cost.</p>
+            </div>
+        </div>
+        <div class="footer">
+            <p>As featured on:</p>
+            <img src="logo1.png" alt="Logo 1" style="margin: 0 10px;">
+            <img src="logo2.png" alt="Logo 2" style="margin: 0 10px;">
+            <img src="logo3.png" alt="Logo 3" style="margin: 0 10px;">
+            <img src="logo4.png" alt="Logo 4" style="margin: 0 10px;">
+        </div>
+    </div>
+</body>
+</html>
