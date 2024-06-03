@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <style>
-      body {
+        body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
@@ -36,6 +36,12 @@
             margin: 0;
             font-size: 2.5em;
             font-weight: 700;
+        }
+        .header p.credit {
+            margin-top: 10px;
+            font-size: 1em;
+            font-weight: 300;
+            color: #b2dfdb;
         }
         .header p {
             font-size: 1.2em;
@@ -98,8 +104,7 @@
             height: 400px;
             padding-top: 10px;
             padding-bottom: 10px;
-            position: relative; /* Ensure the container has relative positioning */
-            overflow: hidden;
+            position: relative;
         }
         .swiper-slide {
             background: #fff;
@@ -144,6 +149,17 @@
             color: #fff;
             border-radius: 10px;
         }
+        .linkedin-link {
+            display: block;
+            margin-top: 10px;
+            color: #b2dfdb;
+            font-size: 1em;
+            text-decoration: none;
+        }
+        .linkedin-link:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -151,6 +167,8 @@
         <div class="header">
             <img src="your-extension-image-url.jpg" alt="WhatsApp Message Helper Extension">
             <h1>WhatsApp ChatShield And Quick Chat</h1>
+            <p class="credit">Design and Developed by Manoj Barma</p>
+            <a href="https://www.linkedin.com/in/manojbarma/" target="_blank" class="linkedin-link">Connect on LinkedIn</a>
             <p>Enhance your WhatsApp experience with our powerful Chrome extension</p>
             <a href="https://chromewebstore.google.com/detail/whatsapp-chatshield-and-q/jikakmgcoakpdfeefigdhdlgndplcdkm" target="_blank" class="btn">Get the Extension</a>
         </div>
