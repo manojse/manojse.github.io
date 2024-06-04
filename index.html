@@ -8,161 +8,230 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #e0f7fa;
-            color: #333;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .header {
-            text-align: center;
-            padding: 50px 0;
-            background-color: #00695c;
-            color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .header img {
-            width: 120px;
-            margin-bottom: 20px;
-            animation: bounce 2s infinite;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 2.5em;
-            font-weight: 700;
-        }
-        .header p.credit {
-            margin-top: 10px;
-            font-size: 1em;
-            font-weight: 300;
-            color: #b2dfdb;
-        }
-        .header p {
-            font-size: 1.2em;
-            padding: 0px 15px 0px;
-        }
-        .header .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #fff;
-            color: #00695c;
-            text-decoration: none;
-            font-size: 1em;
-            font-weight: 700;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .header .btn:hover {
-            background-color: #004d40;
-            color: #fff;
-        }
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin-top: 40px;
-        }
-        .feature {
-            background-color: #fff;
-            width: 45%;
-            margin: 20px 0;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-        .feature:hover {
-            transform: translateY(-10px);
-        }
-        .feature h2 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #00695c;
-        }
-        .feature p {
-            font-size: 1em;
-            line-height: 1.6;
-            color: #666;
-        }
-        .screenshots {
-            margin-top: 40px;
-            text-align: center;
-        }
-        .screenshots h2 {
-            font-size: 2em;
-            color: #00695c;
-            margin-bottom: 20px;
-        }
-        .swiper-container {
-            width: 100%;
-            height: 400px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-        .swiper-slide {
-            background: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .swiper-slide img {
-            display: block;
-            max-width: 100%;
-            max-height: 100%;
-            border-radius: 10px;
-        }
-        .swiper-button-next, .swiper-button-prev {
-            color: #00695c;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-20px);
-            }
-            60% {
-                transform: translateY(-10px);
-            }
-        }
-        @media (max-width: 768px) {
-            .feature {
-                width: 100%;
-            }
-        }
-        .footer {
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-            background-color: #004d40;
-            color: #fff;
-            border-radius: 10px;
-        }
-        .linkedin-link {
-            display: block;
-            margin-top: 10px;
-            color: #b2dfdb;
-            font-size: 1em;
-            text-decoration: none;
-        }
-        .linkedin-link:hover {
-            color: #fff;
-            text-decoration: underline;
-        }
+      body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e0f7fa;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #00695c;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header img {
+    width: 120px;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    font-weight: 700;
+}
+
+.header p.credit {
+    margin-top: 10px;
+    font-size: 1em;
+    font-weight: 300;
+    color: #b2dfdb;
+}
+
+.header p {
+    font-size: 1.2em;
+    padding: 0px 15px 0px;
+}
+
+.header .btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #00695c;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 700;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.header .btn:hover {
+    background-color: #004d40;
+    color: #fff;
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 40px;
+}
+
+.feature {
+    background-color: #fff;
+    width: 45%;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.feature:hover {
+    transform: translateY(-10px);
+}
+
+.feature h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #00695c;
+}
+
+.feature p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #666;
+}
+
+.screenshots {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.screenshots h2 {
+    font-size: 2em;
+    color: #00695c;
+    margin-bottom: 20px;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 400px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.swiper-slide {
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.swiper-slide img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #00695c;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+@media (max-width: 768px) {
+    .feature {
+        width: 100%;
+    }
+}
+
+.footer {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+    background-color: #004d40;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.linkedin-link {
+    display: block;
+    margin-top: 10px;
+    color: #b2dfdb;
+    font-size: 1em;
+    text-decoration: none;
+}
+
+.linkedin-link:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.user-guide,
+.testimonials {
+    background-color: #f7f7f7;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 40px 0;
+}
+
+.user-guide h2,
+.testimonials h2 {
+    font-size: 2em;
+    color: #00695c;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.user-guide p,
+.testimonials p {
+    font-size: 1.2em;
+    color: #333;
+    line-height: 1.6;
+}
+
+.user-guide ol {
+    padding-left: 20px;
+}
+
+.user-guide ol li {
+    margin-bottom: 10px;
+}
+
+.testimonials em {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #666;
+}
+
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3029851571351657"
      crossorigin="anonymous"></script>
@@ -211,9 +280,10 @@
             </div>
             <div class="feature">
                 <h2>Free to Use</h2>
-                <p>Enjoy all these features without any cost. Our extension is completely free to use, offering you premium features at no extra charge.</p>
+                <p>Enjoy all these features without any cost. We believe in providing value to our users and therefore offer this extension free of charge.</p>
             </div>
         </div>
+        
         <div class="user-guide">
             <h2>User Guide</h2>
             <p>To get started with WhatsApp ChatShield, follow these steps:</p>
@@ -225,15 +295,16 @@
                 <li>Enjoy a more secure and enhanced WhatsApp experience!</li>
             </ol>
         </div>
+        
         <div class="testimonials">
             <h2>User Testimonials</h2>
             <p>"This extension is a game-changer for my WhatsApp usage. Highly recommend it!" - <em>Jane Doe</em></p>
             <p>"I love the quick start feature. Saves me so much time!" - <em>John Smith</em></p>
             <p>"The hide messages feature is perfect for keeping my conversations private." - <em>Emily Johnson</em></p>
         </div>
+        
         <div class="footer">
             <p>&copy; 2024 WhatsApp ChatShield. All rights reserved.</p>
-            <a href="https://www.linkedin.com/in/manojbarma/" target="_blank" class="linkedin-link">Connect on LinkedIn</a>
         </div>
     </div>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
