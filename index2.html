@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extensions by Manoj Barma</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <div class="logo">
+                    <h1>Extensions by Manoj Barma</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#aws-account-labeler">AWS Account Labeler</a></li>
+                    <li><a href="#whatsapp-chatshield">WhatsApp ChatShield</a></li>
+                    <li><a href="#user-guide">User Guide</a></li>
+                </ul>
+                <div class="hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="header-content">
+            <div class="swiper-container header-swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="header">
+                            <img src="your-extension-image-url.jpg" alt="Welcome">
+                            <h1>Welcome to My World of Extensions!</h1>
+                            <p>Hi, I'm Manoj Barma. I'm passionate about creating tools that make your digital life safer and more efficient. Explore my Chrome extensions designed for AWS and WhatsApp, and take control of your online experience.</p>
+                            <a href="#aws-account-labeler" class="btn">Discover More</a>
+                        </div>
+                    </div>
+                    <!-- Additional slides if necessary -->
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+
+        <section class="features" id="aws-account-labeler">
+            <div class="feature">
+                <h2>AWS Account Labeler</h2>
+                <p>Keep your AWS accounts organized and easily identifiable with custom labels. No more confusion between multiple accounts. A must-have tool for AWS users managing multiple environments.</p>
+            </div>
+            <div class="feature" id="whatsapp-chatshield">
+                <h2>WhatsApp ChatShield</h2>
+                <p>Protect your WhatsApp chats from being cloned. Ensure your conversations remain private and secure with advanced encryption and clone detection features.</p>
+            </div>
+        </section>
+
+        <div class="screenshots">
+            <h2>Screenshots</h2>
+            <div class="swiper-container screenshot-swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="screenshot1.jpg" alt="Screenshot 1"></div>
+                    <div class="swiper-slide"><img src="screenshot2.jpg" alt="Screenshot 2"></div>
+                    <div class="swiper-slide"><img src="screenshot3.jpg" alt="Screenshot 3"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+
+        <section class="user-guide" id="user-guide">
+            <h2>User Guide</h2>
+            <p>Get started with our Chrome extensions by following these simple steps:</p>
+            <ol>
+                <li>Install the extension from the Chrome Web Store.</li>
+                <li>Follow the on-screen instructions to set up the extension.</li>
+                <li>Enjoy enhanced functionality and improved security.</li>
+            </ol>
+        </section>
+
+        <section class="testimonials">
+            <h2>Testimonials</h2>
+            <p>See what our users have to say:</p>
+            <blockquote>
+                <p>"The AWS Account Labeler has been a game-changer for managing my accounts. Highly recommended!" - John D.</p>
+            </blockquote>
+            <blockquote>
+                <p>"WhatsApp ChatShield gives me peace of mind knowing my conversations are secure. Great job, Manoj!" - Sarah K.</p>
+            </blockquote>
+        </section>
+
+        <footer class="footer">
+            <p>Made with 💙 by Manoj Barma</p>
+            <a href="https://www.linkedin.com/in/manojbarma/" class="linkedin-link">Connect with me on LinkedIn</a>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var swiperHeader = new Swiper('.header-swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+        });
+
+        var swiperScreenshots = new Swiper('.screenshot-swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+        });
+
+        const nav = document.querySelector('nav');
+        const hamburger = document.querySelector('.hamburger');
+
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>
