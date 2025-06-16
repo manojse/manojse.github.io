@@ -252,22 +252,28 @@
             <img src="your-extension-image-url.png" alt="WhatsApp Message Helper Extension">
             <h1>WhatsApp ChatShield And Quick Chat</h1>
             <p class="credit">Design and Developed by Manoj Barma</p>
-            <a href="https://www.linkedin.com/in/manojbarma/" target="_blank" class="linkedin-link">Connect on
-                LinkedIn</a>
+
+            <div style="margin-top: 20px;">
+                <input id="phoneInputTop" type="tel" inputmode="numeric" pattern="\d*" maxlength="15"
+                    placeholder="Enter phone number"
+                    style="padding: 10px; width: 280px; font-size: 1em; border-radius: 5px; border: 1px solid #ccc;" />
+                <button onclick="startWhatsAppChatTop()"
+                    style="padding: 10px 20px; margin-left: 10px; background-color: #fff; color: #00695c; font-weight: bold; border: none; border-radius: 5px; cursor: pointer;">
+                    Start Chat
+                </button>
+            </div>
+
+
             <p>Enhance your WhatsApp experience with our powerful Chrome extension</p>
             <a href="https://chromewebstore.google.com/detail/whatsapp-chatshield-and-q/jikakmgcoakpdfeefigdhdlgndplcdkm"
                 target="_blank" class="btn">Get the Extension</a>
+
+            <a href="https://www.linkedin.com/in/manojbarma/" target="_blank" class="linkedin-link">Connect on
+                LinkedIn</a>
+
+
         </div>
-        <div class="quick-chat-top" style="background-color: #ffffff; padding: 30px 20px; margin-top: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center;">
-            <h2 style="color: #00695c; margin-bottom: 10px;">Quick WhatsApp Chat</h2>
-            <p style="margin-bottom: 20px; color: #555;">Start chatting without saving the number. Enter a phone number with country code (e.g., 919876543210):</p>
-            <input id="phoneInputTop" type="text" placeholder="Enter phone number" 
-                   style="padding: 10px; width: 80%; max-width: 400px; border-radius: 5px; border: 1px solid #ccc;">
-            <button onclick="startWhatsAppChatTop()" 
-                    style="padding: 10px 20px; margin-left: 10px; background-color: #00695c; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                Start Chat
-            </button>
-        </div>
+
         <div class="screenshots">
             <h2>Screenshots</h2>
             <div class="swiper-container">
@@ -357,21 +363,21 @@
             },
         });
         function startWhatsAppChatTop() {
-        const input = document.getElementById('phoneInputTop').value.trim();
-        const phoneRegex = /^\d{10,15}$/;
+            const input = document.getElementById('phoneInputTop').value.trim();
+            const phoneRegex = /^\d{10,15}$/;
 
-        if (!phoneRegex.test(input)) {
-            alert("Please enter a valid phone number with country code (e.g. 919876543210)");
-            return;
+            if (!phoneRegex.test(input)) {
+                alert("Please enter a valid phone number with country code (e.g. 919876543210)");
+                return;
+            }
+
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            const whatsappURL = isMobile
+                ? `https://wa.me/${input}`
+                : `https://web.whatsapp.com/send/?phone=${input}&text&type=phone_number&app_absent=0`;
+
+            window.open(whatsappURL, '_blank');
         }
-
-        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-        const whatsappURL = isMobile
-            ? `https://wa.me/${input}`
-            : `https://web.whatsapp.com/send/?phone=${input}&text&type=phone_number&app_absent=0`;
-
-        window.open(whatsappURL, '_blank');
-    }
     </script>
 </body>
 
