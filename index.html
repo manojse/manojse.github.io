@@ -376,7 +376,12 @@
                 ? `https://wa.me/${input}`
                 : `https://web.whatsapp.com/send/?phone=${input}&text&type=phone_number&app_absent=0`;
 
-            window.open(whatsappURL, '_blank');
+
+            if (isMobile) {
+                window.open(whatsappURL, '');
+            } else {
+                window.open(whatsappURL, '_blank');
+            }
         }
     </script>
 </body>
