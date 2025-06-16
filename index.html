@@ -357,17 +357,21 @@
             },
         });
         function startWhatsAppChatTop() {
-            const input = document.getElementById('phoneInputTop').value.trim();
-            const phoneRegex = /^\d{10,15}$/;
+        const input = document.getElementById('phoneInputTop').value.trim();
+        const phoneRegex = /^\d{10,15}$/;
 
-            if (!phoneRegex.test(input)) {
-                alert("Please enter a valid phone number with country code (e.g. 919876543210)");
-                return;
-            }
-
-            const whatsappURL = `https://wa.me/${input}`;
-            window.open(whatsappURL, '_blank');
+        if (!phoneRegex.test(input)) {
+            alert("Please enter a valid phone number with country code (e.g. 919876543210)");
+            return;
         }
+
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        const whatsappURL = isMobile
+            ? `https://wa.me/${input}`
+            : `https://web.whatsapp.com/send/?phone=${input}&text&type=phone_number&app_absent=0`;
+
+        window.open(whatsappURL, '_blank');
+    }
     </script>
 </body>
 
