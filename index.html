@@ -5,384 +5,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Enhance your WhatsApp experience with the WhatsApp ChatShield Chrome extension. Features include hiding messages, quick chat, and more, all free of charge!">
+        content="Explore all calculators, tools, and extensions by Manoj Barma at Skrollmates.com. Find EMI calculators, loan tools, WhatsApp extension, privacy policy, and more in one place.">
     <meta name="google-adsense-account" content="ca-pub-3029851571351657">
-    <title>WhatsApp ChatShield And Quick Chat</title>
+    <title>Skrollmates.com - All Tools & Info</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3029851571351657"
-        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu.css">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #e0f7fa;
-            color: #333;
+            background: linear-gradient(120deg, #e0f7fa 0%, #f7f7f7 100%);
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            text-align: center;
-            padding: 50px 0;
-            background-color: #00695c;
-            color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .header img {
-            width: 120px;
-            margin-bottom: 20px;
-            animation: bounce 2s infinite;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 2.5em;
-            font-weight: 700;
-        }
-
-        .header p.credit {
-            margin-top: 10px;
-            font-size: 1em;
-            font-weight: 300;
-            color: #b2dfdb;
-        }
-
-        .header p {
-            font-size: 1.2em;
-            padding: 0px 15px 0px;
-        }
-
-        .header .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #fff;
-            color: #00695c;
-            text-decoration: none;
-            font-size: 1em;
-            font-weight: 700;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .header .btn:hover {
-            background-color: #004d40;
-            color: #fff;
-        }
-
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin-top: 40px;
-        }
-
-        .feature {
-            background-color: #fff;
-            width: 45%;
-            margin: 20px 0;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .feature:hover {
-            transform: translateY(-10px);
-        }
-
-        .feature h2 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #00695c;
-        }
-
-        .feature p {
-            font-size: 1em;
-            line-height: 1.6;
-            color: #666;
-        }
-
-        .screenshots {
-            margin-top: 40px;
-            text-align: center;
-        }
-
-        .screenshots h2 {
-            font-size: 2em;
-            color: #00695c;
-            margin-bottom: 20px;
-        }
-
-        .swiper-container {
-            width: 100%;
-            height: 400px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .swiper-slide {
-            background: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .swiper-slide img {
-            display: block;
-            max-width: 100%;
-            max-height: 100%;
-            border-radius: 10px;
-        }
-
-        .swiper-button-next,
-        .swiper-button-prev {
-            color: #00695c;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        @keyframes bounce {
-
-            0%,
-            20%,
-            50%,
-            80%,
-            100% {
-                transform: translateY(0);
-            }
-
-            40% {
-                transform: translateY(-20px);
-            }
-
-            60% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .feature {
-                width: 100%;
-            }
-        }
-
-        .footer {
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-            background-color: #004d40;
-            color: #fff;
-            border-radius: 10px;
-        }
-
-        .linkedin-link {
-            display: block;
-            margin-top: 10px;
-            color: #b2dfdb;
-            font-size: 1em;
-            text-decoration: none;
-        }
-
-        .linkedin-link:hover {
-            color: #fff;
-            text-decoration: underline;
-        }
-
-        .user-guide,
-        .testimonials {
-            background-color: #f7f7f7;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin: 40px 0;
-        }
-
-        .user-guide h2,
-        .testimonials h2 {
-            font-size: 2em;
-            color: #00695c;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .user-guide p,
-        .testimonials p {
-            font-size: 1.2em;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .user-guide ol {
-            padding-left: 20px;
-        }
-
-        .user-guide ol li {
-            margin-bottom: 10px;
-        }
-
-        .testimonials em {
-            display: block;
-            margin-top: 10px;
-            font-size: 0.9em;
-            color: #666;
-        }
+        /* Modern Navbar Styles */
     </style>
-
-</head>
-
-<body>
-    <div class="container">
-        <div class="header">
-            <img src="your-extension-image-url.png" alt="WhatsApp Message Helper Extension">
-            <h1>WhatsApp ChatShield And Quick Chat</h1>
-            <p class="credit">Design and Developed by Manoj Barma</p>
-
-            <div style="margin-top: 20px;">
-                <input id="phoneInputTop" type="tel" inputmode="numeric" pattern="\d*" maxlength="15"
-                    placeholder="Enter phone number"
-                    style="padding: 10px; width: 280px; font-size: 1em; border-radius: 5px; border: 1px solid #ccc;" />
-                <button onclick="startWhatsAppChatTop()" class="btn">
-                    Start Chat
-                </button>
-            </div>
-
-
-            <p>Enhance your WhatsApp experience with our powerful Chrome extension</p>
-            <a href="https://chromewebstore.google.com/detail/whatsapp-chatshield-and-q/jikakmgcoakpdfeefigdhdlgndplcdkm"
-                target="_blank" class="btn">Get the Extension</a>
-
-            <a href="https://www.linkedin.com/in/manojbarma/" target="_blank" class="linkedin-link">Connect on
-                LinkedIn</a>
-
-
-        </div>
-
-        <div class="screenshots">
-            <h2>Screenshots</h2>
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="screenshot1.jpg" alt="Screenshot 1"></div>
-                    <div class="swiper-slide"><img src="screenshot2.png" alt="Screenshot 2"></div>
-                    <div class="swiper-slide"><img src="screenshot3.png" alt="Screenshot 3"></div>
+    <nav class="navbar" style="position:fixed;top:0;left:0;width:100%;z-index:100;box-shadow:0 4px 18px rgba(0,0,0,0.10);">
+    <span class="menu-toggle" aria-label="Toggle menu" id="menuToggle" tabindex="1">&#9776;</span>
+        <ul id="mainMenu">
+            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="emi-calculator.html">EMI Calculator</a></li>
+            <li><a href="home-loan.html">Home Loan</a></li>
+            <li><a href="personal-loan.html">Personal Loan</a></li>
+            <li><a href="car-loan.html">Car Loan</a></li>
+            <li><a href="two-wheeler-loan.html">Two Wheeler Loan</a></li>
+            
+            <li><a href="whatsapp-extension.html">WhatsApp Extension</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+    </nav>
+    <div class="main-index-hero" style="margin-top:72px;">
+    <img src="skrollmates.png" alt="Skrollmates Logo" style="width:96px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,0.07);border-radius:50%;">
+        <h1 style="font-size:2.5em;font-weight:700;margin:0 0 12px 0;">Skrollmates.com</h1>
+        <p style="font-size:1.25em;font-weight:400;max-width:600px;margin:0 auto 18px auto;">Explore calculators, Chrome extensions, and digital tools by <strong>Manoj Barma</strong> at <strong>Skrollmates.com</strong>. Free, secure, and easy to use for everyone.</p>
+        <a href="https://www.linkedin.com/in/manojbarma/" target="_blank" style="color:#ffd600;font-weight:500;text-decoration:none;font-size:1.1em;">Connect on LinkedIn</a>
+    </div>
+    <div class="main-index">
+            
+        <h2 style="color:#00695c;text-align:center;font-size:2em;margin-bottom:32px;">Featured Tools & Extensions</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:32px;justify-content:center;">
+            <a href="whatsapp-extension.html" style="text-decoration:none;color:inherit;">
+                <div class="tool-card" style="height:320px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+                    <img src="your-extension-image-url.png" alt="WhatsApp Extension" style="width:56px;margin-bottom:12px;">
+                    <h3 style="color:#0078d7;font-size:1.3em;margin-bottom:8px;">WhatsApp ChatShield & Quick Chat</h3>
+                    <p style="color:#333;font-size:1em;margin-bottom:12px;">Chrome extension for WhatsApp Web: hide messages, quick chat, privacy, and more.</p>
+                    <span style="color:#00695c;font-weight:500;text-decoration:none;font-size:1.1em;">Learn More</span>
                 </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
-                <!-- Add Navigation -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
+            </a>
+            <a href="emi-calculator.html" style="text-decoration:none;color:inherit;">
+                <div class="tool-card" style="height:320px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+                    <img src="skrollmates.png" alt="EMI Calculator" style="width:56px;margin-bottom:12px;">
+                    <h3 style="color:#0078d7;font-size:1.3em;margin-bottom:8px;">General EMI Calculator</h3>
+                    <p style="color:#333;font-size:1em;margin-bottom:12px;">Advanced EMI calculator with charts, pre-EMI, schedule, and PDF download.</p>
+                    <span style="color:#00695c;font-weight:500;text-decoration:none;font-size:1.1em;">Try Now</span>
+                </div>
+            </a>
         </div>
-        <div class="features">
-            <div class="feature">
-                <h2>Hide Messages</h2>
-                <p>Easily hide your sensitive messages from prying eyes with a single click. This feature ensures that
-                    your private conversations remain private even when someone else is looking at your screen.</p>
-            </div>
-            <div class="feature">
-                <h2>Quick Start Conversations</h2>
-                <p>Start a WhatsApp chat without the hassle of saving the mobile number in your contacts. Just enter the
-                    number and start chatting instantly, saving you time and effort.</p>
-            </div>
-            <div class="feature">
-                <h2>User-Friendly Interface</h2>
-                <p>Simple and intuitive design to make your WhatsApp experience smoother. The interface is designed to
-                    be straightforward and easy to navigate, ensuring a seamless user experience.</p>
-            </div>
-            <div class="feature">
-                <h2>Secure</h2>
-                <p>Your privacy is our priority. The extension operates securely without accessing or storing your data.
-                    We use advanced encryption methods to ensure that your information is always safe.</p>
-            </div>
-            <div class="feature">
-                <h2>Free to Use</h2>
-                <p>Enjoy all these features without any cost. We believe in providing value to our users and therefore
-                    offer this extension free of charge.</p>
-            </div>
+        <h2 style="color:#00695c;text-align:center;font-size:1.7em;margin:48px 0 24px 0;">Loan Calculators</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:32px;justify-content:center;">
+            <a href="home-loan.html" style="text-decoration:none;color:inherit;">
+                <div class="tool-card" style="height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+                    <h4 style="color:#0078d7;font-size:1.1em;margin-bottom:8px;">Home Loan EMI</h4>
+                    <span style="color:#00695c;font-weight:500;text-decoration:none;font-size:1em;">Calculate</span>
+                </div>
+            </a>
+            <a href="personal-loan.html" style="text-decoration:none;color:inherit;">
+                <div class="tool-card" style="height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+                    <h4 style="color:#0078d7;font-size:1.1em;margin-bottom:8px;">Personal Loan EMI</h4>
+                    <span style="color:#00695c;font-weight:500;text-decoration:none;font-size:1em;">Calculate</span>
+                </div>
+            </a>
+            <a href="car-loan.html" style="text-decoration:none;color:inherit;">
+                <div class="tool-card" style="height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+                    <h4 style="color:#0078d7;font-size:1.1em;margin-bottom:8px;">Car Loan EMI</h4>
+                    <span style="color:#00695c;font-weight:500;text-decoration:none;font-size:1em;">Calculate</span>
+                </div>
+            </a>
+            <a href="two-wheeler-loan.html" style="text-decoration:none;color:inherit;">
+                <div class="tool-card" style="height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+                    <h4 style="color:#0078d7;font-size:1.1em;margin-bottom:8px;">Two Wheeler Loan EMI</h4>
+                    <span style="color:#00695c;font-weight:500;text-decoration:none;font-size:1em;">Calculate</span>
+                </div>
+            </a>
         </div>
-
-        <div class="user-guide">
-            <h2>User Guide</h2>
-            <p>To get started with WhatsApp ChatShield, follow these steps:</p>
-            <ol>
-                <li>Download and install the extension from the <a
-                        href="https://chromewebstore.google.com/detail/whatsapp-chatshield-and-q/jikakmgcoakpdfeefigdhdlgndplcdkm"
-                        target="_blank">Chrome Web Store</a>.</li>
-                <li>Open WhatsApp Web on your browser.</li>
-                <li>Click on the ChatShield icon in your browser's toolbar.</li>
-                <li>Select the features you want to use and configure them according to your preferences.</li>
-                <li>Enjoy a more secure and enhanced WhatsApp experience!</li>
-            </ol>
-        </div>
-
-        <div class="testimonials">
-            <h2>User Testimonials</h2>
-            <p>"This extension is a game-changer for my WhatsApp usage. Highly recommend it!" - <em>Jane Doe</em></p>
-            <p>"I love the quick start feature. Saves me so much time!" - <em>John Smith</em></p>
-            <p>"The hide messages feature is perfect for keeping my conversations private." - <em>Emily Johnson</em></p>
-        </div>
-
-        <div class="footer">
-            <p>&copy; 2024 WhatsApp ChatShield. All rights reserved.</p>
+        <div style="max-width:700px;margin:32px auto 32px auto;text-align:left;background:#f7f7f7;padding:24px 18px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
+                <h2 style="color:#0078d7;margin-bottom:10px;">Our Mission</h2>
+                <p style="color:#333;font-size:1.1em;">Skrollmates.com is dedicated to providing free, secure, and easy-to-use digital tools for everyone. Whether you need to calculate your loan EMI, manage privacy on WhatsApp, or access other productivity tools, our goal is to make your online experience smarter and safer.</p>
+                <h3 style="color:#00695c;margin-top:24px;margin-bottom:8px;">Security & Privacy</h3>
+                <p style="color:#333;font-size:1em;">All tools and extensions are designed with privacy in mind. We do not collect or store your personal data. Your information stays on your device.</p>
+                <h3 style="color:#00695c;margin-top:24px;margin-bottom:8px;">Quick Start Guide</h3>
+                <ol style="color:#333;font-size:1em;line-height:1.7;">
+                    <li>Browse the featured tools and calculators below.</li>
+                    <li>Click "Learn More" or "Try Now" to use a tool.</li>
+                    <li>For WhatsApp extension, install from the Chrome Web Store and follow the guide.</li>
+                    <li>Contact us via LinkedIn for feedback or support.</li>
+                </ol>
+            </div>
+         
+    </div>
+     <div class="footer">
+            <p>&copy; 2024 Skrollmates.com. All rights reserved.</p>
             <a href="privacy-policy.html" target="_blank" style="color: #b2dfdb;">Privacy Policy</a>
         </div>
-    </div>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 1,
-            spaceBetween: 10,
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-        });
-        function startWhatsAppChatTop() {
-            const input = document.getElementById('phoneInputTop').value.trim();
-            const phoneRegex = /^\d{10,15}$/;
-
-            if (!phoneRegex.test(input)) {
-                alert("Please enter a valid phone number with country code (e.g. 919876543210)");
-                return;
-            }
-
-            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-            const whatsappURL = isMobile
-                ? `https://wa.me/${input}`
-                : `https://web.whatsapp.com/send/?phone=${input}&text&type=phone_number&app_absent=0`;
-
-
-            if (isMobile) {
-                window.open(whatsappURL, '');
-            } else {
-                window.open(whatsappURL, '_blank');
-            }
-        }
-    </script>
+    <script src="scripts.js" defer></script>
+    <script src="menu.js" defer></script>
+    <!-- menu.js will handle menu toggle logic -->
 </body>
 
 </html>

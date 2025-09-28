@@ -5,41 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Privacy policy for WhatsApp ChatShield Chrome Extension. We do not collect any user data.">
     <title>Privacy Policy</title>
-    <link rel="stylesheet" href="styles.css">
+           <link rel="stylesheet" href="styles.css">
+           <link rel="stylesheet" href="menu.css">
+           <script src="scripts.js" defer></script>
+           <script src="menu.js" defer></script>
+        <style>
+            .privacy-card {
+                max-width: 700px;
+                margin: 40px auto;
+                background: linear-gradient(120deg, #f7f7f7 80%, #e0f7fa 100%);
+                border-radius: 18px;
+                box-shadow: 0 8px 32px rgba(0,188,212,0.10);
+                padding: 38px 32px 32px 32px;
+            }
+            .privacy-card h1 {
+                color: #009688;
+                font-size: 2.3em;
+                font-weight: 700;
+                text-align: center;
+                margin-bottom: 18px;
+                letter-spacing: 1px;
+            }
+            .privacy-card h2 {
+                color: #0078d7;
+                font-size: 1.3em;
+                margin-top: 32px;
+                margin-bottom: 8px;
+            }
+            .privacy-card p, .privacy-card a {
+                font-size: 1.12em;
+                color: #333;
+                line-height: 1.7;
+            }
+            .privacy-card a {
+                color: #009688;
+                text-decoration: underline;
+            }
+            .privacy-card a:hover {
+                color: #0078d7;
+            }
+            .privacy-card footer {
+                text-align: center;
+                padding: 18px 0 0 0;
+                margin-top: 32px;
+                color: #009688;
+                font-size: 1em;
+            }
+        </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Privacy Policy</h1>
-        </header>
-
-        <section>
-            <h2>Introduction</h2>
-            <p>At WhatsApp ChatShield, your privacy is our top priority. This Privacy Policy document outlines the types of personal information that is received and collected by our website and how it is used.</p>
-
-            <h2>Data Collection</h2>
-            <p>We want to make it clear that we do not collect any personally identifiable information from users who visit our website or use our Chrome extension.</p>
-            <p>We do not store any information such as names, email addresses, or other personal details.</p>
-
-            <h2>Use of Cookies</h2>
-            <p>Our website may use cookies to enhance your experience, but we do not collect any personal data through cookies. Cookies are small files that are stored on your device to help with navigation and improve functionality.</p>
-
-            <h2>Third-Party Services</h2>
-            <p>Our website may display third-party ads through Google AdSense. These ads may use cookies to track user interactions with the ads. However, this data is managed by Google and is subject to their privacy policies. We do not control or have access to any of the data Google collects.</p>
-            <p>For more information, please refer to Google's Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a>.</p>
-
-            <h2>Security</h2>
-            <p>We take reasonable measures to protect the security of our website and your interactions with it. However, please be aware that no online service is completely secure, and we cannot guarantee the security of any data transmitted to us via the website.</p>
-
-            <h2>Changes to This Privacy Policy</h2>
-            <p>We reserve the right to update this privacy policy from time to time. When we do, we will update the date at the top of this page. We encourage you to review this page periodically for any changes.</p>
-
-            <h2>Contact Information</h2>
-            <p>If you have any questions about this Privacy Policy or our practices, please feel free to contact us at <a href="mailto:skrollmates@gmail.com">skrollmates@gmail.com</a>.</p>
-        </section>
-
+    <nav class="navbar">
+        <span class="menu-toggle" aria-label="Toggle menu" id="menuToggle" tabindex="1" onclick="toggleMenu()">&#9776;</span>
+        <ul id="mainMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="emi-calculator.html">EMI Calculator</a></li>
+                <li><a href="home-loan.html">Home Loan</a></li>
+                <li><a href="personal-loan.html">Personal Loan</a></li>
+                <li><a href="car-loan.html">Car Loan</a></li>
+                <li><a href="two-wheeler-loan.html">Two Wheeler Loan</a></li>
+                
+                <li><a href="whatsapp-extension.html">WhatsApp Extension</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+    </nav>
+        <!-- menu.js will handle menu toggle logic -->
+    <div class="privacy-card">
+        <h1>Privacy Policy</h1>
+        <h2>Introduction</h2>
+        <p>At WhatsApp ChatShield, your privacy is our top priority. This Privacy Policy document outlines the types of personal information that is received and collected by our website and how it is used.</p>
+        <h2>Data Collection</h2>
+        <p>We want to make it clear that we do not collect any personally identifiable information from users who visit our website or use our Chrome extension.</p>
+        <p>We do not store any information such as names, email addresses, or other personal details.</p>
+        <h2>Use of Cookies</h2>
+        <p>Our website may use cookies to enhance your experience, but we do not collect any personal data through cookies. Cookies are small files that are stored on your device to help with navigation and improve functionality.</p>
+        <h2>Third-Party Services</h2>
+        <p>Our website may display third-party ads through Google AdSense. These ads may use cookies to track user interactions with the ads. However, this data is managed by Google and is subject to their privacy policies. We do not control or have access to any of the data Google collects.</p>
+        <p>For more information, please refer to Google's Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a>.</p>
+        <h2>Security</h2>
+        <p>We take reasonable measures to protect the security of our website and your interactions with it. However, please be aware that no online service is completely secure, and we cannot guarantee the security of any data transmitted to us via the website.</p>
+        <h2>Changes to This Privacy Policy</h2>
+        <p>We reserve the right to update this privacy policy from time to time. When we do, we will update the date at the top of this page. We encourage you to review this page periodically for any changes.</p>
+        <h2>Contact Information</h2>
+        <p>If you have any questions about this Privacy Policy or our practices, please feel free to contact us at <a href="mailto:skrollmates@gmail.com">skrollmates@gmail.com</a>.</p>
         <footer>
-            <p>&copy; 2024 WhatsApp ChatShield. All rights reserved.</p>
+            <p>&copy; 2024 Skrollmates.com. All rights reserved.</p>
         </footer>
     </div>
 </body>

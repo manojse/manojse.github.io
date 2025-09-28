@@ -1,0 +1,73 @@
+/* Common menu styles for navbar and mobile menu */
+.navbar {
+    width: 100%;
+    background: linear-gradient(90deg, #009688 0%, #00bcd4 100%);
+    color: #fff;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+body {
+    margin-top: 72px;
+}
+.navbar ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    transition: max-height 0.3s;
+}
+.navbar li {
+    margin: 0 18px;
+}
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 500;
+    padding: 18px 0;
+    display: block;
+    transition: color 0.2s;
+}
+.navbar a:hover {
+    color: #ffd600;
+}
+.menu-toggle {
+    display: none;
+    font-size: 2em;
+    cursor: pointer;
+    padding: 18px;
+    margin-left: 18px;
+}
+@media (max-width: 800px) {
+    .navbar ul {
+        flex-direction: column;
+        align-items: flex-start;
+        background: linear-gradient(90deg, #009688 0%, #00bcd4 100%);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+    }
+    .navbar ul.open {
+        max-height: 500px;
+        overflow: visible;
+        transition: max-height 0.3s;
+    }
+    .menu-toggle {
+        display: inline-block;
+    }
+    .navbar li {
+        margin: 0 0 0 18px;
+    }
+}
