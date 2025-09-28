@@ -17,12 +17,12 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="menu.css">
     <style>
-        body {
-            background: linear-gradient(120deg, #e0f7fa 0%, #f7f7f7 100%);
-        }
-        /* Modern Navbar Styles */
+        /* small page-specific overrides (prefer moving into styles.css when possible) */
+        body { background: linear-gradient(120deg, #e0f7fa 0%, #f7f7f7 100%); }
     </style>
-    <nav class="navbar" style="position:fixed;top:0;left:0;width:100%;z-index:100;box-shadow:0 4px 18px rgba(0,0,0,0.10);">
+    </head>
+<body>
+    <nav class="navbar">
     <span class="menu-toggle" aria-label="Toggle menu" id="menuToggle" tabindex="1">&#9776;</span>
         <ul id="mainMenu">
             <li class="active"><a href="index.html">Home</a></li>
@@ -36,67 +36,67 @@
             <li><a href="privacy-policy.html">Privacy Policy</a></li>
         </ul>
     </nav>
-    <div class="main-index-hero" style="margin-top:72px;">
-    <img src="skrollmates.png" alt="Skrollmates Logo" style="width:96px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,0.07);border-radius:50%;">
-        <h1 style="font-size:2.5em;font-weight:700;margin:0 0 12px 0;">Skrollmates.com</h1>
-        <p style="font-size:1.25em;font-weight:400;max-width:600px;margin:0 auto 18px auto;">Explore calculators, Chrome extensions, and digital tools by <strong>Manoj Barma</strong> at <strong>Skrollmates.com</strong>. Free, secure, and easy to use for everyone.</p>
-        <a href="https://www.linkedin.com/in/manojbarma/" target="_blank" style="color:#ffd600;font-weight:500;text-decoration:none;font-size:1.1em;">Connect on LinkedIn</a>
+    <div class="main-index-hero">
+        <img src="skrollmates.png" alt="Skrollmates Logo" class="hero-logo">
+        <h1>Skrollmates.com</h1>
+        <p class="hero-sub">Explore calculators, Chrome extensions, and digital tools by <strong>Manoj Barma</strong> at <strong>Skrollmates.com</strong>. Free, secure, and easy to use for everyone.</p>
+        <a href="https://www.linkedin.com/in/manojbarma/" target="_blank" class="hero-link">Connect on LinkedIn</a>
     </div>
     <div class="main-index">
-            
-        <h2 style="color:#00695c;text-align:center;font-size:2em;margin-bottom:32px;">Featured Tools & Extensions</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:32px;justify-content:center;">
-            <a href="whatsapp-extension.html" style="text-decoration:none;color:inherit;">
-                <div class="tool-card" style="height:320px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
-                    <img src="your-extension-image-url.png" alt="WhatsApp Extension" style="width:56px;margin-bottom:12px;">
-                    <h3 style="color:#0078d7;font-size:1.3em;margin-bottom:8px;">WhatsApp ChatShield & Quick Chat</h3>
-                    <p style="color:#333;font-size:1em;margin-bottom:12px;">Chrome extension for WhatsApp Web: hide messages, quick chat, privacy, and more.</p>
-                    <span style="color:#00695c;font-weight:500;text-decoration:none;font-size:1.1em;">Learn More</span>
+
+    <h2 class="section-title">Featured Tools & Extensions</h2>
+    <div class="cards-container">
+            <a href="whatsapp-extension.html" class="card-link">
+                <div class="tool-card tool-card--large">
+                    <img src="your-extension-image-url.png" alt="WhatsApp Extension">
+                    <h3>WhatsApp ChatShield & Quick Chat</h3>
+                    <p>Chrome extension for WhatsApp Web: hide messages, quick chat, privacy, and more.</p>
+                    <span>Learn More</span>
                 </div>
             </a>
-            <a href="emi-calculator.html" style="text-decoration:none;color:inherit;">
-                <div class="tool-card" style="height:320px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
-                    <img src="skrollmates.png" alt="EMI Calculator" style="width:56px;margin-bottom:12px;">
-                    <h3 style="color:#0078d7;font-size:1.3em;margin-bottom:8px;">General EMI Calculator</h3>
-                    <p style="color:#333;font-size:1em;margin-bottom:12px;">Advanced EMI calculator with charts, pre-EMI, schedule, and PDF download.</p>
-                    <span style="color:#00695c;font-weight:500;text-decoration:none;font-size:1.1em;">Try Now</span>
-                </div>
-            </a>
-        </div>
-        <h2 style="color:#00695c;text-align:center;font-size:1.7em;margin:48px 0 24px 0;">Loan Calculators</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:32px;justify-content:center;">
-            <a href="home-loan.html" style="text-decoration:none;color:inherit;">
-                <div class="tool-card" style="height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
-                    <h4 style="color:#0078d7;font-size:1.1em;margin-bottom:8px;">Home Loan EMI</h4>
-                    <span style="color:#00695c;font-weight:500;text-decoration:none;font-size:1em;">Calculate</span>
-                </div>
-            </a>
-            <a href="personal-loan.html" style="text-decoration:none;color:inherit;">
-                <div class="tool-card" style="height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
-                    <h4 style="color:#0078d7;font-size:1.1em;margin-bottom:8px;">Personal Loan EMI</h4>
-                    <span style="color:#00695c;font-weight:500;text-decoration:none;font-size:1em;">Calculate</span>
-                </div>
-            </a>
-            <a href="car-loan.html" style="text-decoration:none;color:inherit;">
-                <div class="tool-card" style="height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
-                    <h4 style="color:#0078d7;font-size:1.1em;margin-bottom:8px;">Car Loan EMI</h4>
-                    <span style="color:#00695c;font-weight:500;text-decoration:none;font-size:1em;">Calculate</span>
-                </div>
-            </a>
-            <a href="two-wheeler-loan.html" style="text-decoration:none;color:inherit;">
-                <div class="tool-card" style="height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
-                    <h4 style="color:#0078d7;font-size:1.1em;margin-bottom:8px;">Two Wheeler Loan EMI</h4>
-                    <span style="color:#00695c;font-weight:500;text-decoration:none;font-size:1em;">Calculate</span>
+            <a href="emi-calculator.html" class="card-link">
+                <div class="tool-card tool-card--large">
+                    <img src="skrollmates.png" alt="EMI Calculator">
+                    <h3>General EMI Calculator</h3>
+                    <p>Advanced EMI calculator with charts, pre-EMI, schedule, and PDF download.</p>
+                    <span>Try Now</span>
                 </div>
             </a>
         </div>
-        <div style="max-width:700px;margin:32px auto 32px auto;text-align:left;background:#f7f7f7;padding:24px 18px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
-                <h2 style="color:#0078d7;margin-bottom:10px;">Our Mission</h2>
-                <p style="color:#333;font-size:1.1em;">Skrollmates.com is dedicated to providing free, secure, and easy-to-use digital tools for everyone. Whether you need to calculate your loan EMI, manage privacy on WhatsApp, or access other productivity tools, our goal is to make your online experience smarter and safer.</p>
-                <h3 style="color:#00695c;margin-top:24px;margin-bottom:8px;">Security & Privacy</h3>
-                <p style="color:#333;font-size:1em;">All tools and extensions are designed with privacy in mind. We do not collect or store your personal data. Your information stays on your device.</p>
-                <h3 style="color:#00695c;margin-top:24px;margin-bottom:8px;">Quick Start Guide</h3>
-                <ol style="color:#333;font-size:1em;line-height:1.7;">
+    <h2 class="section-subtitle">Loan Calculators</h2>
+    <div class="cards-container">
+            <a href="home-loan.html" class="card-link">
+                <div class="tool-card tool-card--small">
+                    <h4>Home Loan EMI</h4>
+                    <span>Calculate</span>
+                </div>
+            </a>
+            <a href="personal-loan.html" class="card-link">
+                <div class="tool-card tool-card--small">
+                    <h4>Personal Loan EMI</h4>
+                    <span>Calculate</span>
+                </div>
+            </a>
+            <a href="car-loan.html" class="card-link">
+                <div class="tool-card tool-card--small">
+                    <h4>Car Loan EMI</h4>
+                    <span>Calculate</span>
+                </div>
+            </a>
+            <a href="two-wheeler-loan.html" class="card-link">
+                <div class="tool-card tool-card--small">
+                    <h4>Two Wheeler Loan EMI</h4>
+                    <span>Calculate</span>
+                </div>
+            </a>
+        </div>
+    <div class="info-panel">
+        <h2>Our Mission</h2>
+        <p>Skrollmates.com is dedicated to providing free, secure, and easy-to-use digital tools for everyone. Whether you need to calculate your loan EMI, manage privacy on WhatsApp, or access other productivity tools, our goal is to make your online experience smarter and safer.</p>
+        <h3>Security & Privacy</h3>
+        <p>All tools and extensions are designed with privacy in mind. We do not collect or store your personal data. Your information stays on your device.</p>
+        <h3>Quick Start Guide</h3>
+        <ol>
                     <li>Browse the featured tools and calculators below.</li>
                     <li>Click "Learn More" or "Try Now" to use a tool.</li>
                     <li>For WhatsApp extension, install from the Chrome Web Store and follow the guide.</li>
@@ -107,7 +107,7 @@
     </div>
      <div class="footer">
             <p>&copy; 2024 Skrollmates.com. All rights reserved.</p>
-            <a href="privacy-policy.html" target="_blank" style="color: #b2dfdb;">Privacy Policy</a>
+            <a href="privacy-policy.html" target="_blank">Privacy Policy</a>
         </div>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
     <script src="scripts.js" defer></script>

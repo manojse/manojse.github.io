@@ -10,10 +10,7 @@
     top: 0;
     left: 0;
     z-index: 100;
-}
-
-body {
-    margin-top: 72px;
+    height: 72px; /* reserve consistent navbar height */
 }
 .navbar ul {
     display: flex;
@@ -36,6 +33,7 @@ body {
     display: block;
     transition: color 0.2s;
 }
+.navbar li.active > a { color: #ffd600; font-weight:700; }
 .navbar a:hover {
     color: #ffd600;
 }

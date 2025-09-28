@@ -1,118 +1,463 @@
-/* emi-calculator.css: Common styles for all EMI Calculator pages */
-.emi-container {
-    max-width: 540px;
-    margin: 48px auto 32px auto;
-    background: #fff;
-    padding: 44px 32px 36px 32px;
-    border-radius: 22px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+:root{
+    --brand-1: #009688;
+    --brand-2: #00bcd4;
+    --accent: #0078d7;
+    --muted: #b2dfdb;
+    --bg-soft: #e0f7fa;
+    --card-bg: #ffffff;
+    --surface: #f7f7f7;
+    /* slider gradient colors: start light -> mid -> end dark */
+    --slider-start: rgba(0,188,212,0.18);
+    --slider-mid: rgba(0,150,136,0.40);
+    --slider-end: rgba(0,96,85,1);
 }
-h2 {
-    text-align: center;
-    margin-bottom: 28px;
-    color: #009688;
-    font-size: 2.1em;
-    font-weight:700;
-    letter-spacing:0.5px;
+
+/* Global box-sizing to avoid width surprises */
+*, *::before, *::after { box-sizing: border-box; }
+
+
+/* Base layout */
+body { font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; color:#233; background: linear-gradient(120deg,var(--bg-soft) 0%, #f7f7f7 100%); }
+
+.emi-main-layout { max-width:1200px; margin: 90px auto 28px auto; display: grid; grid-template-columns: 600px 420px; gap:28px; align-items:start; padding: 0 18px; overflow-x: hidden; }
+.emi-left, .emi-right { background: var(--card-bg); border-radius: 14px; padding: 20px; box-shadow: 0 6px 18px rgba(0,0,0,0.05); }
+.emi-left { min-width: 320px; max-width: 640px; }
+.emi-right { min-width: 320px; width:420px; display:flex; flex-direction:column; align-items:stretch; position: static; }
+
+/* Headings */
+h2 { font-size:1.8em; color:var(--brand-1); margin: 0 0 18px 0; text-align:center; }
+.emi-left h2 { margin-top:0; }
+
+/* New editorial classes to replace inline styles */
+.emi-title { text-align:center; color:var(--brand-1); font-size:2em; margin-bottom:28px; }
+.toggle-group { display:flex; align-items:center; gap:10px; }
+.toggle-caption { margin-left:8px; color:var(--accent); font-size:1em; cursor:pointer; font-weight:700; }
+.emi-summary-title { text-align:center; color:var(--accent); margin-bottom:18px; }
+
+/* Toggle placed after EMI date input */
+.toggle-after-emi { align-items:center; gap:12px; }
+.toggle-after-emi .input-label { flex:1 1 auto; margin:0; }
+.toggle-after-emi .input-group { display:flex; align-items:center; justify-content:flex-end; }
+.emi-summary-container { width:100%; margin-top:8px; font-size:1.1em; color:#333; }
+.emi-balance-graph { width:100%; margin:32px auto 0 auto; background:var(--card-bg); padding:18px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.04); }
+.emi-balance-graph[aria-hidden="true"] { display:none; }
+
+/* Make the balance graph span full width under the two-column layout */
+#emiBalanceGraphContainer { grid-column: 1 / -1; }
+.emi-info { margin:40px auto; max-width:1100px; background:var(--card-bg); padding:28px 18px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); color:#333; }
+.emi-info-title { color:var(--brand-1); text-align:center; margin-bottom:16px; }
+.emi-formula { background:var(--bg-soft); padding:10px 12px; border-radius:8px; }
+.emi-note { background:#fffde7; padding:10px 12px; border-radius:8px; color:#ff9800; }
+
+/* small card utility used across loan pages */
+.card { background: var(--card-bg); border-radius:16px; padding:28px; box-shadow:0 8px 32px rgba(0,0,0,0.06); }
+.summary-title { text-align:center; color:var(--accent); margin-bottom:18px; }
+.modern-btn { margin-left:8px; padding:6px 12px; font-size:1em; border-radius:6px; border:1px solid var(--muted); background:var(--bg-soft); color:var(--accent); cursor:pointer; }
+.formula { background:var(--bg-soft); padding:10px 12px; border-radius:8px; }
+.warning { background:#fffde7; padding:10px 12px; border-radius:8px; color:#ff9800; }
+
+.emi-section-title { color: var(--accent); margin-top: 24px; }
+.emi-list { margin: 12px 0 0 18px; color:#333; }
+.emi-info-paragraph { margin-top:18px; font-size:1em; color:#666; }
+.privacy-link { color: var(--muted); }
+
+.download-row { width:100%; text-align:right; margin-bottom:12px; }
+.secondary-btn { background:#0078d7; color:#fff; padding:8px 18px; border:none; border-radius:8px; font-size:1em; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.07); }
+
+/* Form layout */
+form#emiForm { width:100%; }
+.input-row { margin-bottom:18px; }
+.input-label { display:flex; justify-content:space-between; align-items:center; font-weight:600; color:var(--brand-1); margin-bottom:8px; }
+.input-label small { color:#666; font-weight:400; font-size:0.95em; }
+
+.input-group { display:flex; gap:12px; align-items:center; justify-content:space-between; min-width:0; }
+.modern-group { display:flex; gap:12px; align-items:center; justify-content:space-between; }
+
+/* Ensure the slider takes remaining space but can shrink to avoid pushing other columns */
+.input-group .modern-slider,
+.modern-group .modern-slider {
+    flex: 1 1 auto;
+    min-width: 0;
 }
-.input-row {
-    margin-bottom: 24px;
-}
-.input-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: #00695c;
-}
-.input-group {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-input[type="number"] {
-    width: 120px;
-    padding: 8px;
-    border: 1px solid #b2dfdb;
-    border-radius: 8px;
-    font-size: 1.1em;
-    background: #f7f7f7;
-}
-input[type="range"] {
-    flex: 1;
-    accent-color: #0078d7;
-    height: 4px;
-}
-.amount-words {
-    font-size: 1em;
-    color: #0078d7;
-    margin-top: 4px;
-    margin-bottom: 8px;
-    text-align: left;
-}
-.amount-formatted {
-    font-size: 1.1em;
-    color: #333;
-    margin-left: 8px;
-}
-button {
-    width: 100%;
-    padding: 12px;
-    background: #0078d7;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.15em;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-}
-button:hover {
-    background: #005fa3;
-}
-.result {
-    margin-top: 28px;
-    text-align: center;
-    font-size: 20px;
-    color: #333;
-}
-#emiChart {
-    margin-top: 32px;
-    max-width: 100%;
-    background: #f7f7f7;
+/* Numeric inputs keep a compact width but can shrink on tight containers */
+.modern-input { flex: 0 0 120px; width: 120px; min-width: 72px; max-width: 240px; }
+/* Amount words (like '94 Lakh') should not force layout; give it a fixed min width and allow wrapping */
+.amount-words { min-width: 110px; text-align:left; font-weight:700; color:var(--brand-2); }
+
+/* Inputs */
+/* inputs */
+.modern-input, input[type=date] { padding:10px 12px; border-radius:10px; border:1px solid var(--muted); background:var(--surface); font-size:1em; color:#222; }
+/* Right-align numeric inputs for easier reading of amounts */
+input[type=number].modern-input, input[type=number] { width:150px; text-align:right; }
+/* Range slider: smooth left-to-right gradient from lighter to darker */
+/* scope range styles to EMI layout to avoid affecting other pages */
+.emi-main-layout input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 10px;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    background: linear-gradient(90deg, var(--slider-start) 0%, var(--slider-mid) 60%, var(--slider-end) 100%);
+    flex: 1;
+    transition: background 0.18s ease;
 }
-#emiSchedule {
-    margin-top: 32px;
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
+
+/* WebKit track/thumb */
+.emi-main-layout input[type=range]::-webkit-slider-runnable-track {
+    height: 10px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--slider-start) 0%, var(--slider-mid) 60%, var(--slider-end) 100%);
 }
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #fafafa;
-    border-radius: 8px;
-    overflow: hidden;
+.emi-main-layout input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    margin-top: -5px; /* center the thumb */
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3px solid var(--brand-1);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
-th, td {
-    padding: 10px 6px;
-    border-bottom: 1px solid #e0e0e0;
-    text-align: center;
+
+/* Firefox */
+.emi-main-layout input[type=range]::-moz-range-track {
+    height: 10px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--slider-start) 0%, var(--slider-mid) 60%, var(--slider-end) 100%);
 }
-th {
-    background: #b2dfdb;
-    color: #00695c;
+.emi-main-layout input[type=range]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3px solid var(--brand-1);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
-tr:last-child td {
-    border-bottom: none;
+
+/* slider value bubble */
+.slider-bubble {
+    position: absolute;
+    transform: translateX(-50%);
+    top: -34px;
+    background: linear-gradient(90deg, #ffffff, #e8fffb);
+    border: 1px solid var(--muted);
+    color: var(--brand-1);
+    padding: 6px 8px;
+    border-radius: 12px;
+    font-weight:700;
+    font-size:0.85em;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    white-space:nowrap;
+    pointer-events:none;
+    z-index: 10;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-4px);
+    transition: opacity .14s ease, transform .14s ease;
 }
-@media (max-width: 600px) {
-    .emi-container { padding: 18px 6px; }
-    h2 { font-size: 1.3em; }
-    button { font-size: 1em; }
-    .input-group { flex-direction: column; align-items: stretch; gap: 6px; }
-    input[type="number"] { width: 100%; }
+/* avoid overflow and long content; clamp bubble width */
+.slider-bubble { max-width: 110px; overflow: hidden; text-overflow: ellipsis; font-size:0.85em; padding:6px 8px; }
+/* small caret */
+.slider-bubble:after{
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -6px;
+    width: 0; height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #ffffff;
 }
-.hidden { display: none; }
+
+/* ensure parent groups are positioned for absolute bubble placement */
+.input-group { position: relative; }
+
+/* show bubble on mouse hover, focus or while dragging */
+.input-group:hover .slider-bubble,
+.input-group.dragging .slider-bubble,
+.input-group:focus-within .slider-bubble {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.amount-words { color:var(--brand-2); font-weight:600; }
+
+/* inline formatted numeric display next to numeric inputs */
+.numeric-format {
+    font-weight:700;
+    color:var(--brand-1);
+    font-size:0.95em;
+    margin-left:8px;
+    min-width:86px;
+    text-align:right;
+}
+
+/* Right-align inputs intended for numeric entry (covers inputmode numeric & number) */
+.emi-main-layout input[inputmode="numeric"],
+.emi-main-layout input[type="text"].numeric,
+.emi-main-layout input[type="number"] {
+    text-align: right;
+    width: 150px;
+    min-width: 72px;
+}
+@media (max-width:480px){
+    .numeric-format { display:inline-block; min-width:68px; font-size:0.9em; }
+}
+
+/* Toggle switch */
+.modern-toggle-switch { position:relative; display:inline-block; width:64px; height:28px; margin-left:12px; vertical-align:middle; }
+.modern-toggle-switch input { opacity:0; width:0; height:0; }
+.modern-toggle-slider { position:absolute; inset:0; background:var(--surface); border-radius:28px; border:1px solid var(--muted); }
+/* moving thumb */
+.modern-toggle-slider:before { content:''; position:absolute; width:22px; height:22px; left:3px; bottom:3px; background:var(--brand-1); border-radius:50%; transition:transform .18s ease; z-index:2; }
+/* M/Y label inside the track */
+.modern-toggle-slider:after { content:'M'; position:absolute; top:0; bottom:0; left:0; width:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; color:var(--brand-1); z-index:1; pointer-events:none; }
+.modern-toggle-switch input:checked + .modern-toggle-slider { background: linear-gradient(90deg,var(--brand-2), var(--brand-1)); }
+.modern-toggle-switch input:checked + .modern-toggle-slider:before { transform:translateX(36px); background:var(--accent); }
+.modern-toggle-switch input:checked + .modern-toggle-slider:after { content:'Y'; left:50%; color:#ffffff; }
+#toggleTenureText{ display:none; }
+
+/* Buttons */
+.primary-btn, button, .modern-btn { display:inline-block; padding:12px 18px; border-radius:10px; border:none; background:linear-gradient(90deg,var(--brand-1), var(--brand-2)); color:#fff; font-weight:700; cursor:pointer; box-shadow:0 8px 24px rgba(0,188,212,0.12); }
+.primary-btn:hover, button:hover { transform:translateY(-2px); }
+
+/* Result and summary */
+.modern-result, .result { background: linear-gradient(90deg,var(--bg-soft), #fff); border-radius:10px; padding:14px; color:var(--accent); font-weight:700; text-align:center; box-shadow:0 6px 18px rgba(0,188,212,0.06); }
+
+/* focus-visible for keyboard users */
+.modern-input:focus-visible,
+.modern-toggle-switch input:focus-visible + .modern-toggle-slider,
+button:focus-visible,
+.primary-btn:focus-visible {
+    outline: 3px solid rgba(0,150,136,0.18);
+    outline-offset: 3px;
+}
+
+/* Charts */
+#emiChart, #emiBalanceGraph { display:block; width:100%; min-height:220px; height:260px; border-radius:12px; background:var(--surface); box-shadow:0 6px 18px rgba(0,0,0,0.04); }
+
+/* Loan Summary panel styles */
+.emi-right { padding:28px; display:flex; flex-direction:column; gap:18px; align-items:stretch; }
+.emi-right h3 { margin:0; color:var(--accent); font-size:1.15em; text-align:center; }
+
+.emi-right .summary-title { margin-bottom:14px; }
+#emiSummary { width:100%; display:grid; grid-template-columns: repeat(2, 1fr); gap:12px; align-items:center; }
+.summary-card { background: #ffffff; border-radius:12px; padding:12px 14px; box-shadow: 0 6px 14px rgba(14,36,33,0.06); display:flex; flex-direction:column; justify-content:center; border-left: 4px solid var(--brand-2); }
+.summary-card .label { font-size:0.85em; color:#666; margin-bottom:8px; }
+.summary-card .value { font-size:1.16em; font-weight:800; color:var(--brand-1); text-align:right; letter-spacing:0.2px; }
+.summary-card.emi { border-left-color: var(--brand-1); background: linear-gradient(90deg, #eafefb, #ffffff); }
+
+.summary-small { color: #00796b; font-weight:700; font-size:0.92em; }
+
+/* utility for right-aligned currency/number display */
+.amount { text-align: right; font-weight:700; color:var(--brand-1); }
+/* numeric table cells */
+td.numeric, th.numeric { text-align: right; }
+
+/* Make the summary grid single column on small screens */
+@media (max-width: 480px){
+    #emiSummary { grid-template-columns: 1fr; }
+    .emi-right { padding:16px; }
+    .summary-card .value { font-size:1.05em; }
+}
+
+/* Schedule table */
+/* ensure schedule appears after the full-width balance graph */
+#emiSchedule { margin-top:28px; }
+table { width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.04); }
+th, td { padding:12px 10px; text-align:center; border-bottom:1px solid #eef6f6; }
+th { background: linear-gradient(90deg,var(--muted), #d4f0ee); color:var(--brand-1); font-weight:700; }
+tr:nth-child(even) td { background:#fbffff; }
+
+/* Responsive */
+/* Tablet breakpoint: collapse grid into single column and remove fixed widths */
+@media (max-width: 900px){
+    .emi-main-layout {
+        grid-template-columns: 1fr;
+        padding: 0 12px;
+        margin: 64px auto 24px; /* reduced space for mobile/tablet so content appears higher */
+    }
+    .emi-left, .emi-right { padding:20px; }
+    .emi-right { width: auto; min-width: 0; }
+    /* On tablet and smaller screens, allow number inputs to stretch */
+    input[type=number] { width:100%; }
+}
+
+@media (max-width: 480px){
+    h2 { font-size:1.4em; }
+    .emi-main-layout { gap:16px; }
+    /* reduce top spacing on very small screens to keep content visible under fixed nav */
+    .emi-main-layout { margin: 56px auto 16px; }
+    /* make cards a bit tighter on mobile */
+    .emi-left, .emi-right, .card { padding:16px; border-radius:12px; }
+    /* Keep slider and numeric input on the same row for the first form row (Loan Amount) */
+    .input-row.modern-row.form-inline:first-of-type { flex-direction: row; align-items: center; }
+    .input-row.modern-row.form-inline:first-of-type .input-group { flex-direction: row; align-items:center; gap:8px; }
+    /* compact numeric input for principal on mobile */
+    #principal { width:96px !important; min-width:72px; text-align:right; transition: width .18s ease; }
+    /* expand principal input when focused for easier editing on touch devices */
+    #principal:focus { width:160px !important; }
+    #principalSlider { margin-right:8px; }
+    /* other groups remain stacked or row as previously defined; ensure sliders still flex */
+    .input-group, .modern-group { gap:10px; }
+    .amount-words{ text-align:left; }
+    /* compact numeric inputs elsewhere */
+    input[type=number].modern-input, input[type=number] { width:96px; min-width:72px; text-align:right; }
+    input[type=range] { flex:1; }
+    /* Place toggle switch spaced for easier tapping */
+    .modern-toggle-switch { margin-left:0; margin-top:6px; }
+    #toggleTenureText { display:none; }
+    /* Reduce chart heights on very small screens */
+    #emiChart, #emiBalanceGraph { height:180px; }
+
+    /* date pair stacks on mobile */
+    .date-pair { flex-direction: column; }
+    .date-pair .date-col { width:100%; }
+}
+
+/* date pair side-by-side for larger screens */
+.date-pair { display:flex; gap:12px; align-items:flex-start; }
+.date-pair .date-col { flex:1; }
+
+/* On larger screens show label left and input right in the date columns */
+@media (min-width: 481px) {
+    .date-col { display:flex; align-items:center; gap:12px; }
+    /* override .input-label (which is flex between) to be a simple left label here */
+    .date-col .input-label { display:block; width:160px; margin:0; color:var(--brand-1); font-weight:700; }
+    .date-col .modern-input { flex:1; }
+}
+
+/* ensure stacked on mobile (restate for clarity) */
+@media (max-width:480px){
+    .date-col .input-label { display:block; margin-bottom:6px; }
+}
+
+/* Generic inline form row: default to stacked/flow layout; apply fixed label column only on wide screens.
+   This prevents the label from forcing layout on smaller viewports. */
+#emiForm .form-inline { display:flex; flex-direction:row; align-items:center; gap:12px; }
+/* Default label behaviour: allow label to size naturally (prevents forcing fixed width on mobile) */
+#emiForm .form-inline .input-label { display:block; width:auto; flex:0 0 auto; margin:0; color:var(--brand-1); font-weight:700; }
+#emiForm .form-inline .input-group { flex:1; display:flex; gap:12px; align-items:center; justify-content:flex-end; }
+#emiForm .input-group .modern-slider { flex:1; }
+#emiForm .modern-input, #emiForm input[type=number], #emiForm input[type=date], #emiForm input[type=text] { width:auto; min-width:128px; max-width:128px; background:#fff; }
+#emiForm .amount-words { display:inline-block; width:auto; flex:0 0 auto; margin-top:0; margin-left:12px; white-space:nowrap; color:var(--brand-2); font-weight:700; }
+
+/* On wider screens, enforce a two-column form: label on the left (fixed), inputs on the right */
+@media (min-width: 901px) {
+    #emiForm .form-inline { flex-direction:row; align-items:center; }
+    #emiForm .form-inline .input-label { width:220px; flex:0 0 220px; }
+    #emiForm .form-inline .input-group { justify-content:flex-end; }
+}
+
+/* Tenure row rules */
+#emiForm .tenure-row { display:flex; flex-direction:row; gap:12px; align-items:center; }
+#emiForm .tenure-row .toggle-group { flex:0 0 auto; align-items:center; gap:10px; }
+#emiForm .tenure-row .input-group { flex:1; display:flex; gap:12px; align-items:center; justify-content:flex-end; }
+#emiForm #tenureSlider { flex:1; }
+#emiForm #tenure { flex:0 0 110px; min-width:96px; text-align:right; }
+
+/* date pair: force stack vertically so each date input sits on its own line */
+/* Date rows: keep each date on its own line but align the input to the right
+    (label left, input right) for a cleaner, two-column look per row) */
+#emiForm .date-pair { display:flex; flex-direction:column; gap:10px; }
+#emiForm .date-pair .date-col { width:100%; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+#emiForm .date-col .input-label { margin:0; flex:0 0 200px; }
+#emiForm .date-col .modern-input, #emiForm .date-col input[type=date] { flex:1 1 auto; max-width:128px; text-align:right; }
+
+/* Toggle after EMI: align label left and switch on right */
+#emiForm .toggle-after-emi { display:flex; align-items:center; gap:12px; }
+#emiForm .toggle-after-emi .input-label { flex:1; margin:0; }
+#emiForm .toggle-after-emi .input-group { justify-content:flex-end; }
+
+/* Mobile: consolidated rules for narrow screens (max-width:480px).
+   - Stack labels above controls for readability.
+   - Keep the Loan Amount row's slider + compact numeric input on one line.
+   - Use a compact default width for the principal input that expands on focus.
+   These selectors are placed together and are specific to avoid conflicts. */
+@media (max-width: 480px) {
+    /* general stacking for form rows: reduce vertical gaps so labels sit closer to controls */
+    #emiForm .form-inline { display:flex; flex-direction:column; align-items:stretch; gap:6px; }
+    #emiForm .form-inline .input-label { margin-bottom:4px; }
+    #emiForm .form-inline .input-group { display:flex; flex-direction:column; align-items:stretch; gap:8px; }
+    /* Keep slider + numeric input inline for rows that use `.modern-group` (principal, rate, tenure) */
+    #emiForm .input-group.modern-group { flex-direction:row; align-items:center; gap:8px; }
+    #emiForm .input-group.modern-group .modern-slider { flex:1 1 auto; min-width:0; }
+    #emiForm .input-group.modern-group .modern-input { flex:0 0 auto; }
+    #emiForm .date-pair { flex-direction:column; }
+    #emiForm .toggle-after-emi { flex-direction:column; align-items:stretch; }
+    #emiForm .modern-input, #emiForm input[type=number], #emiForm input[type=date], #emiForm input[type=text] { width:70px; }
+    #emiForm .amount-words { width:100%; margin-left:0; }
+
+    /* Loan Amount row: keep label above, but slider + numeric input inline in a single row */
+    #emiForm .input-row.modern-row.form-inline:first-of-type { display:flex; flex-direction:column; gap:4px; margin-bottom:10px; }
+    #emiForm .input-row.modern-row.form-inline:first-of-type .input-group { display:flex; flex-direction:row; align-items:center; gap:8px; }
+    #emiForm .input-row.modern-row.form-inline:first-of-type .modern-slider { flex:1 1 auto; min-width:0; }
+
+    /* compact numeric input for principal on mobile; expands when focused for easier editing */
+    #emiForm .input-row.modern-row.form-inline:first-of-type .modern-input,
+    #emiForm .input-row.modern-row.form-inline:first-of-type input[type=text]#principal {
+        flex:0 0 90px;
+        width:90px;
+        min-width:72px;
+        height:36px;
+        padding:6px 8px;
+        font-size:0.95rem;
+        border-radius:8px;
+        box-sizing:border-box;
+        text-align:right;
+        background:#fff;
+        transition: width .18s ease, padding .12s ease;
+    }
+    #emiForm .input-row.modern-row.form-inline:first-of-type .modern-input:focus,
+    #emiForm .input-row.modern-row.form-inline:first-of-type input[type=text]#principal:focus {
+        width:160px;
+    }
+
+    /* ensure sliders flex and don't wrap */
+    #emiForm .input-row.modern-row.form-inline:first-of-type #principalSlider { margin-right:6px; }
+
+    /* compact other numeric inputs (height/padding unified with principal) */
+    input[type=number].modern-input, input[type=number] {
+        width:96px;
+        min-width:72px;
+        text-align:right;
+        height:36px;
+        padding:6px 8px;
+        line-height:1.1;
+        box-sizing:border-box;
+        font-size:0.95rem;
+        border-radius:8px;
+    }
+    /* Ensure the rate input specifically matches visual height and alignment */
+    #emiForm input#rate {
+        height:36px;
+        padding:6px 8px;
+        line-height:1.1;
+        font-size:0.95rem;
+        box-sizing:border-box;
+    }
+
+    /* compact cards and charts on very small screens */
+    .emi-left, .emi-right, .card { padding:16px; border-radius:12px; }
+    #emiChart, #emiBalanceGraph { height:180px; }
+}
+
+.hidden{ display:none; }
+
+/* Make tables scroll horizontally on small containers to avoid page growth */
+.table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.table-container table, #emiSchedule table { width: 100%; max-width: 100%; }
+
+/* Schedule and year blocks styling */
+.schedule-title { margin-top:32px; text-align:center; color:var(--brand-1); font-weight:700; }
+.year-block { margin-bottom:18px; border:1px solid var(--muted); border-radius:8px; overflow:hidden; }
+.year-header { background: var(--muted); color: var(--brand-1); padding:10px 16px; cursor:pointer; font-weight:600; display:flex; justify-content:space-between; align-items:center; }
+.toggle-indicator { float:right; }
+.year-details { padding:0 8px 8px 8px; }
+.year-details.hidden { display:none; }
+/* Allow wide schedule tables inside year-details to scroll horizontally on small screens */
+.year-details { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.year-details .schedule-table { min-width:720px; }
+.schedule-table { width:100%; border-collapse:collapse; margin-top:8px; }
+.schedule-table thead th { text-align:center; }
+.schedule-table td, .schedule-table th { padding:10px 8px; }
+.schedule-table td.numeric, .schedule-table th.numeric { text-align:right; }

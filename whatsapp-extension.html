@@ -275,11 +275,10 @@
             <h1>WhatsApp ChatShield And Quick Chat</h1>
             <p class="credit">Design and Developed by Manoj Barma</p>
 
-            <div style="margin-top: 20px;">
-                <input id="phoneInputTop" type="tel" inputmode="numeric" pattern="\d*" maxlength="15"
-                    placeholder="Enter phone number"
-                    style="padding: 10px; width: 280px; font-size: 1em; border-radius: 5px; border: 1px solid #ccc;" />
-                <button onclick="startWhatsAppChatTop()" class="btn">
+            <div class="top-input-row">
+                <input id="phoneInputTop" type="tel" inputmode="numeric" pattern="\\d*" maxlength="15"
+                    placeholder="Enter phone number" class="phone-input" />
+                <button id="startChatTopBtn" class="btn">
                     Start Chat
                 </button>
             </div>
@@ -363,7 +362,7 @@
     </div>
      <div class="footer">
         <p>&copy; 2024 Skrollmates.com. All rights reserved.</p>
-            <a href="privacy-policy.html" target="_blank" style="color: #ffd600;">Privacy Policy</a>
+            <a href="privacy-policy.html" target="_blank">Privacy Policy</a>
         </div>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="menu.js" defer></script>
@@ -389,7 +388,7 @@
         });
         function startWhatsAppChatTop() {
             const input = document.getElementById('phoneInputTop').value.trim();
-            const phoneRegex = /^\d{10,15}$/;
+            const phoneRegex = /^\\d{10,15}$/;
             if (!phoneRegex.test(input)) {
                 alert("Please enter a valid phone number with country code (e.g. 919876543210)");
                 return;
@@ -404,6 +403,12 @@
                 window.open(whatsappURL, '_blank');
             }
         }
+
+        // attach click handler to button (no inline onclick)
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('startChatTopBtn');
+            if (btn) btn.addEventListener('click', startWhatsAppChatTop);
+        });
     </script>
 </body>
 

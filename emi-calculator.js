@@ -1,7 +1,17 @@
 // emi-calculator.js - rewritten from car-loan.html
 
 function pad(n) { return n < 10 ? '0' + n : n; }
-function formatNumber(num) { return num.toLocaleString('en-IN'); }
+// formatNumber: accepts a number or numeric string and optional decimals.
+// If decimals is provided, format with that many fraction digits (useful for currency).
+function formatNumber(num, decimals) {
+	let n = Number(num);
+	if (isNaN(n)) n = 0;
+	if (typeof decimals === 'number') {
+		return n.toLocaleString('en-IN', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+	}
+	// default: no forced decimals, return localized string (will include decimals if present)
+	return n.toLocaleString('en-IN');
+}
 function numberToWords(num) {
 	if (isNaN(num) || num < 1) return '';
 	const units = ['', 'Thousand', 'Lakh', 'Crore'];
@@ -25,15 +35,52 @@ document.addEventListener('DOMContentLoaded', function() {
 	const principalInput = document.getElementById('principal');
 	const principalWords = document.getElementById('principalWords');
 	function updatePrincipalDisplay(val) {
-		let raw = val.replace(/[^\d]/g, '');
+		// accept either raw numeric input or formatted value with commas
+		let raw = String(val).replace(/[^\d]/g, '');
 		if (!raw) raw = '0';
 		let numVal = Number(raw);
-		principalInput.value = numVal;
+		// store raw numeric value on the input for calculations
+		principalInput.dataset.raw = String(numVal);
 		principalSlider.value = numVal;
-		principalWords.textContent = numberToWords(numVal);
+		// display formatted value with Indian commas in the text input
+		principalInput.value = formatNumber(numVal);
+	if (principalWords) principalWords.textContent = numberToWords(numVal);
 	}
 	principalSlider.addEventListener('input', e => updatePrincipalDisplay(e.target.value));
-	principalInput.addEventListener('input', e => updatePrincipalDisplay(e.target.value));
+	// format on each keystroke while preserving caret position
+	principalInput.addEventListener('input', function(e) {
+		try {
+			const el = e.target;
+			const selStart = el.selectionStart || 0;
+			// count digits before caret
+			const digitsBefore = el.value.slice(0, selStart).replace(/\D/g, '').length;
+			// raw numeric value
+			const raw = el.value.replace(/[^\d]/g, '') || '0';
+			principalInput.dataset.raw = raw;
+			principalSlider.value = raw;
+			if (principalWords) principalWords.textContent = numberToWords(Number(raw));
+			// formatted value
+			const formatted = formatNumber(Number(raw));
+			el.value = formatted;
+			// compute new caret position: find position after digitsBefore digits
+			let pos = 0, digitCount = 0;
+			while (digitCount < digitsBefore && pos < el.value.length) {
+				if (/\d/.test(el.value.charAt(pos))) digitCount++;
+				pos++;
+			}
+			el.setSelectionRange(pos, pos);
+		} catch (err) {
+			// fallback: simple update
+			const raw = e.target.value.replace(/[^\d]/g, '') || '0';
+			principalInput.dataset.raw = raw;
+			principalSlider.value = raw;
+			if (principalWords) principalWords.textContent = numberToWords(Number(raw));
+			principalInput.value = formatNumber(Number(raw));
+		}
+		// update calculation live
+		calculateEMI();
+	});
+	// initial format
 	updatePrincipalDisplay(principalInput.value);
 
 	// Rate sync
@@ -54,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const tenureSlider = document.getElementById('tenureSlider');
 	const tenureInput = document.getElementById('tenure');
 	const toggleTenureUnit = document.getElementById('toggleTenureUnit');
+	const toggleTenureText = document.getElementById('toggleTenureText');
 	const tenureUnitLabel = document.getElementById('tenureUnitLabel');
 	let tenureUnit = 'months';
 	function updateTenureDisplay(val, source) {
@@ -71,34 +119,116 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 	tenureSlider.addEventListener('input', e => updateTenureDisplay(e.target.value, 'slider'));
 	tenureInput.addEventListener('input', e => updateTenureDisplay(e.target.value, 'input'));
-	toggleTenureUnit.addEventListener('click', function() {
-		if (tenureUnit === 'months') {
-			tenureUnit = 'years';
-			tenureUnitLabel.textContent = '(years)';
-			toggleTenureUnit.textContent = 'Switch to Months';
-			let years = (parseInt(tenureInput.value) / 12).toFixed(2);
-			tenureInput.value = years;
-			tenureInput.min = 0.5;
-			tenureInput.max = 30;
-			tenureInput.step = 0.01;
-		} else {
-			tenureUnit = 'months';
-			tenureUnitLabel.textContent = '(months)';
-			toggleTenureUnit.textContent = 'Switch to Years';
-			let months = Math.round(parseFloat(tenureInput.value) * 12);
-			tenureInput.value = months;
-			tenureInput.min = 6;
-			tenureInput.max = 360;
-			tenureInput.step = 1;
-		}
-		updateTenureDisplay(tenureInput.value, 'input');
-	});
+	// toggleTenureUnit is now a checkbox switch; update on change
+	if (toggleTenureUnit) {
+		toggleTenureUnit.addEventListener('change', function() {
+			if (toggleTenureUnit.checked) {
+				// switch to years
+				tenureUnit = 'years';
+				tenureUnitLabel.textContent = '(years)';
+				// caption removed
+				// convert current slider/months value to years (with 2 decimals)
+				let monthsVal = parseFloat(tenureSlider.value) || parseFloat(tenureInput.value) || 0;
+				let years = (monthsVal / 12);
+				tenureInput.value = years.toFixed(0);
+				tenureInput.min = 1;
+				tenureInput.max = 30;
+				tenureInput.step = 1;
+			} else {
+				// switch to months
+				tenureUnit = 'months';
+				tenureUnitLabel.textContent = '(months)';
+				// caption removed
+				let yearsVal = parseFloat(tenureInput.value) || (parseFloat(tenureSlider.value) / 12) || 0;
+				let months = Math.round(yearsVal * 12);
+				tenureInput.value = months;
+				tenureInput.min = 6;
+				tenureInput.max = 360;
+				tenureInput.step = 1;
+			}
+			updateTenureDisplay(tenureInput.value, 'input');
+		});
+	}
 	updateTenureDisplay(tenureInput.value, 'input');
+
+	// --- Slider value bubbles ---
+	function createBubble(slider) {
+		const bubble = document.createElement('div');
+		bubble.className = 'slider-bubble';
+		slider.parentElement.appendChild(bubble);
+		return bubble;
+	}
+
+	function updateBubblePosition(slider, bubble, formatFn) {
+		const sliderRect = slider.getBoundingClientRect();
+		const parentRect = slider.parentElement.getBoundingClientRect();
+		const min = parseFloat(slider.min) || 0;
+		const max = parseFloat(slider.max) || 100;
+		const val = parseFloat(slider.value);
+		const percent = (val - min) / (max - min);
+		// compute x relative to parent but clamp within the slider's own track
+		const sliderLeftRel = sliderRect.left - parentRect.left;
+		let x = sliderLeftRel + percent * sliderRect.width;
+		const padding = 8; // keep bubble inside a small padding from track edges
+		const minX = sliderLeftRel + padding;
+		const maxX = sliderLeftRel + sliderRect.width - padding;
+		x = Math.max(minX, Math.min(x, maxX));
+		bubble.style.left = x + 'px';
+		bubble.textContent = formatFn ? formatFn(val) : slider.value;
+	}
+
+    // updateRangeFill: show filled portion of slider track up to thumb
+    function updateRangeFill(slider) {
+        const min = Number(slider.min) || 0;
+        const max = Number(slider.max) || 100;
+        const val = Number(slider.value);
+        const pct = ((val - min) / (max - min)) * 100;
+        // create a background that visually fills to the thumb position
+        slider.style.background = `linear-gradient(90deg, var(--slider-end) ${pct}%, var(--slider-mid) ${pct}%, var(--slider-start) 100%)`;
+    }
+
+	// Create bubbles for principal, rate and tenure sliders
+	const principalBubble = createBubble(principalSlider);
+	const rateBubble = createBubble(rateSlider);
+	const tenureBubble = createBubble(tenureSlider);
+
+	// formatting helpers
+	function formatPrincipal(v){ return '₹' + formatNumber(Math.round(v)); }
+	function formatRate(v){ return parseFloat(v).toFixed(2) + '%'; }
+	function formatTenure(v){ return tenureUnit === 'months' ? Math.round(v) + 'm' : parseFloat(v).toFixed(2) + 'y'; }
+
+	// update on input and update filled track
+	principalSlider.addEventListener('input', function(e){ updateBubblePosition(principalSlider, principalBubble, formatPrincipal); updateRangeFill(principalSlider); });
+	rateSlider.addEventListener('input', function(e){ updateBubblePosition(rateSlider, rateBubble, formatRate); updateRangeFill(rateSlider); });
+	tenureSlider.addEventListener('input', function(e){ updateBubblePosition(tenureSlider, tenureBubble, formatTenure); updateRangeFill(tenureSlider); });
+
+	// initialize positions and filled track
+	setTimeout(function(){
+		updateBubblePosition(principalSlider, principalBubble, formatPrincipal);
+		updateBubblePosition(rateSlider, rateBubble, formatRate);
+		updateBubblePosition(tenureSlider, tenureBubble, formatTenure);
+		updateRangeFill(principalSlider);
+		updateRangeFill(rateSlider);
+		updateRangeFill(tenureSlider);
+	}, 100);
+
+	// show bubble while dragging (for touch devices) using a 'dragging' class
+	[principalSlider, rateSlider, tenureSlider].forEach(function(sl) {
+		const parent = sl.parentElement;
+		sl.addEventListener('pointerdown', function() { parent.classList.add('dragging'); });
+		document.addEventListener('pointerup', function() { parent.classList.remove('dragging'); });
+		// also remove on pointercancel to be safe
+		sl.addEventListener('pointercancel', function() { parent.classList.remove('dragging'); });
+	});
 
 	// EMI calculation
 	function calculateEMI() {
 		const preEmiOnly = document.getElementById('preEmiOnly').checked;
-		const P = parseFloat(principalInput.value.replace(/,/g, ''));
+		// robust principal parsing: prefer dataset.raw, otherwise strip non-digits from visible value
+		let rawP = (principalInput.dataset.raw !== undefined && principalInput.dataset.raw !== '') ? principalInput.dataset.raw : principalInput.value || '0';
+		rawP = String(rawP).replace(/[^\d.\-]/g, '');
+		let P = parseFloat(rawP);
+		if (isNaN(P)) P = 0;
 		const R = parseFloat(rateInput.value) / 12 / 100;
 		let N;
 		if (tenureUnitLabel.textContent.indexOf('year') !== -1) N = Math.round(parseFloat(tenureInput.value) * 12);
@@ -144,12 +274,28 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 			const repaymentAmount = P + totalInterest;
 			const tenureYears = (N / 12).toFixed(2);
+			// build structured summary using summary-card classes
 			document.getElementById('emiSummary').innerHTML = `
-				<div style="margin-bottom:10px;"><strong>Loan Amount:</strong> ₹${formatNumber(P)}</div>
-				<div style="margin-bottom:10px;"><strong>Total Interest:</strong> ₹${formatNumber(totalInterest.toFixed(2))}</div>
-				<div style="margin-bottom:10px;"><strong>Loan Repayment Amount:</strong> ₹${formatNumber(repaymentAmount.toFixed(2))}</div>
-				<div style="margin-bottom:10px;"><strong>Monthly EMI:</strong> ₹${formatNumber(emi.toFixed(2))}</div>
-				<div style="margin-bottom:10px;"><strong>Tenure:</strong> ${N} months (${tenureYears} years)</div>
+				<div class="summary-card emi">
+					<div class="label">Monthly EMI</div>
+					<div class="value amount">₹${formatNumber(emi, 2)}</div>
+				</div>
+				<div class="summary-card">
+					<div class="label">Loan Amount</div>
+					<div class="value amount">₹${formatNumber(P)}</div>
+				</div>
+				<div class="summary-card">
+					<div class="label">Total Interest</div>
+					<div class="value amount">₹${formatNumber(totalInterest, 2)}</div>
+				</div>
+				<div class="summary-card">
+					<div class="label">Total Repayment</div>
+					<div class="value amount">₹${formatNumber(repaymentAmount, 2)}</div>
+				</div>
+				<div class="summary-card">
+					<div class="label">Tenure</div>
+					<div class="value">${N} months<br><small class="summary-small">(${tenureYears} yrs)</small></div>
+				</div>
 			`;
 			let years = {};
 			schedule.forEach(function(row, idx) {
@@ -172,20 +318,76 @@ document.addEventListener('DOMContentLoaded', function() {
 					years[yearValue].push(Object.assign({}, row, {emiMonthDate: emiMonthDate}));
 				}
 			});
-			let table = `<h3 style='margin-top:32px;text-align:center'>EMI Payment Schedule</h3><div style='overflow-x:auto'>`;
+			let table = `<h3 class='schedule-title'>EMI Payment Schedule</h3><div class='table-container'>`;
 			Object.keys(years).forEach(function(year) {
-				table += `<div style='margin-bottom:18px;border:1px solid #b2dfdb;border-radius:8px;'>`;
-				table += `<div style='background:#b2dfdb;color:#00695c;padding:10px 16px;cursor:pointer;font-weight:600;' onclick='document.getElementById("year-details-${year}").classList.toggle("hidden");'>Year ${year} <span style='float:right;'>[+/-]</span></div>`;
-				table += `<div id='year-details-${year}' class='hidden' style='padding:0 8px 8px 8px;'>`;
-				table += `<table style='width:100%;border-collapse:collapse;margin-top:8px;'><thead><tr><th>Month</th><th>EMI Date</th><th>EMI (₹)</th><th>Principal Paid (₹)</th><th>Interest Paid (₹)</th><th>Balance (₹)</th></tr></thead><tbody>`;
+				table += `<div class='year-block'>`;
+				// create a simple header; we'll attach listeners after injecting HTML
+				table += `<div class='year-header'>Year ${year} <span class='toggle-indicator'>[+/-]</span></div>`;
+				table += `<div id='year-details-${year}' class='year-details hidden'>`;
+				table += `<table class='schedule-table'><thead><tr><th>Month</th><th>EMI Date</th><th>EMI (₹)</th><th>Principal Paid (₹)</th><th>Interest Paid (₹)</th><th>Balance (₹)</th></tr></thead><tbody>`;
 				years[year].forEach(function(row) {
 					let emiDateStr = row.emiMonthDate.display || (pad(row.emiMonthDate.getDate()) + '-' + pad(row.emiMonthDate.getMonth() + 1) + '-' + row.emiMonthDate.getFullYear());
-					table += `<tr><td>${row.month}</td><td>${emiDateStr}</td><td>${row.emi.toFixed(2)}</td><td>${row.principalPaid.toFixed(2)}</td><td>${row.interestPaid.toFixed(2)}</td><td>${row.balance.toFixed(2)}</td></tr>`;
+					table += `<tr>
+						<td>${row.month}</td>
+						<td>${emiDateStr}</td>
+						<td class="numeric">₹${formatNumber(row.emi, 2)}</td>
+						<td class="numeric">₹${formatNumber(row.principalPaid, 2)}</td>
+						<td class="numeric">₹${formatNumber(row.interestPaid, 2)}</td>
+						<td class="numeric">₹${formatNumber(row.balance, 2)}</td>
+					</tr>`;
 				});
 				table += `</tbody></table></div></div>`;
 			});
-			table += `</div>`;
+				table += `</div>`;
 			document.getElementById('emiSchedule').innerHTML = table;
+			// Attach click handlers to the generated year headers to toggle details
+			document.querySelectorAll('#emiSchedule .year-header').forEach(function(hdr) {
+				hdr.style.cursor = 'pointer';
+				hdr.setAttribute('role', 'button');
+				hdr.setAttribute('tabindex', '0');
+				// start collapsed
+				hdr.setAttribute('aria-expanded', 'false');
+				hdr.addEventListener('click', function() {
+					// Prefer the next sibling (year-details) if present, otherwise fallback to search
+					let details = hdr.nextElementSibling;
+					if (!details || !details.classList.contains('year-details')) {
+						const block = hdr.parentElement;
+						if (block) details = block.querySelector('.year-details');
+						else details = null;
+					}
+					if (details) {
+						const nowHidden = details.classList.toggle('hidden');
+						hdr.setAttribute('aria-expanded', nowHidden ? 'false' : 'true');
+					}
+				});
+				// keyboard accessibility: toggle on Enter/Space
+				hdr.addEventListener('keydown', function(e) {
+					if (e.key === 'Enter' || e.key === ' ') {
+						e.preventDefault();
+						hdr.click();
+					}
+				});
+				// Delegated listener on the schedule container to handle clicks even if outer code
+				// replaces the inner HTML later. This is a reliable fallback and keeps behavior
+				// consistent when schedule is regenerated.
+				const scheduleContainer = document.getElementById('emiSchedule');
+				if (scheduleContainer && !scheduleContainer.__hasYearToggle) {
+					scheduleContainer.__hasYearToggle = true;
+					scheduleContainer.addEventListener('click', function(e) {
+						const hdr = e.target.closest && e.target.closest('.year-header');
+						if (!hdr) return;
+						let details = hdr.nextElementSibling;
+						if (!details || !details.classList.contains('year-details')) {
+							const block = hdr.parentElement;
+							details = block ? block.querySelector('.year-details') : null;
+						}
+						if (details) {
+							const nowHidden = details.classList.toggle('hidden');
+							hdr.setAttribute('aria-expanded', nowHidden ? 'false' : 'true');
+						}
+					});
+				}
+			});
 			if (window.Chart) {
 				let balanceLabels = schedule.map(function(row) {
 					let emiMonthDate;
@@ -257,16 +459,44 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	}
 
+	// debounce helper to limit calculateEMI calls during rapid input
+	function debounce(fn, wait) {
+		let t = null;
+		return function() {
+			const args = arguments;
+			const ctx = this;
+			clearTimeout(t);
+			t = setTimeout(function() { fn.apply(ctx, args); }, wait);
+		};
+	}
+
+	const calculateEMIDebounced = debounce(calculateEMI, 120);
+
+	// Wire input listeners, but filter out any missing elements to avoid runtime errors
 	[principalInput, principalSlider, rateInput, rateSlider, tenureInput, tenureSlider,
 	 document.getElementById('preEmiOnly'), document.getElementById('disbursalDate'), document.getElementById('emiDate')]
-		.forEach(function(el) { el.addEventListener('input', calculateEMI); });
+		.filter(Boolean)
+		.forEach(function(el) { el.addEventListener('input', calculateEMIDebounced); });
+
+	// Delegated click handler for year header expand/collapse (avoid inline onclick)
+	document.addEventListener('click', function(e) {
+		const el = e.target.closest && e.target.closest('.year-header');
+		if (el) {
+			const parent = el.parentElement;
+			const details = parent.querySelector('.year-details');
+			if (details) details.classList.toggle('hidden');
+		}
+	});
 
 	function runInitialCalculationWhenReady() {
-		if (window.Chart) calculateEMI();
-		else {
+		// Always run an initial calculation so the schedule/summary appear even if Chart.js
+		// hasn't loaded yet. If Chart.js loads later, update charts again.
+		calculateEMI();
+		if (!window.Chart) {
 			var chartInterval = setInterval(function() {
 				if (window.Chart) {
 					clearInterval(chartInterval);
+					// re-run calculation so charts are drawn
 					calculateEMI();
 				}
 			}, 100);

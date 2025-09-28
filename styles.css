@@ -16,6 +16,10 @@ body {
     margin-bottom:24px;
     position: relative;
 }
+.main-index-hero { padding-top: 92px; } /* make space for fixed navbar */
+.main-index-hero .hero-logo { width:96px; margin-bottom:18px; box-shadow:0 2px 8px rgba(0,0,0,0.07); border-radius:50%; }
+.hero-sub { font-size:1.25em; font-weight:400; max-width:600px; margin:0 auto 18px auto; }
+.hero-link { color:#ffd600; font-weight:500; text-decoration:none; font-size:1.1em; }
 .main-index-hero img {
     width:96px;
     margin-bottom:18px;
@@ -57,172 +61,52 @@ body {
     box-shadow:0 2px 8px rgba(0,0,0,0.08);
 }
 /* Add more styles as needed for all pages */
+/* Ensure single, consistent body rule */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: #333;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
+/* Cards container for featured tools */
+.cards-container { display:flex; flex-wrap:wrap; gap:32px; justify-content:center; }
 
-header {
-    background-color: #333;
-    color: #fff;
-}
+/* Section title utility */
+.section-title { color:#00695c; text-align:center; font-size:2em; margin-bottom:32px; }
+.section-subtitle { color:#00695c; text-align:center; font-size:1.7em; margin:48px 0 24px 0; }
 
-/* Unified footer styles */
-.footer {
-    text-align: center;
-    padding: 18px 0;
-    margin-top: 32px;
-    background: linear-gradient(90deg, #009688 0%, #00bcd4 100%);
-    color: #fff;
-    border-radius: 14px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.08);
-}
-.footer a {
-    color: #00aced;
-    text-decoration: none;
-}
-.footer a:hover {
-    text-decoration: underline;
-}
-.nav-links a:hover {
-    text-decoration: underline;
-}
+/* Tool card size variants */
+.tool-card--large { height:320px; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+.tool-card--small { height:120px; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+.tool-card img { width:56px; margin-bottom:12px; }
 
-.hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-}
+/* Info panel */
+.info-panel { max-width:700px; margin:32px auto; text-align:left; background:#f7f7f7; padding:24px 18px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); }
 
-.hamburger div {
-    width: 25px;
-    height: 3px;
-    background-color: #fff;
-}
+/* Consolidated footer styling */
+.footer { text-align: center; padding: 18px 0; margin-top: 32px; background: linear-gradient(90deg, #009688 0%, #00bcd4 100%); color: #fff; border-radius: 14px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.footer a { color: #00aced; text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
 
-.header-content {
-    text-align: center;
-    padding: 50px 20px;
-}
+/* Card link utility (replace inline anchor styles) */
+.card-link { text-decoration: none; color: inherit; }
 
-.header {
-    background-color: #005555;
-    color: #fff;
-    padding: 50px 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
+/* Tool card heading styles */
+.tool-card h3 { color: #0078d7; font-size: 1.3em; margin-bottom: 8px; }
+.tool-card h4 { color: #0078d7; font-size: 1.1em; margin-bottom: 8px; }
 
-.header img {
-    width: 100px;
-    margin-bottom: 20px;
-}
+/* Info panel heading styles */
+.info-panel h2 { color: #0078d7; margin-bottom: 10px; }
+.info-panel h3 { color: #00695c; margin-top: 24px; margin-bottom: 8px; }
 
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 20px;
-    color: #fff;
-    background-color: #008080;
-    border-radius: 5px;
-    text-decoration: none;
-}
+/* WhatsApp extension top input row */
+.top-input-row { display:flex; gap:12px; justify-content:center; align-items:center; margin-top:20px; }
+.phone-input { padding:10px; width:280px; font-size:1em; border-radius:5px; border:1px solid #ccc; }
 
-.btn:hover {
-    background-color: #006666;
-}
-
-.features {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 0;
-}
-
-.feature {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 45%;
-}
-
-.screenshots {
-    text-align: center;
-}
-
-.screenshots img {
-    width: 100%;
-    border-radius: 10px;
-}
-
-.user-guide {
-    margin: 20px 0;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-}
-
-.testimonials {
-    margin: 20px 0;
-    padding: 20px;
-    background-color: #f1f1f1;
-    border-radius: 10px;
-}
-
-.testimonials blockquote {
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #fff;
-    border-left: 5px solid #008080;
-    border-radius: 5px;
-}
-
-.footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #333;
-    color: #fff;
-}
-
-.footer a {
-    color: #00aced;
-    text-decoration: none;
-}
-
-.footer a:hover {
-    text-decoration: underline;
-}
-
-/* Responsive Design */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .features {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .feature {
-        width: 80%;
-        margin-bottom: 20px;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-    }
-
-    .nav.active .nav-links {
-        display: flex;
-    }
+    .cards-container { gap:20px; }
+    .tool-card--large, .tool-card--small { width: 90%; max-width: 420px; }
 }
