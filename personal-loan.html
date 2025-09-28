@@ -3,16 +3,16 @@
 <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>EMI Calculator - Home, Personal, Car, LAP, Two Wheeler Loan EMI Online India</title>
-        <meta name="description" content="Free EMI Calculator for Home Loan, Personal Loan, Car Loan, LAP, Two Wheeler Loan. Calculate EMI, interest, payment schedule, and more online for loans in India.">
+    <title>Personal Loan EMI Calculator — Calculate Personal Loan EMI & Schedule (India)</title>
+    <meta name="description" content="Personal Loan EMI Calculator for India — calculate monthly EMI, total interest, and view payment schedule for personal loans. Quick, accurate and free online tool.">
         <meta name="keywords" content="EMI Calculator, Home Loan EMI, Personal Loan EMI, Car Loan EMI, LAP EMI, Two Wheeler Loan EMI, Loan Calculator India, Interest Calculator, Payment Schedule">
         <meta name="robots" content="index, follow">
-        <meta property="og:title" content="EMI Calculator - Home, Personal, Car, LAP, Two Wheeler Loan EMI Online India">
-        <meta property="og:description" content="Free EMI Calculator for all major loan types in India. Calculate EMI, interest, payment schedule, and more online.">
+    <meta property="og:title" content="Personal Loan EMI Calculator — Skrollmates">
+    <meta property="og:description" content="Calculate personal loan EMI, interest and payment schedule online for loans in India. Use our free EMI calculator to plan your finances.">
         <meta property="og:type" content="website">
-        <meta property="og:url" content="https://skrollmates.com/emi-calculator.html">
+    <meta property="og:url" content="https://skrollmates.com/personal-loan.html">
         <meta property="og:image" content="https://skrollmates.com/icon128.png">
-    <link rel="canonical" href="https://skrollmates.com/emi-calculator.html">
+    <link rel="canonical" href="https://skrollmates.com/personal-loan.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -28,9 +28,9 @@
         {
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "name": "EMI Calculator",
-            "description": "Free EMI Calculator for Home Loan, Personal Loan, Car Loan, LAP, Two Wheeler Loan. Calculate EMI, interest, payment schedule, and more online for loans in India.",
-            "url": "https://skrollmates.com/emi-calculator.html",
+            "name": "Personal Loan EMI Calculator",
+            "description": "Personal Loan EMI Calculator for India — calculate monthly EMI, total interest, and view payment schedule for personal loans.",
+            "url": "https://skrollmates.com/personal-loan.html",
             "image": "https://skrollmates.com/icon128.png"
         }
         </script>
@@ -57,7 +57,7 @@
         </div> -->
     <div class="emi-left card">
             <h2 class="emi-title">EMI Calculator</h2>
-            <form id="emiForm">
+            <form id="emiForm" onsubmit="event.preventDefault()">
                 <!-- Calculate Pre-EMI toggle moved next to EMI Date for better UX -->
                 <div class="input-row modern-row form-inline">
                     <label class="input-label modern-label" for="principal">Loan Amount (₹)</label>
@@ -130,13 +130,13 @@
                         <input type="number" id="tenure" name="tenure" min="6" max="360" step="1" value="240" required class="modern-input">
                     </div>
                 </div>
-                <div id="emiResult" class="result modern-result"></div>
+                <div id="emiResult" class="result modern-result" aria-live="polite"></div>
         </form>
         </div>
     <div class="emi-right card">
             <h3 class="emi-summary-title">Loan Summary</h3>
             <canvas id="emiChart"></canvas>
-            <div id="emiSummary" class="emi-summary-container"></div>
+        <div id="emiSummary" class="emi-summary-container" aria-live="polite"></div>
            
         </div>
      <div id="emiBalanceGraphContainer" class="emi-balance-graph" aria-hidden="true">
@@ -188,7 +188,7 @@
     </script>
     <div class="footer">
         <p>&copy; 2024 Skrollmates.com. All rights reserved.</p>
-    <a href="privacy-policy.html" target="_blank" class="privacy-link">Privacy Policy</a>
+    <a href="privacy-policy.html" target="_blank" rel="noopener noreferrer" class="privacy-link">Privacy Policy</a>
     </div>
 </body>
 </html>
