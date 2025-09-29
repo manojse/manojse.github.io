@@ -54,8 +54,5 @@
     <xhtml:link rel="alternate" media="only screen and (max-width: 640px)" href="https://skrollmates.com/privacy-policy.amp.html"/>
     <xhtml:link rel="amphtml" href="https://skrollmates.com/privacy-policy.amp.html"/>
   </url>
-  <url>
-    <loc>https://skrollmates.com/index2.html</loc>
-  </url>
 
 </urlset>
