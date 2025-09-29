@@ -1,0 +1,25 @@
+{
+  "name": "Skrollmates",
+  "short_name": "Skrollmates",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#009688",
+  "icons": [
+    {
+      "src": "/skrollmates-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/skrollmates-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/skrollmates-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
