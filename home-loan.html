@@ -62,6 +62,10 @@
 </head>
 <body>
     <nav class="navbar">
+        <div class="brand">
+            <img src="skrollmates.png" alt="Skrollmates logo">
+            <span class="brand-name">Skrollmates</span>
+        </div>
         <span class="menu-toggle" aria-label="Toggle menu" id="menuToggle">&#9776;</span>
         <ul id="mainMenu">
             <li><a href="index.html">Home</a></li>
@@ -82,6 +86,7 @@
         </div> -->
     <div class="emi-left card">
             <h2 class="emi-title">EMI Calculator</h2>
+            
             <form id="emiForm" onsubmit="event.preventDefault()">
                 <!-- Calculate Pre-EMI toggle moved next to EMI Date for better UX -->
                 <div class="input-row modern-row form-inline">
@@ -170,6 +175,16 @@
     </div>
     </div>
     <div id="emiSchedule"></div>
+    <div class="loan-card card">
+        <h3 class="loan-card-title">Quick Home Loan Facts</h3>
+        <p>Key points to keep in mind when calculating home loan EMIs.</p>
+        <ul class="loan-facts-list">
+            <li>Secured loan — property acts as collateral.</li>
+            <li>Lower interest rates compared to unsecured loans.</li>
+            <li>Longer tenures (often 10–30 years) reduce EMI but increase total interest.</li>
+            <li>Watch out for processing fees, foreclosure charges and prepayment rules.</li>
+        </ul>
+    </div>
     <div class="emi-info">
         <h3 class="emi-info-title">What is EMI?</h3>
         <p><strong>EMI</strong> (Equated Monthly Installment) is the fixed payment amount made by a borrower to a lender at a specified date each calendar month. EMIs are used to pay off both interest and principal each month so that over a specified number of years, the loan is paid off in full.</p>

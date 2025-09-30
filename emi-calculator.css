@@ -458,6 +458,14 @@ tr:nth-child(even) td { background:#fbffff; }
 .year-details { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .year-details .schedule-table { min-width:720px; }
 .schedule-table { width:100%; border-collapse:collapse; margin-top:8px; }
+
+/* Loan type informational card removed — styles deleted as requested */
 .schedule-table thead th { text-align:center; }
 .schedule-table td, .schedule-table th { padding:10px 8px; }
 .schedule-table td.numeric, .schedule-table th.numeric { text-align:right; }
+
+/* Quick loan facts card placed above the EMI info section */
+.loan-card { margin:40px auto; max-width:1100px; background:var(--card-bg); padding:28px 18px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); color:#333; }
+.loan-card-title { color:var(--brand-1); text-align:center; margin-bottom:16px; }
+.loan-facts-list { margin:8px 0 0 18px; color:#333; }
+.loan-facts-list li { margin-bottom:6px; }
