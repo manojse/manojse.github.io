@@ -85,20 +85,66 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Rate sync
 	const rateSlider = document.getElementById('rateSlider');
 	const rateInput = document.getElementById('rate');
+	// Accept partial numeric input while typing (e.g. "7.", "7.4") without
+	// overwriting the field. Only update the slider when the input contains a
+	// parseable numeric value. Normalize / clamp the value on blur.
 	function updateRateDisplay(val, source) {
-		let floatVal = parseFloat(val);
-		if (isNaN(floatVal)) floatVal = 0;
-		floatVal = Math.max(1, Math.min(20, floatVal));
-		// Always keep both controls in sync. When source is 'slider' or 'input'
-		// update both the visible number input and the slider value so programmatic
-		// default-setting updates are reflected in the UI immediately.
+		if (source === 'slider') {
+			// slider always produces a valid numeric string
+			let floatVal = parseFloat(val);
+			if (isNaN(floatVal)) floatVal = 0;
+			floatVal = Math.max( Number(rateSlider.min || 1), Math.min(Number(rateSlider.max || 20), floatVal));
+			// reflect slider value into the number input
+			rateInput.value = floatVal;
+			rateSlider.value = floatVal;
+			try { updateRangeFill(rateSlider); } catch (e) { /* ignore if not ready */ }
+			return;
+		}
+		// source === 'input'
+		const str = String(val);
+		// allow empty or partial numeric patterns: digits, optional single dot
+		const partialNumPattern = /^-?\d*(?:\.\d*)?$/;
+		if (str === '' || partialNumPattern.test(str)) {
+			// if parseable to a number, update slider; otherwise leave input untouched
+			const parsed = parseFloat(str);
+			if (!isNaN(parsed)) {
+				const floatVal = Math.max(Number(rateSlider.min || 1), Math.min(Number(rateSlider.max || 20), parsed));
+				rateSlider.value = floatVal;
+				try { updateRangeFill(rateSlider); } catch (e) { /* ignore if not ready */ }
+			}
+			// do not overwrite rateInput.value here so the user can continue typing
+			return;
+		}
+		// fallback: if the input contains invalid characters, coerce to a clamped number
+		let floatVal = parseFloat(str);
+		if (isNaN(floatVal)) floatVal = Number(rateSlider.min || 1);
+		floatVal = Math.max(Number(rateSlider.min || 1), Math.min(Number(rateSlider.max || 20), floatVal));
 		rateInput.value = floatVal;
 		rateSlider.value = floatVal;
-		// Refresh slider fill to reflect new value visually
 		try { updateRangeFill(rateSlider); } catch (e) { /* ignore if not ready */ }
 	}
-	rateSlider.addEventListener('input', e => updateRateDisplay(e.target.value, 'slider'));
+
+	// slider -> input (immediate)
+	rateSlider.addEventListener('input', e => {
+		updateRateDisplay(e.target.value, 'slider');
+		try { updateBubblePosition(rateSlider, rateBubble, formatRate); } catch (e) {}
+	});
+
+	// input -> slider (allow partial typing)
 	rateInput.addEventListener('input', e => updateRateDisplay(e.target.value, 'input'));
+
+	// on blur, normalize and clamp to allowed range and trigger visual updates
+	rateInput.addEventListener('blur', function(e) {
+		let parsed = parseFloat(rateInput.value);
+		if (isNaN(parsed)) parsed = Number(rateSlider.min || 1);
+		parsed = Math.max(Number(rateSlider.min || 1), Math.min(Number(rateSlider.max || 20), parsed));
+		// display a clean numeric value (no trailing dot)
+		rateInput.value = parseFloat(parsed.toFixed(2));
+		rateSlider.value = parsed;
+		try { updateRangeFill(rateSlider); updateBubblePosition(rateSlider, rateBubble, formatRate); } catch (e) {}
+	});
+
+	// initialize slider from current input value if parseable
 	updateRateDisplay(rateInput.value, 'input');
 
 	// Tenure sync
