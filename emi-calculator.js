@@ -80,8 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		// update calculation live
 		calculateEMI();
 	});
-	// initial format
-	updatePrincipalDisplay(principalInput.value);
+	// initial format: principal will be set later as part of the combined defaults
 
 	// Rate sync
 	const rateSlider = document.getElementById('rateSlider');
@@ -90,8 +89,13 @@ document.addEventListener('DOMContentLoaded', function() {
 		let floatVal = parseFloat(val);
 		if (isNaN(floatVal)) floatVal = 0;
 		floatVal = Math.max(1, Math.min(20, floatVal));
-		if (source === 'slider') rateInput.value = floatVal;
-		else rateSlider.value = floatVal;
+		// Always keep both controls in sync. When source is 'slider' or 'input'
+		// update both the visible number input and the slider value so programmatic
+		// default-setting updates are reflected in the UI immediately.
+		rateInput.value = floatVal;
+		rateSlider.value = floatVal;
+		// Refresh slider fill to reflect new value visually
+		try { updateRangeFill(rateSlider); } catch (e) { /* ignore if not ready */ }
 	}
 	rateSlider.addEventListener('input', e => updateRateDisplay(e.target.value, 'slider'));
 	rateInput.addEventListener('input', e => updateRateDisplay(e.target.value, 'input'));
@@ -150,6 +154,65 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	}
 	updateTenureDisplay(tenureInput.value, 'input');
+
+	// Combined defaults: principal, annual rate and tenure based on page filename
+	(function setDefaultsByLoanType(){
+		const page = (window.location.pathname || '').split('/').pop();
+		// default mappings (tweak as needed)
+		const principalMapping = {
+			'home-loan.html': 5000000,
+			'personal-loan.html': 200000,
+			'car-loan.html': 800000,
+			'two-wheeler-loan.html': 70000,
+			'lap-loan.html': 9400000,
+			'emi-calculator.html': Number(principalInput.dataset.raw || principalInput.value || principalSlider.value) || 9400000
+		};
+		const rateMapping = {
+			'home-loan.html': 7.10,
+			'personal-loan.html': 13.50,
+			'car-loan.html': 9.00,
+			'two-wheeler-loan.html': 9.50,
+			'lap-loan.html': 8.50,
+			'emi-calculator.html': parseFloat(rateInput.value) || 7.45
+		};
+		const tenureMappingMonths = {
+			'home-loan.html': 240,
+			'personal-loan.html': 60,
+			'car-loan.html': 60,
+			'two-wheeler-loan.html': 36,
+			'lap-loan.html': 240,
+			'emi-calculator.html': parseInt(tenureSlider.value) || 240
+		};
+
+		// Apply principal
+		let desiredPrincipal = principalMapping[page] !== undefined ? principalMapping[page] : Number(principalInput.dataset.raw || principalInput.value || principalSlider.value) || 9400000;
+		const pMin = Number(principalSlider.min) || 10000;
+		const pMax = Number(principalSlider.max) || 50000000;
+		desiredPrincipal = Math.max(pMin, Math.min(pMax, Number(desiredPrincipal)));
+		updatePrincipalDisplay(desiredPrincipal);
+
+		// Apply rate
+		let desiredRate = rateMapping[page] !== undefined ? rateMapping[page] : parseFloat(rateInput.value) || 7.45;
+		desiredRate = Math.max(Number(rateSlider.min || 1), Math.min(Number(rateSlider.max || 20), Number(desiredRate)));
+		updateRateDisplay(desiredRate, 'input');
+		try { updateBubblePosition(rateSlider, rateBubble, formatRate); updateRangeFill(rateSlider); } catch (e) {}
+
+		// Apply tenure (months)
+		let desiredMonths = tenureMappingMonths[page] !== undefined ? tenureMappingMonths[page] : parseInt(tenureSlider.value) || 240;
+		const tMin = Number(tenureSlider.min) || 6;
+		const tMax = Number(tenureSlider.max) || 360;
+		desiredMonths = Math.max(tMin, Math.min(tMax, Number(desiredMonths)));
+		if (tenureUnit === 'months') {
+			tenureSlider.value = desiredMonths;
+			updateTenureDisplay(desiredMonths, 'slider');
+			try { updateBubblePosition(tenureSlider, tenureBubble, formatTenure); updateRangeFill(tenureSlider); } catch (e) {}
+		} else {
+			let yearsVal = Math.round(desiredMonths / 12);
+			tenureInput.value = yearsVal;
+			updateTenureDisplay(yearsVal, 'input');
+			try { updateBubblePosition(tenureSlider, tenureBubble, formatTenure); updateRangeFill(tenureSlider); } catch (e) {}
+		}
+	})();
 
 	// --- Slider value bubbles ---
 	function createBubble(slider) {

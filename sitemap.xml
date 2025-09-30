@@ -55,4 +55,11 @@
     <xhtml:link rel="amphtml" href="https://skrollmates.com/privacy-policy.amp.html"/>
   </url>
 
+  <!-- Repo Rate page -->
+  <url>
+    <loc>https://skrollmates.com/repo-rates.html</loc>
+    <xhtml:link rel="alternate" media="only screen and (max-width: 640px)" href="https://skrollmates.com/repo-rates.amp.html"/>
+    <xhtml:link rel="amphtml" href="https://skrollmates.com/repo-rates.amp.html"/>
+  </url>
+
 </urlset>
