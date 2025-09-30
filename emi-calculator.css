@@ -6,6 +6,8 @@
     --bg-soft: #e0f7fa;
     --card-bg: #ffffff;
     --surface: #f7f7f7;
+    /* central content width used by EMI info, schedule and cards */
+    --content-max-width: 1100px;
     /* slider gradient colors: start light -> mid -> end dark */
     --slider-start: rgba(0,188,212,0.18);
     --slider-mid: rgba(0,150,136,0.40);
@@ -19,7 +21,7 @@
 /* Base layout */
 body { font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; color:#233; background: linear-gradient(120deg,var(--bg-soft) 0%, #f7f7f7 100%); }
 
-.emi-main-layout { max-width:1200px; margin: 90px auto 28px auto; display: grid; grid-template-columns: 600px 420px; gap:28px; align-items:start; padding: 0 18px; overflow-x: hidden; }
+.emi-main-layout { max-width: var(--content-max-width); margin: 90px auto 28px auto; display: grid; grid-template-columns: 600px 420px; gap:28px; align-items:start; padding: 0 18px; overflow-x: hidden; }
 .emi-left, .emi-right { background: var(--card-bg); border-radius: 14px; padding: 20px; box-shadow: 0 6px 18px rgba(0,0,0,0.05); }
 .emi-left { min-width: 320px; max-width: 640px; }
 .emi-right { min-width: 320px; width:420px; display:flex; flex-direction:column; align-items:stretch; position: static; }
@@ -39,12 +41,21 @@ h2 { font-size:1.8em; color:var(--brand-1); margin: 0 0 18px 0; text-align:cente
 .toggle-after-emi .input-label { flex:1 1 auto; margin:0; }
 .toggle-after-emi .input-group { display:flex; align-items:center; justify-content:flex-end; }
 .emi-summary-container { width:100%; margin-top:8px; font-size:1.1em; color:#333; }
-.emi-balance-graph { width:100%; margin:32px auto 0 auto; background:var(--card-bg); padding:18px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.04); }
+.emi-balance-graph {
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin: 40px auto; /* match .emi-info and .loan-card spacing */
+    background: var(--card-bg);
+    padding: 28px 18px; /* same padding as cards */
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    box-sizing: border-box;
+}
 .emi-balance-graph[aria-hidden="true"] { display:none; }
 
 /* Make the balance graph span full width under the two-column layout */
 #emiBalanceGraphContainer { grid-column: 1 / -1; }
-.emi-info { margin:40px auto; max-width:1100px; background:var(--card-bg); padding:28px 18px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); color:#333; }
+.emi-info { margin:40px auto; max-width:var(--content-max-width); background:var(--card-bg); padding:28px 18px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); color:#333; }
 .emi-info-title { color:var(--brand-1); text-align:center; margin-bottom:16px; }
 .emi-formula { background:var(--bg-soft); padding:10px 12px; border-radius:8px; }
 .emi-note { background:#fffde7; padding:10px 12px; border-radius:8px; color:#ff9800; }
@@ -262,7 +273,14 @@ td.numeric, th.numeric { text-align: right; }
 
 /* Schedule table */
 /* ensure schedule appears after the full-width balance graph */
-#emiSchedule { margin-top:28px; }
+#emiSchedule {
+    margin: 40px auto; /* match other content blocks */
+    max-width: var(--content-max-width);
+    background: var(--card-bg);
+    padding: 28px 18px; /* same padding as cards */
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
 table { width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.04); }
 th, td { padding:12px 10px; text-align:center; border-bottom:1px solid #eef6f6; }
 th { background: linear-gradient(90deg,var(--muted), #d4f0ee); color:var(--brand-1); font-weight:700; }
@@ -465,7 +483,7 @@ tr:nth-child(even) td { background:#fbffff; }
 .schedule-table td.numeric, .schedule-table th.numeric { text-align:right; }
 
 /* Quick loan facts card placed above the EMI info section */
-.loan-card { margin:40px auto; max-width:1100px; background:var(--card-bg); padding:28px 18px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); color:#333; }
+.loan-card { margin:40px auto; max-width:var(--content-max-width); background:var(--card-bg); padding:28px 18px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); color:#333; }
 .loan-card-title { color:var(--brand-1); text-align:center; margin-bottom:16px; }
 .loan-facts-list { margin:8px 0 0 18px; color:#333; }
 .loan-facts-list li { margin-bottom:6px; }
