@@ -4,62 +4,42 @@
 
   <!-- Homepage -->
   <url>
-    <loc>https://skrollmates.com/index.html</loc>
-    <xhtml:link rel="alternate" media="only screen and (max-width: 640px)" href="https://skrollmates.com/index.amp.html"/>
-    <xhtml:link rel="amphtml" href="https://skrollmates.com/index.amp.html"/>
+  <loc>https://skrollmates.com/index.html</loc>
   </url>
 
   <!-- EMI Calculator -->
   <url>
-    <loc>https://skrollmates.com/emi-calculator.html</loc>
-    <xhtml:link rel="alternate" media="only screen and (max-width: 640px)" href="https://skrollmates.com/emi-calculator.amp.html"/>
-    <xhtml:link rel="amphtml" href="https://skrollmates.com/emi-calculator.amp.html"/>
+  <loc>https://skrollmates.com/emi-calculator.html</loc>
   </url>
 
   <!-- Loan pages -->
   <url>
-    <loc>https://skrollmates.com/home-loan.html</loc>
-    <xhtml:link rel="alternate" media="only screen and (max-width: 640px)" href="https://skrollmates.com/home-loan.amp.html"/>
-    <xhtml:link rel="amphtml" href="https://skrollmates.com/home-loan.amp.html"/>
+  <loc>https://skrollmates.com/home-loan.html</loc>
   </url>
   <url>
-    <loc>https://skrollmates.com/personal-loan.html</loc>
-    <xhtml:link rel="alternate" media="only screen and (max-width: 640px)" href="https://skrollmates.com/personal-loan.amp.html"/>
-    <xhtml:link rel="amphtml" href="https://skrollmates.com/personal-loan.amp.html"/>
+  <loc>https://skrollmates.com/personal-loan.html</loc>
   </url>
   <url>
-    <loc>https://skrollmates.com/car-loan.html</loc>
-    <xhtml:link rel="alternate" media="only screen and (max-width: 640px)" href="https://skrollmates.com/car-loan.amp.html"/>
-    <xhtml:link rel="amphtml" href="https://skrollmates.com/car-loan.amp.html"/>
+  <loc>https://skrollmates.com/car-loan.html</loc>
   </url>
   <url>
-    <loc>https://skrollmates.com/lap-loan.html</loc>
-    <xhtml:link rel="alternate" media="only screen and (max-width: 640px)" href="https://skrollmates.com/lap-loan.amp.html"/>
-    <xhtml:link rel="amphtml" href="https://skrollmates.com/lap-loan.amp.html"/>
+  <loc>https://skrollmates.com/lap-loan.html</loc>
   </url>
   <url>
-    <loc>https://skrollmates.com/two-wheeler-loan.html</loc>
-    <xhtml:link rel="alternate" media="only screen and (max-width: 640px)" href="https://skrollmates.com/two-wheeler-loan.amp.html"/>
-    <xhtml:link rel="amphtml" href="https://skrollmates.com/two-wheeler-loan.amp.html"/>
+  <loc>https://skrollmates.com/two-wheeler-loan.html</loc>
   </url>
 
   <!-- Misc pages -->
   <url>
-    <loc>https://skrollmates.com/whatsapp-extension.html</loc>
-    <xhtml:link rel="alternate" media="only screen and (max-width: 640px)" href="https://skrollmates.com/whatsapp-extension.amp.html"/>
-    <xhtml:link rel="amphtml" href="https://skrollmates.com/whatsapp-extension.amp.html"/>
+  <loc>https://skrollmates.com/whatsapp-extension.html</loc>
   </url>
   <url>
-    <loc>https://skrollmates.com/privacy-policy.html</loc>
-    <xhtml:link rel="alternate" media="only screen and (max-width: 640px)" href="https://skrollmates.com/privacy-policy.amp.html"/>
-    <xhtml:link rel="amphtml" href="https://skrollmates.com/privacy-policy.amp.html"/>
+  <loc>https://skrollmates.com/privacy-policy.html</loc>
   </url>
 
   <!-- Repo Rate page -->
   <url>
-    <loc>https://skrollmates.com/repo-rates.html</loc>
-    <xhtml:link rel="alternate" media="only screen and (max-width: 640px)" href="https://skrollmates.com/repo-rates.amp.html"/>
-    <xhtml:link rel="amphtml" href="https://skrollmates.com/repo-rates.amp.html"/>
+  <loc>https://skrollmates.com/repo-rates.html</loc>
   </url>
 
 </urlset>
