@@ -29,7 +29,7 @@ h2 { font-size:1.8em; color:var(--brand-1); margin: 0 0 18px 0; text-align:cente
 .emi-left h2 { margin-top:0; }
 
 /* New editorial classes to replace inline styles */
-.emi-title { text-align:center; color:var(--brand-1); font-size:2em; margin-bottom:28px; }
+.emi-title { text-align:center; color:var(--brand-1); font-size:1.4em; margin-bottom:20px; }
 .toggle-group { display:flex; align-items:center; gap:10px; }
 .toggle-caption { margin-left:8px; color:var(--accent); font-size:1em; cursor:pointer; font-weight:700; }
 .emi-summary-title { text-align:center; color:var(--accent); margin-bottom:18px; }

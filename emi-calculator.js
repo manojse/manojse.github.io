@@ -158,6 +158,22 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Combined defaults: principal, annual rate and tenure based on page filename
 	(function setDefaultsByLoanType(){
 		const page = (window.location.pathname || '').split('/').pop();
+
+		// Update the visible H2 title so the shared EMI UI reflects the specific loan page
+		try {
+			const emiTitleEl = document.querySelector('.emi-title');
+			if (emiTitleEl) {
+				const titleMapping = {
+					'home-loan.html': 'Home Loan EMI Calculator',
+					'personal-loan.html': 'Personal Loan EMI Calculator',
+					'car-loan.html': 'Car Loan EMI Calculator',
+					'two-wheeler-loan.html': 'Two Wheeler Loan EMI Calculator',
+					'lap-loan.html': 'Loan Against Property (LAP) EMI Calculator',
+					'emi-calculator.html': 'EMI Calculator'
+				};
+				emiTitleEl.textContent = titleMapping[page] || emiTitleEl.textContent || 'EMI Calculator';
+			}
+		} catch (e) { /* ignore if DOM not ready or selector missing */ }
 		// default mappings (tweak as needed)
 		const principalMapping = {
 			'home-loan.html': 5000000,
