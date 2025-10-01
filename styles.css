@@ -110,3 +110,16 @@ body {
     .cards-container { gap:20px; }
     .tool-card--large, .tool-card--small { width: 90%; max-width: 420px; }
 }
+
+/* FAQ accordion for loan pages */
+.loan-faq { max-width: 1100px; margin: 36px auto; padding: 18px; background: #fff; border-radius: 10px; box-shadow:0 6px 18px rgba(0,0,0,0.06); }
+.loan-faq h2 { margin-top: 0; color: #00796b; font-size: 1.6em; text-align: left; }
+.faq-item { border-top: 1px solid #e6f2f1; }
+.faq-item:first-of-type { border-top: none; }
+.faq-question { width: 100%; text-align: left; padding: 14px 12px; background: transparent; border: none; outline: none; font-size: 1.05em; cursor: pointer; color: #004d40; display:flex; align-items:center; justify-content:space-between; }
+.faq-question .chev { transition: transform 0.25s; }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.28s ease; padding: 0 12px; color: #333; }
+.faq-item.open .faq-answer { padding-top: 12px; padding-bottom: 18px; }
+.faq-item.open .faq-answer { max-height: 420px; }
+.faq-item.open .faq-question .chev { transform: rotate(180deg); }
+
