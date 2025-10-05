@@ -253,10 +253,11 @@ document.addEventListener('DOMContentLoaded', function() {
 		desiredPrincipal = Math.max(pMin, Math.min(pMax, Number(desiredPrincipal)));
 		updatePrincipalDisplay(desiredPrincipal);
 
-		// Apply rate
-		let desiredRate = rateMapping[page] !== undefined ? rateMapping[page] : parseFloat(rateInput.value) || 7.45;
-		desiredRate = Math.max(Number(rateSlider.min || 1), Math.min(Number(rateSlider.max || 20), Number(desiredRate)));
-		updateRateDisplay(desiredRate, 'input');
+	// Apply rate
+	let desiredRate = rateMapping[page] !== undefined ? rateMapping[page] : parseFloat(rateInput.value) || 7.45;
+	desiredRate = Math.max(Number(rateSlider.min || 1), Math.min(Number(rateSlider.max || 20), Number(desiredRate)));
+	// Use 'slider' as the source so the numeric input is populated with the normalized value
+	updateRateDisplay(desiredRate, 'slider');
 		try { updateBubblePosition(rateSlider, rateBubble, formatRate); updateRangeFill(rateSlider); } catch (e) {}
 
 		// Apply tenure (months)
