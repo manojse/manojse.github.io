@@ -1,0 +1,12 @@
+User-agent: *
+# Allow everything by default
+Allow: /
+
+# Prevent crawlers from indexing repository backup files
+Disallow: /*.bak$
+
+# Optional: block temporary or staging directories
+Disallow: /tmp/
+
+# Point crawlers to the sitemap
+Sitemap: https://skrollmates.com/sitemap.xml
