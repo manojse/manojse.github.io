@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7KZY0CS6R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} 
+        gtag('js', new Date());
+
+        gtag('config', 'G-K7KZY0CS6R');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate salary breakdown with CTC, take-home pay, and tax deductions. Salary calculator with EPF, ESI, and professional tax.">
+    <title>Salary Calculator - CTC to Take Home Salary Calculator | Skrollmates</title>
+    <link rel="canonical" href="https://skrollmates.com/salary-calculator.html">
+    <meta property="og:title" content="Salary Calculator - CTC to Take Home Salary Calculator">
+    <meta property="og:description" content="Calculate salary breakdown from CTC to take-home pay with all deductions.">
+    <meta property="og:url" content="https://skrollmates.com/salary-calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://skrollmates.com/skrollmates-512.webp">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:site_name" content="Skrollmates">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:image:alt" content="Skrollmates logo">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@skrollmates">
+    <meta name="robots" content="index, follow">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3029851571351657"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Salary Calculator",
+        "description": "Calculate salary breakdown from CTC to take-home pay with deductions",
+        "url": "https://skrollmates.com/salary-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+    <style>
+        .calculator-container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .input-field, .select-field {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-field:focus, .select-field:focus {
+            outline: none;
+            border-color: #795548;
+        }
+        
+        .calc-mode {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .mode-button {
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .mode-button.active {
+            background: #795548;
+            color: white;
+            border-color: #795548;
+        }
+        
+        .mode-button:hover {
+            border-color: #795548;
+        }
+        
+        .results-panel {
+            background: linear-gradient(135deg, #795548 0%, #8d6e63 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            height: 300px;
+        }
+        
+        .breakdown-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .breakdown-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .breakdown-card h4 {
+            margin-top: 0;
+            color: #795548;
+            border-bottom: 2px solid #efebe9;
+            padding-bottom: 10px;
+        }
+        
+        .breakdown-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .breakdown-table th, .breakdown-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .breakdown-table th {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+        
+        .breakdown-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .breakdown-table .amount {
+            text-align: right;
+            font-weight: 600;
+        }
+        
+        .tax-breakdown {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .tax-breakdown h4 {
+            margin-top: 0;
+            color: #e65100;
+        }
+        
+        .comparison-toggle {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .comparison-toggle h4 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .print-btn, .calc-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .calc-btn {
+            background: #795548;
+            color: white;
+        }
+        
+        .print-btn {
+            background: #666;
+            color: white;
+        }
+        
+        .calc-btn:hover { background: #6d4c41; }
+        .print-btn:hover { background: #555; }
+        
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .calculator-container {
+                margin-top: 90px;
+                padding: 15px;
+            }
+        }
+        
+        @media print {
+            .navbar, .print-btn, .calc-btn { display: none; }
+            .calculator-container { margin: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <img src="skrollmates.webp" alt="Skrollmates logo">
+            <span class="brand-name">Skrollmates</span>
+        </div>
+        <span class="menu-toggle" aria-label="Toggle menu" id="menuToggle" tabindex="1">&#9776;</span>
+        <ul id="mainMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="whatsapp-extension.html">WhatsApp Extension</a></li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">EMI Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="emi-calculator.html">General EMI Calculator</a></li>
+                    <li><a href="home-loan.html">Home Loan EMI</a></li>
+                    <li><a href="personal-loan.html">Personal Loan EMI</a></li>
+                    <li><a href="car-loan.html">Car Loan EMI</a></li>
+                    <li><a href="two-wheeler-loan.html">Two Wheeler Loan EMI</a></li>
+                    <li><a href="lap-loan.html">LAP Loan EMI</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Investment Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="sip-calculator.html">SIP Calculator</a></li>
+                    <li><a href="lumpsum-calculator.html">Lumpsum Calculator</a></li>
+                    <li><a href="step-up-sip-calculator.html">Step-Up SIP Calculator</a></li>
+                    <li><a href="swp-calculator.html">SWP Calculator</a></li>
+                    <li><a href="mf-calculator.html">Mutual Fund Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Savings Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="fd-calculator.html">FD Calculator</a></li>
+                    <li><a href="rd-calculator.html">RD Calculator</a></li>
+                    <li><a href="ppf-calculator.html">PPF Calculator</a></li>
+                    <li><a href="epf-calculator.html">EPF Calculator</a></li>
+                    <li><a href="ssy-calculator.html">SSY Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Tax & Trading <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                    <li><a href="hra-calculator.html">HRA Calculator</a></li>
+                    <li class="active"><a href="salary-calculator.html">Salary Calculator</a></li>
+                    <li><a href="tds-calculator.html">TDS Calculator</a></li>
+                    <li><a href="gst-calculator.html">GST Calculator</a></li>
+                    <li><a href="brokerage-calculator.html">Brokerage Calculator</a></li>
+                    <li><a href="margin-calculator.html">Margin Calculator</a></li>
+                    <li><a href="stock-average-calculator.html">Stock Average Calculator</a></li>
+                </ul>
+            </li>
+            <li><a href="repo-rates.html">Repo Rates</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+    </nav>
+
+    <main class="calculator-container">
+        <h1>Salary Calculator</h1>
+        <p>Calculate salary breakdown from CTC to take-home pay with all deductions including tax, EPF, ESI, and professional tax.</p>
+        
+        <div class="calc-grid">
+            <div class="inputs-section">
+                <div class="calc-mode">
+                    <div class="mode-button active" onclick="setMode('ctc')">CTC to Take Home</div>
+                    <div class="mode-button" onclick="setMode('takehome')">Take Home to CTC</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="salaryAmount" id="salaryLabel">Annual CTC (₹)</label>
+                    <input type="number" id="salaryAmount" class="input-field" value="1200000" min="0" step="10000">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="age">Age</label>
+                    <input type="number" id="age" class="input-field" value="30" min="18" max="65" step="1">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="taxRegime">Tax Regime</label>
+                    <select id="taxRegime" class="select-field">
+                        <option value="new">New Tax Regime</option>
+                        <option value="old" selected>Old Tax Regime</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="basicPercent">Basic Salary (% of CTC)</label>
+                    <input type="number" id="basicPercent" class="input-field" value="40" min="30" max="60" step="1">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="hraPercent">HRA (% of CTC)</label>
+                    <input type="number" id="hraPercent" class="input-field" value="20" min="0" max="40" step="1">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="otherAllowances">Other Allowances (₹/year)</label>
+                    <input type="number" id="otherAllowances" class="input-field" value="100000" min="0" step="10000">
+                </div>
+                
+                <div class="comparison-toggle">
+                    <h4>Optional Deductions</h4>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="includeEPF" checked>
+                        <label for="includeEPF">Include EPF (12%)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="includeESI">
+                        <label for="includeESI">Include ESI (0.75%)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="includePT" checked>
+                        <label for="includePT">Include Professional Tax</label>
+                    </div>
+                </div>
+                
+                <button onclick="calculateSalary()" class="calc-btn">Calculate Salary</button>
+                <button onclick="printResults()" class="print-btn">Print Results</button>
+                
+                <div class="tax-breakdown">
+                    <h4>Tax Regime Comparison</h4>
+                    <p><strong>Old Regime:</strong> Higher deductions (80C, HRA, etc.)</p>
+                    <p><strong>New Regime:</strong> Lower rates, fewer deductions</p>
+                    <p><strong>EPF:</strong> Only applicable if CTC ≤ ₹15,000/month basic</p>
+                    <p><strong>ESI:</strong> Only applicable if CTC ≤ ₹21,000/month</p>
+                </div>
+            </div>
+            
+            <div class="results-section">
+                <div class="results-panel">
+                    <h3 style="margin-top: 0; margin-bottom: 25px;">Salary Breakdown</h3>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Annual CTC:</span>
+                        <span class="result-value" id="annualCTC">₹12,00,000</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Gross Salary:</span>
+                        <span class="result-value" id="grossSalary">₹11,56,000</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Total Deductions:</span>
+                        <span class="result-value" id="totalDeductions">₹2,87,400</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Annual Take Home:</span>
+                        <span class="result-value" id="annualTakeHome">₹8,68,600</span>
+                    </div>
+                    
+                    <div class="result-item" style="border-bottom: none;">
+                        <span class="result-label">Monthly Take Home:</span>
+                        <span class="result-value" id="monthlyTakeHome">₹72,383</span>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="salaryChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+                
+                <div class="breakdown-cards">
+                    <div class="breakdown-card">
+                        <h4>Earnings Breakdown (Annual)</h4>
+                        <table class="breakdown-table">
+                            <tbody>
+                                <tr>
+                                    <td>Basic Salary</td>
+                                    <td class="amount" id="basicAmount">₹4,80,000</td>
+                                </tr>
+                                <tr>
+                                    <td>HRA</td>
+                                    <td class="amount" id="hraAmount">₹2,40,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Other Allowances</td>
+                                    <td class="amount" id="allowancesAmount">₹1,00,000</td>
+                                </tr>
+                                <tr style="background: #e8f5e8; font-weight: 600;">
+                                    <td>Gross Salary</td>
+                                    <td class="amount" id="grossAmount">₹8,20,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="breakdown-card">
+                        <h4>Deductions Breakdown (Annual)</h4>
+                        <table class="breakdown-table">
+                            <tbody>
+                                <tr>
+                                    <td>Income Tax</td>
+                                    <td class="amount" id="incomeTax">₹1,87,200</td>
+                                </tr>
+                                <tr>
+                                    <td>EPF (Employee)</td>
+                                    <td class="amount" id="epfAmount">₹57,600</td>
+                                </tr>
+                                <tr>
+                                    <td>ESI (Employee)</td>
+                                    <td class="amount" id="esiAmount">₹0</td>
+                                </tr>
+                                <tr>
+                                    <td>Professional Tax</td>
+                                    <td class="amount" id="ptAmount">₹2,400</td>
+                                </tr>
+                                <tr style="background: #ffebee; font-weight: 600;">
+                                    <td>Total Deductions</td>
+                                    <td class="amount" id="totalDeductionsAmount">₹2,47,200</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Skrollmates.com</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="menu.js" defer></script>
+    <script>
+        let chartInstance = null;
+        let currentMode = 'ctc';
+        
+        function setMode(mode) {
+            currentMode = mode;
+            
+            // Update button states
+            document.querySelectorAll('.mode-button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update label
+            const label = document.getElementById('salaryLabel');
+            if (mode === 'ctc') {
+                label.textContent = 'Annual CTC (₹)';
+            } else {
+                label.textContent = 'Desired Take Home (₹/year)';
+            }
+            
+            calculateSalary();
+        }
+        
+        function calculateSalary() {
+            const salaryAmount = parseFloat(document.getElementById('salaryAmount').value) || 1200000;
+            const age = parseInt(document.getElementById('age').value) || 30;
+            const taxRegime = document.getElementById('taxRegime').value;
+            const basicPercent = parseFloat(document.getElementById('basicPercent').value) || 40;
+            const hraPercent = parseFloat(document.getElementById('hraPercent').value) || 20;
+            const otherAllowances = parseFloat(document.getElementById('otherAllowances').value) || 100000;
+            
+            const includeEPF = document.getElementById('includeEPF').checked;
+            const includeESI = document.getElementById('includeESI').checked;
+            const includePT = document.getElementById('includePT').checked;
+            
+            let annualCTC, basicSalary, hra, grossSalary;
+            
+            if (currentMode === 'ctc') {
+                annualCTC = salaryAmount;
+                // Calculate components from CTC
+                const remainingAfterAllowances = annualCTC - otherAllowances;
+                basicSalary = (remainingAfterAllowances * basicPercent) / (basicPercent + hraPercent);
+                hra = (remainingAfterAllowances * hraPercent) / (basicPercent + hraPercent);
+                grossSalary = basicSalary + hra + otherAllowances;
+            } else {
+                // Reverse calculation from desired take home
+                // This is an iterative approximation
+                annualCTC = salaryAmount * 1.4; // Initial estimate
+                basicSalary = (annualCTC - otherAllowances) * (basicPercent / (basicPercent + hraPercent));
+                hra = (annualCTC - otherAllowances) * (hraPercent / (basicPercent + hraPercent));
+                grossSalary = basicSalary + hra + otherAllowances;
+            }
+            
+            // Calculate deductions
+            let epfDeduction = 0;
+            let esiDeduction = 0;
+            let ptDeduction = 0;
+            
+            if (includeEPF && basicSalary/12 <= 15000) {
+                epfDeduction = Math.min(basicSalary * 0.12, 21600); // Cap at ₹21,600
+            }
+            
+            if (includeESI && grossSalary/12 <= 21000) {
+                esiDeduction = grossSalary * 0.0075;
+            }
+            
+            if (includePT) {
+                ptDeduction = 2400; // Standard PT in most states
+            }
+            
+            // Calculate taxable income
+            let taxableIncome = grossSalary;
+            
+            // Standard deductions and exemptions
+            let standardDeduction = 50000;
+            let hraExemption = 0;
+            
+            if (taxRegime === 'old') {
+                // HRA exemption calculation (simplified)
+                hraExemption = Math.min(hra, basicSalary * 0.5, hra - (basicSalary * 0.1));
+                hraExemption = Math.max(0, hraExemption);
+                
+                // 80C deduction (EPF + other investments)
+                let section80C = epfDeduction + 100000; // Assuming ₹1L other investments
+                section80C = Math.min(section80C, 150000);
+                
+                taxableIncome = grossSalary - standardDeduction - hraExemption - section80C;
+            } else {
+                // New regime - no major deductions except standard
+                taxableIncome = grossSalary - standardDeduction;
+            }
+            
+            taxableIncome = Math.max(0, taxableIncome);
+            
+            // Calculate income tax
+            let incomeTax = calculateIncomeTax(taxableIncome, taxRegime, age);
+            
+            // Calculate total deductions and take home
+            const totalDeductions = incomeTax + epfDeduction + esiDeduction + ptDeduction;
+            const annualTakeHome = grossSalary - totalDeductions;
+            const monthlyTakeHome = annualTakeHome / 12;
+            
+            // Update display
+            document.getElementById('annualCTC').textContent = '₹' + annualCTC.toLocaleString('en-IN');
+            document.getElementById('grossSalary').textContent = '₹' + Math.round(grossSalary).toLocaleString('en-IN');
+            document.getElementById('totalDeductions').textContent = '₹' + Math.round(totalDeductions).toLocaleString('en-IN');
+            document.getElementById('annualTakeHome').textContent = '₹' + Math.round(annualTakeHome).toLocaleString('en-IN');
+            document.getElementById('monthlyTakeHome').textContent = '₹' + Math.round(monthlyTakeHome).toLocaleString('en-IN');
+            
+            // Update earnings breakdown
+            document.getElementById('basicAmount').textContent = '₹' + Math.round(basicSalary).toLocaleString('en-IN');
+            document.getElementById('hraAmount').textContent = '₹' + Math.round(hra).toLocaleString('en-IN');
+            document.getElementById('allowancesAmount').textContent = '₹' + otherAllowances.toLocaleString('en-IN');
+            document.getElementById('grossAmount').textContent = '₹' + Math.round(grossSalary).toLocaleString('en-IN');
+            
+            // Update deductions breakdown
+            document.getElementById('incomeTax').textContent = '₹' + Math.round(incomeTax).toLocaleString('en-IN');
+            document.getElementById('epfAmount').textContent = '₹' + Math.round(epfDeduction).toLocaleString('en-IN');
+            document.getElementById('esiAmount').textContent = '₹' + Math.round(esiDeduction).toLocaleString('en-IN');
+            document.getElementById('ptAmount').textContent = '₹' + Math.round(ptDeduction).toLocaleString('en-IN');
+            document.getElementById('totalDeductionsAmount').textContent = '₹' + Math.round(totalDeductions).toLocaleString('en-IN');
+            
+            // Update chart
+            updateChart(annualTakeHome, incomeTax, epfDeduction, esiDeduction, ptDeduction);
+        }
+        
+        function calculateIncomeTax(taxableIncome, regime, age) {
+            let tax = 0;
+            
+            if (regime === 'new') {
+                // New tax regime rates
+                if (taxableIncome > 300000) tax += Math.min(taxableIncome - 300000, 300000) * 0.05;
+                if (taxableIncome > 600000) tax += Math.min(taxableIncome - 600000, 300000) * 0.10;
+                if (taxableIncome > 900000) tax += Math.min(taxableIncome - 900000, 300000) * 0.15;
+                if (taxableIncome > 1200000) tax += Math.min(taxableIncome - 1200000, 300000) * 0.20;
+                if (taxableIncome > 1500000) tax += (taxableIncome - 1500000) * 0.30;
+            } else {
+                // Old tax regime rates
+                const exemptionLimit = age >= 60 ? (age >= 80 ? 500000 : 300000) : 250000;
+                
+                if (taxableIncome > exemptionLimit) {
+                    const taxableAfterExemption = taxableIncome - exemptionLimit;
+                    if (taxableAfterExemption > 0) tax += Math.min(taxableAfterExemption, 250000) * 0.05;
+                    if (taxableAfterExemption > 250000) tax += Math.min(taxableAfterExemption - 250000, 500000) * 0.20;
+                    if (taxableAfterExemption > 750000) tax += (taxableAfterExemption - 750000) * 0.30;
+                }
+            }
+            
+            // Add health and education cess
+            tax = tax * 1.04;
+            
+            return tax;
+        }
+        
+        function updateChart(takeHome, incomeTax, epf, esi, pt) {
+            const ctx = document.getElementById('salaryChart').getContext('2d');
+            
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            const deductions = [];
+            const labels = [];
+            const colors = [];
+            
+            labels.push('Take Home');
+            deductions.push(Math.round(takeHome));
+            colors.push('#4caf50');
+            
+            if (incomeTax > 0) {
+                labels.push('Income Tax');
+                deductions.push(Math.round(incomeTax));
+                colors.push('#f44336');
+            }
+            
+            if (epf > 0) {
+                labels.push('EPF');
+                deductions.push(Math.round(epf));
+                colors.push('#2196f3');
+            }
+            
+            if (esi > 0) {
+                labels.push('ESI');
+                deductions.push(Math.round(esi));
+                colors.push('#ff9800');
+            }
+            
+            if (pt > 0) {
+                labels.push('Professional Tax');
+                deductions.push(Math.round(pt));
+                colors.push('#9c27b0');
+            }
+            
+            chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: deductions,
+                        backgroundColor: colors,
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#333',
+                                padding: 15,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${label}: ₹${value.toLocaleString('en-IN')} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function printResults() {
+            window.print();
+        }
+        
+        // Calculate on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateSalary();
+            
+            // Auto-calculate on input change
+            ['salaryAmount', 'age', 'taxRegime', 'basicPercent', 'hraPercent', 'otherAllowances'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateSalary);
+                document.getElementById(id).addEventListener('change', calculateSalary);
+            });
+            
+            // Auto-calculate on checkbox change
+            ['includeEPF', 'includeESI', 'includePT'].forEach(id => {
+                document.getElementById(id).addEventListener('change', calculateSalary);
+            });
+        });
+    </script>
+</body>
+</html>

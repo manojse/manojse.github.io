@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7KZY0CS6R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} 
+        gtag('js', new Date());
+
+        gtag('config', 'G-K7KZY0CS6R');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate Mutual Fund returns with SIP and lump sum investments. MF calculator with expense ratio and tax implications.">
+    <title>MF Calculator - Mutual Fund Returns Calculator | Skrollmates</title>
+    <link rel="canonical" href="https://skrollmates.com/mf-calculator.html">
+    <meta property="og:title" content="MF Calculator - Mutual Fund Returns Calculator">
+    <meta property="og:description" content="Calculate mutual fund returns with SIP and lump sum investments including expense ratio.">
+    <meta property="og:url" content="https://skrollmates.com/mf-calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://skrollmates.com/skrollmates-512.webp">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:site_name" content="Skrollmates">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:image:alt" content="Skrollmates logo">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@skrollmates">
+    <meta name="robots" content="index, follow">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3029851571351657"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "MF Calculator",
+        "description": "Calculate Mutual Fund returns with SIP and lump sum investments",
+        "url": "https://skrollmates.com/mf-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+    <style>
+        .calculator-container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .input-field, .select-field {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-field:focus, .select-field:focus {
+            outline: none;
+            border-color: #ff5722;
+        }
+        
+        .investment-mode {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .mode-button {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .mode-button.active {
+            background: #ff5722;
+            color: white;
+            border-color: #ff5722;
+        }
+        
+        .mode-button:hover {
+            border-color: #ff5722;
+        }
+        
+        .results-panel {
+            background: linear-gradient(135deg, #ff5722 0%, #ff7043 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            height: 300px;
+        }
+        
+        .fund-comparison {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .fund-comparison h4 {
+            margin-top: 0;
+            color: #ff5722;
+            border-bottom: 2px solid #fbe9e7;
+            padding-bottom: 10px;
+        }
+        
+        .fund-types {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .fund-card {
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .fund-card:hover {
+            border-color: #ff5722;
+            background: #fbe9e7;
+        }
+        
+        .fund-card.selected {
+            border-color: #ff5722;
+            background: #ff5722;
+            color: white;
+        }
+        
+        .fund-card h5 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+        }
+        
+        .fund-card .return-rate {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .fund-card .expense-ratio {
+            font-size: 12px;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+        
+        .tax-implications {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .tax-implications h4 {
+            margin-top: 0;
+            color: #e65100;
+        }
+        
+        .breakdown-table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .breakdown-table h4 {
+            background: #ff5722;
+            color: white;
+            margin: 0;
+            padding: 15px;
+        }
+        
+        .breakdown-body {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        
+        .year-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .year-table th, .year-table td {
+            padding: 10px;
+            text-align: right;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+        
+        .year-table th {
+            background: #f5f5f5;
+            color: #333;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        .year-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .print-btn, .calc-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .calc-btn {
+            background: #ff5722;
+            color: white;
+        }
+        
+        .print-btn {
+            background: #666;
+            color: white;
+        }
+        
+        .calc-btn:hover { background: #e64a19; }
+        .print-btn:hover { background: #555; }
+        
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .investment-mode, .fund-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-container {
+                margin-top: 90px;
+                padding: 15px;
+            }
+        }
+        
+        @media print {
+            .navbar, .print-btn, .calc-btn { display: none; }
+            .calculator-container { margin: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <img src="skrollmates.webp" alt="Skrollmates logo">
+            <span class="brand-name">Skrollmates</span>
+        </div>
+        <span class="menu-toggle" aria-label="Toggle menu" id="menuToggle" tabindex="1">&#9776;</span>
+        <ul id="mainMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="whatsapp-extension.html">WhatsApp Extension</a></li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">EMI Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="emi-calculator.html">General EMI Calculator</a></li>
+                    <li><a href="home-loan.html">Home Loan EMI</a></li>
+                    <li><a href="personal-loan.html">Personal Loan EMI</a></li>
+                    <li><a href="car-loan.html">Car Loan EMI</a></li>
+                    <li><a href="two-wheeler-loan.html">Two Wheeler Loan EMI</a></li>
+                    <li><a href="lap-loan.html">LAP Loan EMI</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Investment Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="sip-calculator.html">SIP Calculator</a></li>
+                    <li><a href="lumpsum-calculator.html">Lumpsum Calculator</a></li>
+                    <li><a href="step-up-sip-calculator.html">Step-Up SIP Calculator</a></li>
+                    <li><a href="swp-calculator.html">SWP Calculator</a></li>
+                    <li class="active"><a href="mf-calculator.html">Mutual Fund Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Savings Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="fd-calculator.html">FD Calculator</a></li>
+                    <li><a href="rd-calculator.html">RD Calculator</a></li>
+                    <li><a href="ppf-calculator.html">PPF Calculator</a></li>
+                    <li><a href="epf-calculator.html">EPF Calculator</a></li>
+                    <li><a href="ssy-calculator.html">SSY Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Tax & Trading <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                    <li><a href="hra-calculator.html">HRA Calculator</a></li>
+                    <li><a href="salary-calculator.html">Salary Calculator</a></li>
+                    <li><a href="tds-calculator.html">TDS Calculator</a></li>
+                    <li><a href="gst-calculator.html">GST Calculator</a></li>
+                    <li><a href="brokerage-calculator.html">Brokerage Calculator</a></li>
+                    <li><a href="margin-calculator.html">Margin Calculator</a></li>
+                    <li><a href="stock-average-calculator.html">Stock Average Calculator</a></li>
+                </ul>
+            </li>
+            <li><a href="repo-rates.html">Repo Rates</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+    </nav>
+
+    <main class="calculator-container">
+        <h1>MF Calculator</h1>
+        <p>Calculate Mutual Fund returns with SIP, lump sum, or combination investments including expense ratio and tax implications.</p>
+        
+        <div class="calc-grid">
+            <div class="inputs-section">
+                <div class="input-group">
+                    <label class="input-label">Investment Mode</label>
+                    <div class="investment-mode">
+                        <div class="mode-button active" onclick="setMode('sip')">SIP Only</div>
+                        <div class="mode-button" onclick="setMode('lumpsum')">Lump Sum</div>
+                        <div class="mode-button" onclick="setMode('combination')">Both</div>
+                    </div>
+                </div>
+                
+                <div class="input-group" id="sipGroup">
+                    <label class="input-label" for="sipAmount">Monthly SIP Amount (₹)</label>
+                    <input type="number" id="sipAmount" class="input-field" value="10000" min="500" step="500">
+                </div>
+                
+                <div class="input-group" id="lumpsumGroup" style="display: none;">
+                    <label class="input-label" for="lumpsumAmount">Lump Sum Amount (₹)</label>
+                    <input type="number" id="lumpsumAmount" class="input-field" value="100000" min="1000" step="1000">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="investmentPeriod">Investment Period (Years)</label>
+                    <input type="number" id="investmentPeriod" class="input-field" value="10" min="1" max="30" step="1">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="expectedReturn">Expected Annual Return (%)</label>
+                    <input type="number" id="expectedReturn" class="input-field" value="12" min="1" max="30" step="0.5">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="expenseRatio">Expense Ratio (%)</label>
+                    <input type="number" id="expenseRatio" class="input-field" value="1.5" min="0" max="3" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="exitLoad">Exit Load (%)</label>
+                    <input type="number" id="exitLoad" class="input-field" value="1" min="0" max="2" step="0.1">
+                    <small style="color: #666;">Applicable if redeemed within 1 year</small>
+                </div>
+                
+                <button onclick="calculateMF()" class="calc-btn">Calculate Returns</button>
+                <button onclick="printResults()" class="print-btn">Print Results</button>
+                
+                <div class="fund-comparison">
+                    <h4>Fund Type Comparison</h4>
+                    <div class="fund-types">
+                        <div class="fund-card" onclick="selectFund('equity')">
+                            <h5>Equity Funds</h5>
+                            <div class="return-rate">12-15%</div>
+                            <div class="expense-ratio">ER: 1.5-2.5%</div>
+                        </div>
+                        <div class="fund-card" onclick="selectFund('debt')">
+                            <h5>Debt Funds</h5>
+                            <div class="return-rate">6-9%</div>
+                            <div class="expense-ratio">ER: 0.5-1.5%</div>
+                        </div>
+                        <div class="fund-card" onclick="selectFund('hybrid')">
+                            <h5>Hybrid Funds</h5>
+                            <div class="return-rate">9-12%</div>
+                            <div class="expense-ratio">ER: 1.0-2.0%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tax-implications">
+                    <h4>Tax Implications</h4>
+                    <p><strong>Equity Funds:</strong></p>
+                    <p>• STCG: 15% if sold within 1 year</p>
+                    <p>• LTCG: 10% on gains > ₹1L (after 1 year)</p>
+                    <p><strong>Debt Funds:</strong></p>
+                    <p>• Gains taxed as per income tax slab</p>
+                </div>
+            </div>
+            
+            <div class="results-section">
+                <div class="results-panel">
+                    <h3 style="margin-top: 0; margin-bottom: 25px;">Investment Summary</h3>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Total Investment:</span>
+                        <span class="result-value" id="totalInvestment">₹12,00,000</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Gross Returns:</span>
+                        <span class="result-value" id="grossReturns">₹8,97,456</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Expense Charges:</span>
+                        <span class="result-value" id="expenseCharges">₹47,832</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Exit Load (if applicable):</span>
+                        <span class="result-value" id="exitLoadAmount">₹20,975</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Net Maturity Value:</span>
+                        <span class="result-value" id="maturityValue">₹20,29,649</span>
+                    </div>
+                    
+                    <div class="result-item" style="border-bottom: none;">
+                        <span class="result-label">Effective Return Rate:</span>
+                        <span class="result-value" id="effectiveReturn">10.8%</span>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="mfChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+                
+                <div class="breakdown-table">
+                    <h4>Year-wise Growth</h4>
+                    <div class="breakdown-body">
+                        <table class="year-table">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Investment</th>
+                                    <th>Returns</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody id="yearBreakdown">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Skrollmates.com</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="menu.js" defer></script>
+    <script>
+        let chartInstance = null;
+        let currentMode = 'sip';
+        
+        const fundTypes = {
+            equity: { return: 12, expense: 2.0 },
+            debt: { return: 7, expense: 1.0 },
+            hybrid: { return: 10, expense: 1.5 }
+        };
+        
+        function setMode(mode) {
+            currentMode = mode;
+            
+            // Update button states
+            document.querySelectorAll('.mode-button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide input groups
+            const sipGroup = document.getElementById('sipGroup');
+            const lumpsumGroup = document.getElementById('lumpsumGroup');
+            
+            if (mode === 'sip') {
+                sipGroup.style.display = 'block';
+                lumpsumGroup.style.display = 'none';
+            } else if (mode === 'lumpsum') {
+                sipGroup.style.display = 'none';
+                lumpsumGroup.style.display = 'block';
+            } else {
+                sipGroup.style.display = 'block';
+                lumpsumGroup.style.display = 'block';
+            }
+            
+            calculateMF();
+        }
+        
+        function selectFund(type) {
+            // Update fund card selection
+            document.querySelectorAll('.fund-card').forEach(card => card.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            
+            // Update inputs
+            const fundData = fundTypes[type];
+            document.getElementById('expectedReturn').value = fundData.return;
+            document.getElementById('expenseRatio').value = fundData.expense;
+            
+            calculateMF();
+        }
+        
+        function calculateMF() {
+            const sipAmount = parseFloat(document.getElementById('sipAmount').value) || 0;
+            const lumpsumAmount = parseFloat(document.getElementById('lumpsumAmount').value) || 0;
+            const investmentPeriod = parseInt(document.getElementById('investmentPeriod').value) || 10;
+            const expectedReturn = parseFloat(document.getElementById('expectedReturn').value) || 12;
+            const expenseRatio = parseFloat(document.getElementById('expenseRatio').value) || 1.5;
+            const exitLoad = parseFloat(document.getElementById('exitLoad').value) || 1;
+            
+            // Adjust return for expense ratio
+            const netReturn = expectedReturn - expenseRatio;
+            const monthlyReturn = netReturn / 100 / 12;
+            
+            let totalInvestment = 0;
+            let maturityValue = 0;
+            let yearBreakdown = [];
+            
+            // Calculate based on mode
+            if (currentMode === 'sip' || currentMode === 'combination') {
+                totalInvestment += sipAmount * 12 * investmentPeriod;
+                
+                // SIP calculation using compound interest formula
+                const sipMaturity = sipAmount * (((Math.pow(1 + monthlyReturn, investmentPeriod * 12) - 1) / monthlyReturn) * (1 + monthlyReturn));
+                maturityValue += sipMaturity;
+            }
+            
+            if (currentMode === 'lumpsum' || currentMode === 'combination') {
+                totalInvestment += lumpsumAmount;
+                
+                // Lump sum calculation
+                const lumpsumMaturity = lumpsumAmount * Math.pow(1 + netReturn/100, investmentPeriod);
+                maturityValue += lumpsumMaturity;
+            }
+            
+            // Calculate year-wise breakdown
+            let currentValue = 0;
+            let cumulativeInvestment = 0;
+            
+            for (let year = 1; year <= investmentPeriod; year++) {
+                let yearlyInvestment = 0;
+                
+                if (currentMode === 'sip' || currentMode === 'combination') {
+                    yearlyInvestment += sipAmount * 12;
+                }
+                
+                if ((currentMode === 'lumpsum' || currentMode === 'combination') && year === 1) {
+                    yearlyInvestment += lumpsumAmount;
+                }
+                
+                cumulativeInvestment += yearlyInvestment;
+                
+                // Calculate returns
+                if (currentMode === 'sip' || currentMode === 'combination') {
+                    // For SIP, calculate progressive value
+                    const sipValue = sipAmount * (((Math.pow(1 + monthlyReturn, year * 12) - 1) / monthlyReturn) * (1 + monthlyReturn));
+                    currentValue = sipValue;
+                    
+                    if ((currentMode === 'combination') && year === 1) {
+                        currentValue += lumpsumAmount;
+                    } else if (currentMode === 'combination' && year > 1) {
+                        currentValue += lumpsumAmount * Math.pow(1 + netReturn/100, year);
+                    }
+                } else {
+                    // For lump sum
+                    currentValue = lumpsumAmount * Math.pow(1 + netReturn/100, year);
+                }
+                
+                const yearlyReturns = currentValue - cumulativeInvestment;
+                
+                yearBreakdown.push({
+                    year: year,
+                    investment: yearlyInvestment,
+                    cumulativeInvestment: cumulativeInvestment,
+                    returns: yearlyReturns,
+                    value: currentValue
+                });
+            }
+            
+            const grossReturns = maturityValue - totalInvestment;
+            const expenseCharges = maturityValue * (expenseRatio / 100) * investmentPeriod;
+            const exitLoadAmount = maturityValue * (exitLoad / 100);
+            const netMaturityValue = maturityValue - expenseCharges;
+            
+            // Calculate effective return
+            const effectiveReturn = currentMode === 'sip' ? 
+                (Math.pow(netMaturityValue / totalInvestment, 1/investmentPeriod) - 1) * 100 :
+                (Math.pow(netMaturityValue / totalInvestment, 1/investmentPeriod) - 1) * 100;
+            
+            // Update display
+            document.getElementById('totalInvestment').textContent = '₹' + totalInvestment.toLocaleString('en-IN');
+            document.getElementById('grossReturns').textContent = '₹' + Math.round(grossReturns).toLocaleString('en-IN');
+            document.getElementById('expenseCharges').textContent = '₹' + Math.round(expenseCharges).toLocaleString('en-IN');
+            document.getElementById('exitLoadAmount').textContent = '₹' + Math.round(exitLoadAmount).toLocaleString('en-IN');
+            document.getElementById('maturityValue').textContent = '₹' + Math.round(netMaturityValue).toLocaleString('en-IN');
+            document.getElementById('effectiveReturn').textContent = effectiveReturn.toFixed(1) + '%';
+            
+            // Update chart and breakdown
+            updateChart(totalInvestment, grossReturns, expenseCharges);
+            updateBreakdown(yearBreakdown);
+        }
+        
+        function updateChart(investment, returns, expenses) {
+            const ctx = document.getElementById('mfChart').getContext('2d');
+            
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Total Investment', 'Net Returns', 'Expense Charges'],
+                    datasets: [{
+                        data: [investment, Math.round(returns - expenses), Math.round(expenses)],
+                        backgroundColor: ['#ff5722', '#4caf50', '#f44336'],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#333',
+                                padding: 15,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${label}: ₹${value.toLocaleString('en-IN')} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function updateBreakdown(breakdown) {
+            const tbody = document.getElementById('yearBreakdown');
+            tbody.innerHTML = '';
+            
+            breakdown.forEach((item) => {
+                const row = tbody.insertRow();
+                
+                row.insertCell(0).textContent = item.year;
+                row.insertCell(1).textContent = item.investment > 0 ? '₹' + item.investment.toLocaleString('en-IN') : '-';
+                row.insertCell(2).textContent = '₹' + Math.round(item.returns).toLocaleString('en-IN');
+                row.insertCell(3).textContent = '₹' + Math.round(item.value).toLocaleString('en-IN');
+            });
+        }
+        
+        function printResults() {
+            window.print();
+        }
+        
+        // Calculate on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateMF();
+            
+            // Auto-calculate on input change
+            ['sipAmount', 'lumpsumAmount', 'investmentPeriod', 'expectedReturn', 'expenseRatio', 'exitLoad'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateMF);
+                document.getElementById(id).addEventListener('change', calculateMF);
+            });
+        });
+    </script>
+</body>
+</html>

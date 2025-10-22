@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Debug Test</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu.css">
+    <style>
+        body { margin: 0; padding: 80px 20px 20px; }
+        .debug-info { 
+            background: #f0f0f0; 
+            padding: 10px; 
+            margin: 20px 0; 
+            border-radius: 4px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <img src="skrollmates.webp" alt="Skrollmates logo">
+            <span class="brand-name">Skrollmates</span>
+        </div>
+        <span class="menu-toggle" aria-label="Toggle menu" id="menuToggle" tabindex="1">&#9776;</span>
+        <ul id="mainMenu">
+            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="whatsapp-extension.html">WhatsApp Extension</a></li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle">EMI Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="emi-calculator.html">General EMI Calculator</a></li>
+                    <li><a href="home-loan.html">Home Loan EMI</a></li>
+                    <li><a href="personal-loan.html">Personal Loan EMI</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle">Investment Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="sip-calculator.html">SIP Calculator</a></li>
+                    <li><a href="lumpsum-calculator.html">Lumpsum Calculator</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="debug-info">
+        <h3>Debug Information</h3>
+        <div id="debugOutput"></div>
+        <button onclick="testDropdowns()">Test Dropdowns</button>
+        <button onclick="testMobileMenu()">Test Mobile Menu</button>
+    </div>
+
+    <script src="menu.js"></script>
+    <script>
+        function log(message) {
+            const output = document.getElementById('debugOutput');
+            output.innerHTML += '<div>' + new Date().toLocaleTimeString() + ': ' + message + '</div>';
+        }
+
+        function testDropdowns() {
+            log('Testing dropdown elements...');
+            const dropdowns = document.querySelectorAll('.menu-dropdown');
+            log('Found ' + dropdowns.length + ' dropdown elements');
+            
+            const toggles = document.querySelectorAll('.menu-dropdown-toggle');
+            log('Found ' + toggles.length + ' dropdown toggles');
+            
+            const submenus = document.querySelectorAll('.menu-submenu');
+            log('Found ' + submenus.length + ' submenus');
+            
+            // Test hover behavior
+            if (dropdowns.length > 0) {
+                log('Testing hover on first dropdown...');
+                const event = new MouseEvent('mouseenter', { bubbles: true });
+                dropdowns[0].dispatchEvent(event);
+                log('Hover event dispatched');
+            }
+        }
+
+        function testMobileMenu() {
+            log('Testing mobile menu...');
+            const menu = document.getElementById('mainMenu');
+            const toggle = document.getElementById('menuToggle');
+            
+            if (menu && toggle) {
+                log('Menu and toggle found');
+                toggle.click();
+                log('Menu toggle clicked, menu open: ' + menu.classList.contains('open'));
+            } else {
+                log('Menu or toggle not found');
+            }
+        }
+
+        // Log when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            log('DOM Content Loaded');
+            
+            // Log click events on dropdown toggles
+            const toggles = document.querySelectorAll('.menu-dropdown-toggle');
+            toggles.forEach((toggle, index) => {
+                toggle.addEventListener('click', function(e) {
+                    log('Dropdown toggle ' + index + ' clicked');
+                });
+            });
+            
+            // Log window size changes
+            window.addEventListener('resize', function() {
+                log('Window resized to: ' + window.innerWidth + 'x' + window.innerHeight);
+            });
+            
+            log('Initial window size: ' + window.innerWidth + 'x' + window.innerHeight);
+        });
+    </script>
+</body>
+</html>

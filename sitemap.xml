@@ -5,41 +5,183 @@
   <!-- Homepage -->
   <url>
   <loc>https://skrollmates.com/index.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>1.0</priority>
   </url>
 
-  <!-- EMI Calculator -->
+  <!-- WhatsApp Extension -->
+  <url>
+  <loc>https://skrollmates.com/whatsapp-extension.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+  </url>
+
+  <!-- EMI Calculators -->
   <url>
   <loc>https://skrollmates.com/emi-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.9</priority>
   </url>
-
-  <!-- Loan pages -->
   <url>
   <loc>https://skrollmates.com/home-loan.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
   </url>
   <url>
   <loc>https://skrollmates.com/personal-loan.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
   </url>
   <url>
   <loc>https://skrollmates.com/car-loan.html</loc>
-  </url>
-  <url>
-  <loc>https://skrollmates.com/lap-loan.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
   </url>
   <url>
   <loc>https://skrollmates.com/two-wheeler-loan.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
+  </url>
+  <url>
+  <loc>https://skrollmates.com/lap-loan.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
   </url>
 
-  <!-- Misc pages -->
+  <!-- Investment Calculators -->
   <url>
-  <loc>https://skrollmates.com/whatsapp-extension.html</loc>
+  <loc>https://skrollmates.com/sip-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.9</priority>
+  </url>
+  <url>
+  <loc>https://skrollmates.com/lumpsum-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.9</priority>
+  </url>
+  <url>
+  <loc>https://skrollmates.com/step-up-sip-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+  </url>
+  <url>
+  <loc>https://skrollmates.com/swp-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.9</priority>
+  </url>
+  <url>
+  <loc>https://skrollmates.com/mf-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+  </url>
+
+  <!-- Savings Calculators -->
+  <url>
+  <loc>https://skrollmates.com/fd-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+  </url>
+  <url>
+  <loc>https://skrollmates.com/rd-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+  </url>
+  <url>
+  <loc>https://skrollmates.com/ppf-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.9</priority>
+  </url>
+  <url>
+  <loc>https://skrollmates.com/epf-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+  </url>
+  <url>
+  <loc>https://skrollmates.com/ssy-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+  </url>
+
+  <!-- Tax & Trading Calculators -->
+  <url>
+  <loc>https://skrollmates.com/income-tax-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.9</priority>
+  </url>
+  <url>
+  <loc>https://skrollmates.com/hra-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+  </url>
+  <url>
+  <loc>https://skrollmates.com/salary-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+  </url>
+  <url>
+  <loc>https://skrollmates.com/tds-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+  </url>
+  <url>
+  <loc>https://skrollmates.com/gst-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+  </url>
+  <url>
+  <loc>https://skrollmates.com/brokerage-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+  </url>
+  <url>
+  <loc>https://skrollmates.com/margin-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+  </url>
+  <url>
+  <loc>https://skrollmates.com/stock-average-calculator.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+  </url>
+
+  <!-- Additional Pages -->
+  <url>
+  <loc>https://skrollmates.com/repo-rates.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
   </url>
   <url>
   <loc>https://skrollmates.com/privacy-policy.html</loc>
-  </url>
-
-  <!-- Repo Rate page -->
-  <url>
-  <loc>https://skrollmates.com/repo-rates.html</loc>
+  <lastmod>2025-10-22</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.3</priority>
   </url>
 
 </urlset>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7KZY0CS6R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} 
+        gtag('js', new Date());
+
+        gtag('config', 'G-K7KZY0CS6R');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate SWP (Systematic Withdrawal Plan) returns and sustainability. Plan your retirement withdrawals with detailed projections and charts.">
+    <title>SWP Calculator - Systematic Withdrawal Plan Calculator | Skrollmates</title>
+    <link rel="canonical" href="https://skrollmates.com/swp-calculator.html">
+    <meta property="og:title" content="SWP Calculator - Systematic Withdrawal Plan Calculator">
+    <meta property="og:description" content="Calculate SWP returns and plan your systematic withdrawals with detailed projections.">
+    <meta property="og:url" content="https://skrollmates.com/swp-calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://skrollmates.com/skrollmates-512.webp">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:site_name" content="Skrollmates">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:image:alt" content="Skrollmates logo">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@skrollmates">
+    <meta name="robots" content="index, follow">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3029851571351657"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "SWP Calculator",
+        "description": "Calculate Systematic Withdrawal Plan returns and sustainability",
+        "url": "https://skrollmates.com/swp-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+    <style>
+        .calculator-container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #009688;
+        }
+        
+        .results-panel {
+            background: linear-gradient(135deg, #009688 0%, #00bcd4 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .warning-panel {
+            background: linear-gradient(135deg, #ff5722 0%, #f44336 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            height: 300px;
+        }
+        
+        .sustainability-meter {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .meter-bar {
+            width: 100%;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .meter-fill {
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+        
+        .print-btn, .calc-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .calc-btn {
+            background: #009688;
+            color: white;
+        }
+        
+        .print-btn {
+            background: #666;
+            color: white;
+        }
+        
+        .calc-btn:hover { background: #00796b; }
+        .print-btn:hover { background: #555; }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .calculator-container {
+                margin-top: 90px;
+                padding: 15px;
+            }
+        }
+        
+        @media print {
+            .navbar, .print-btn, .calc-btn { display: none; }
+            .calculator-container { margin: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <img src="skrollmates.webp" alt="Skrollmates logo">
+            <span class="brand-name">Skrollmates</span>
+        </div>
+        <span class="menu-toggle" aria-label="Toggle menu" id="menuToggle" tabindex="1">&#9776;</span>
+        <ul id="mainMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="whatsapp-extension.html">WhatsApp Extension</a></li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">EMI Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="emi-calculator.html">General EMI Calculator</a></li>
+                    <li><a href="home-loan.html">Home Loan EMI</a></li>
+                    <li><a href="personal-loan.html">Personal Loan EMI</a></li>
+                    <li><a href="car-loan.html">Car Loan EMI</a></li>
+                    <li><a href="two-wheeler-loan.html">Two Wheeler Loan EMI</a></li>
+                    <li><a href="lap-loan.html">LAP Loan EMI</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Investment Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="sip-calculator.html">SIP Calculator</a></li>
+                    <li><a href="lumpsum-calculator.html">Lumpsum Calculator</a></li>
+                    <li><a href="step-up-sip-calculator.html">Step-Up SIP Calculator</a></li>
+                    <li class="active"><a href="swp-calculator.html">SWP Calculator</a></li>
+                    <li><a href="mf-calculator.html">Mutual Fund Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Savings Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="fd-calculator.html">FD Calculator</a></li>
+                    <li><a href="rd-calculator.html">RD Calculator</a></li>
+                    <li><a href="ppf-calculator.html">PPF Calculator</a></li>
+                    <li><a href="epf-calculator.html">EPF Calculator</a></li>
+                    <li><a href="ssy-calculator.html">SSY Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Tax & Trading <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                    <li><a href="hra-calculator.html">HRA Calculator</a></li>
+                    <li><a href="salary-calculator.html">Salary Calculator</a></li>
+                    <li><a href="tds-calculator.html">TDS Calculator</a></li>
+                    <li><a href="gst-calculator.html">GST Calculator</a></li>
+                    <li><a href="brokerage-calculator.html">Brokerage Calculator</a></li>
+                    <li><a href="margin-calculator.html">Margin Calculator</a></li>
+                    <li><a href="stock-average-calculator.html">Stock Average Calculator</a></li>
+                </ul>
+            </li>
+            <li><a href="repo-rates.html">Repo Rates</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+    </nav>
+
+    <main class="calculator-container">
+        <h1>SWP Calculator</h1>
+        <p>Calculate how long your investment will last with systematic withdrawals and plan your retirement income.</p>
+        
+        <div class="calc-grid">
+            <div class="inputs-section">
+                <div class="input-group">
+                    <label class="input-label" for="initialInvestment">Initial Investment (₹)</label>
+                    <input type="number" id="initialInvestment" class="input-field" value="2000000" min="10000" step="10000">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="monthlyWithdrawal">Monthly Withdrawal (₹)</label>
+                    <input type="number" id="monthlyWithdrawal" class="input-field" value="15000" min="1000" step="1000">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="annualReturn">Expected Annual Return (%)</label>
+                    <input type="number" id="annualReturn" class="input-field" value="10" min="1" max="25" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="inflationRate">Inflation Rate (%)</label>
+                    <input type="number" id="inflationRate" class="input-field" value="6" min="0" max="15" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="withdrawalPeriod">Withdrawal Period (Years)</label>
+                    <input type="number" id="withdrawalPeriod" class="input-field" value="20" min="1" max="50" step="1">
+                </div>
+                
+                <button onclick="calculateSWP()" class="calc-btn">Calculate SWP</button>
+                <button onclick="printResults()" class="print-btn">Print Results</button>
+                
+                <div class="info-box">
+                    <strong>SWP Benefits:</strong><br>
+                    • Regular income from investments<br>
+                    • Capital appreciation on remaining corpus<br>
+                    • Tax efficient compared to FDs<br>
+                    • Flexible withdrawal amounts
+                </div>
+            </div>
+            
+            <div class="results-section">
+                <div class="results-panel">
+                    <h3 style="margin-top: 0; margin-bottom: 25px;">SWP Summary</h3>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Initial Corpus:</span>
+                        <span class="result-value" id="initialCorpus">₹20,00,000</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Total Withdrawals:</span>
+                        <span class="result-value" id="totalWithdrawals">₹36,00,000</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Remaining Corpus:</span>
+                        <span class="result-value" id="remainingCorpus">₹15,47,832</span>
+                    </div>
+                    
+                    <div class="result-item" style="border-bottom: none;">
+                        <span class="result-label">Corpus Duration:</span>
+                        <span class="result-value" id="corpusDuration">20+ Years</span>
+                    </div>
+                </div>
+                
+                <div class="sustainability-meter">
+                    <h4>Sustainability Score</h4>
+                    <div class="meter-bar">
+                        <div class="meter-fill" id="sustainabilityFill" style="width: 85%; background: linear-gradient(90deg, #4caf50 0%, #8bc34a 100%);"></div>
+                    </div>
+                    <div id="sustainabilityText">Excellent - Corpus will sustain for 20+ years</div>
+                </div>
+                
+                <div id="warningPanel" class="warning-panel" style="display: none;">
+                    <h4>⚠️ Warning</h4>
+                    <div id="warningText"></div>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="swpChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Skrollmates.com</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="menu.js" defer></script>
+    <script>
+        let chartInstance = null;
+        
+        function calculateSWP() {
+            const initialInvestment = parseFloat(document.getElementById('initialInvestment').value) || 2000000;
+            const monthlyWithdrawal = parseFloat(document.getElementById('monthlyWithdrawal').value) || 15000;
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value) || 10;
+            const inflationRate = parseFloat(document.getElementById('inflationRate').value) || 6;
+            const withdrawalPeriod = parseFloat(document.getElementById('withdrawalPeriod').value) || 20;
+            
+            const monthlyReturn = annualReturn / 12 / 100;
+            const monthlyInflation = inflationRate / 12 / 100;
+            const totalMonths = withdrawalPeriod * 12;
+            
+            let corpus = initialInvestment;
+            let totalWithdrawn = 0;
+            const monthlyData = [];
+            let corpusExhaustedMonth = null;
+            
+            for (let month = 1; month <= totalMonths; month++) {
+                // Apply returns first
+                corpus = corpus * (1 + monthlyReturn);
+                
+                // Apply inflation to withdrawal amount
+                const inflationAdjustedWithdrawal = monthlyWithdrawal * Math.pow(1 + monthlyInflation, month - 1);
+                
+                // Withdraw
+                if (corpus >= inflationAdjustedWithdrawal) {
+                    corpus -= inflationAdjustedWithdrawal;
+                    totalWithdrawn += inflationAdjustedWithdrawal;
+                } else {
+                    // Corpus exhausted
+                    totalWithdrawn += corpus;
+                    corpus = 0;
+                    if (!corpusExhaustedMonth) {
+                        corpusExhaustedMonth = month;
+                    }
+                }
+                
+                if (month % 12 === 0 || month === totalMonths) {
+                    monthlyData.push({
+                        year: Math.ceil(month / 12),
+                        corpus: corpus,
+                        totalWithdrawn: totalWithdrawn
+                    });
+                }
+                
+                if (corpus <= 0) break;
+            }
+            
+            // Calculate sustainability score
+            const sustainabilityScore = corpusExhaustedMonth ? 
+                Math.min(100, (corpusExhaustedMonth / totalMonths) * 100) : 100;
+            
+            // Update display
+            document.getElementById('initialCorpus').textContent = '₹' + initialInvestment.toLocaleString('en-IN');
+            document.getElementById('totalWithdrawals').textContent = '₹' + Math.round(totalWithdrawn).toLocaleString('en-IN');
+            document.getElementById('remainingCorpus').textContent = '₹' + Math.round(corpus).toLocaleString('en-IN');
+            
+            if (corpusExhaustedMonth) {
+                const yearsToExhaustion = Math.floor(corpusExhaustedMonth / 12);
+                const monthsToExhaustion = corpusExhaustedMonth % 12;
+                document.getElementById('corpusDuration').textContent = 
+                    `${yearsToExhaustion} years ${monthsToExhaustion} months`;
+                
+                // Show warning
+                document.getElementById('warningPanel').style.display = 'block';
+                document.getElementById('warningText').textContent = 
+                    `Your corpus will be exhausted in ${yearsToExhaustion} years and ${monthsToExhaustion} months. Consider reducing withdrawal amount or increasing returns.`;
+            } else {
+                document.getElementById('corpusDuration').textContent = `${withdrawalPeriod}+ Years`;
+                document.getElementById('warningPanel').style.display = 'none';
+            }
+            
+            // Update sustainability meter
+            updateSustainabilityMeter(sustainabilityScore, corpusExhaustedMonth, withdrawalPeriod);
+            
+            // Update chart
+            updateChart(monthlyData, corpusExhaustedMonth);
+        }
+        
+        function updateSustainabilityMeter(score, exhaustedMonth, totalPeriod) {
+            const fill = document.getElementById('sustainabilityFill');
+            const text = document.getElementById('sustainabilityText');
+            
+            fill.style.width = score + '%';
+            
+            if (score >= 90) {
+                fill.style.background = 'linear-gradient(90deg, #4caf50 0%, #8bc34a 100%)';
+                text.textContent = 'Excellent - Corpus will sustain for the entire period';
+            } else if (score >= 70) {
+                fill.style.background = 'linear-gradient(90deg, #ff9800 0%, #ffc107 100%)';
+                text.textContent = 'Good - Minor adjustments may be needed';
+            } else if (score >= 50) {
+                fill.style.background = 'linear-gradient(90deg, #ff5722 0%, #ff9800 100%)';
+                text.textContent = 'Moderate - Consider reducing withdrawal amount';
+            } else {
+                fill.style.background = 'linear-gradient(90deg, #f44336 0%, #e91e63 100%)';
+                text.textContent = 'Poor - Significant adjustments needed';
+            }
+        }
+        
+        function updateChart(data, exhaustedMonth) {
+            const ctx = document.getElementById('swpChart').getContext('2d');
+            
+            const labels = data.map(d => `Year ${d.year}`);
+            const corpusValues = data.map(d => Math.round(d.corpus));
+            const withdrawalValues = data.map(d => Math.round(d.totalWithdrawn));
+            
+            // Destroy existing chart if it exists
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Remaining Corpus (₹)',
+                        data: corpusValues,
+                        borderColor: '#009688',
+                        backgroundColor: 'rgba(0, 150, 136, 0.1)',
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4
+                    }, {
+                        label: 'Total Withdrawn (₹)',
+                        data: withdrawalValues,
+                        borderColor: '#ffd600',
+                        backgroundColor: 'rgba(255, 214, 0, 0.1)',
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#333'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#333',
+                                callback: function(value) {
+                                    return '₹' + (value / 100000).toFixed(1) + 'L';
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#333'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function printResults() {
+            window.print();
+        }
+        
+        // Calculate on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateSWP();
+            
+            // Auto-calculate on input change
+            ['initialInvestment', 'monthlyWithdrawal', 'annualReturn', 'inflationRate', 'withdrawalPeriod'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateSWP);
+            });
+        });
+    </script>
+</body>
+</html>

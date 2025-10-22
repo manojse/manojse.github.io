@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7KZY0CS6R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} 
+        gtag('js', new Date());
+
+        gtag('config', 'G-K7KZY0CS6R');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate Step-Up SIP returns with annual increment. Plan your systematic investment with increasing contributions for higher returns.">
+    <title>Step-Up SIP Calculator - Systematic Investment Plan with Annual Increase | Skrollmates</title>
+    <link rel="canonical" href="https://skrollmates.com/step-up-sip-calculator.html">
+    <meta property="og:title" content="Step-Up SIP Calculator - Systematic Investment Plan with Annual Increase">
+    <meta property="og:description" content="Calculate Step-Up SIP returns with annual increment for higher wealth creation.">
+    <meta property="og:url" content="https://skrollmates.com/step-up-sip-calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://skrollmates.com/skrollmates-512.webp">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:site_name" content="Skrollmates">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:image:alt" content="Skrollmates logo">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@skrollmates">
+    <meta name="robots" content="index, follow">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3029851571351657"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Step-Up SIP Calculator",
+        "description": "Calculate Step-Up SIP returns with annual increment for systematic investment",
+        "url": "https://skrollmates.com/step-up-sip-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+    <style>
+        .calculator-container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #009688;
+        }
+        
+        .results-panel {
+            background: linear-gradient(135deg, #009688 0%, #00bcd4 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+        
+        .comparison-panel {
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            height: 300px;
+        }
+        
+        .year-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .year-table th, .year-table td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .year-table th {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+        
+        .print-btn, .calc-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .calc-btn {
+            background: #009688;
+            color: white;
+        }
+        
+        .print-btn {
+            background: #666;
+            color: white;
+        }
+        
+        .calc-btn:hover { background: #00796b; }
+        .print-btn:hover { background: #555; }
+        
+        .info-box {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #4caf50;
+        }
+        
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .calculator-container {
+                margin-top: 90px;
+                padding: 15px;
+            }
+        }
+        
+        @media print {
+            .navbar, .print-btn, .calc-btn { display: none; }
+            .calculator-container { margin: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <img src="skrollmates.webp" alt="Skrollmates logo">
+            <span class="brand-name">Skrollmates</span>
+        </div>
+        <span class="menu-toggle" aria-label="Toggle menu" id="menuToggle" tabindex="1">&#9776;</span>
+        <ul id="mainMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="whatsapp-extension.html">WhatsApp Extension</a></li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">EMI Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="emi-calculator.html">General EMI Calculator</a></li>
+                    <li><a href="home-loan.html">Home Loan EMI</a></li>
+                    <li><a href="personal-loan.html">Personal Loan EMI</a></li>
+                    <li><a href="car-loan.html">Car Loan EMI</a></li>
+                    <li><a href="two-wheeler-loan.html">Two Wheeler Loan EMI</a></li>
+                    <li><a href="lap-loan.html">LAP Loan EMI</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Investment Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="sip-calculator.html">SIP Calculator</a></li>
+                    <li><a href="lumpsum-calculator.html">Lumpsum Calculator</a></li>
+                    <li class="active"><a href="step-up-sip-calculator.html">Step-Up SIP Calculator</a></li>
+                    <li><a href="swp-calculator.html">SWP Calculator</a></li>
+                    <li><a href="mf-calculator.html">Mutual Fund Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Savings Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="fd-calculator.html">FD Calculator</a></li>
+                    <li><a href="rd-calculator.html">RD Calculator</a></li>
+                    <li><a href="ppf-calculator.html">PPF Calculator</a></li>
+                    <li><a href="epf-calculator.html">EPF Calculator</a></li>
+                    <li><a href="ssy-calculator.html">SSY Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Tax & Trading <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                    <li><a href="hra-calculator.html">HRA Calculator</a></li>
+                    <li><a href="salary-calculator.html">Salary Calculator</a></li>
+                    <li><a href="tds-calculator.html">TDS Calculator</a></li>
+                    <li><a href="gst-calculator.html">GST Calculator</a></li>
+                    <li><a href="brokerage-calculator.html">Brokerage Calculator</a></li>
+                    <li><a href="margin-calculator.html">Margin Calculator</a></li>
+                    <li><a href="stock-average-calculator.html">Stock Average Calculator</a></li>
+                </ul>
+            </li>
+            <li><a href="repo-rates.html">Repo Rates</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+    </nav>
+
+    <main class="calculator-container">
+        <h1>Step-Up SIP Calculator</h1>
+        <p>Calculate returns from Step-Up SIP with annual increment to beat inflation and increase wealth creation.</p>
+        
+        <div class="calc-grid">
+            <div class="inputs-section">
+                <div class="input-group">
+                    <label class="input-label" for="initialSIP">Initial SIP Amount (₹)</label>
+                    <input type="number" id="initialSIP" class="input-field" value="5000" min="100" step="100">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="stepUpPercent">Annual Step-Up (%)</label>
+                    <input type="number" id="stepUpPercent" class="input-field" value="10" min="0" max="50" step="1">
+                    <small style="color: #666;">Recommended: 10-15% to beat inflation</small>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="annualReturn">Expected Annual Return (%)</label>
+                    <input type="number" id="annualReturn" class="input-field" value="12" min="1" max="30" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="tenure">Investment Period (Years)</label>
+                    <input type="number" id="tenure" class="input-field" value="15" min="1" max="50" step="1">
+                </div>
+                
+                <button onclick="calculateStepUpSIP()" class="calc-btn">Calculate Step-Up SIP</button>
+                <button onclick="showComparison()" class="calc-btn" style="background: #ff9800;">Compare with Regular SIP</button>
+                <button onclick="printResults()" class="print-btn">Print Results</button>
+                
+                <div class="info-box">
+                    <strong>Step-Up SIP Benefits:</strong><br>
+                    • Beat inflation with increasing investments<br>
+                    • Higher wealth creation over time<br>
+                    • Matches income growth pattern<br>
+                    • Disciplined investment approach
+                </div>
+            </div>
+            
+            <div class="results-section">
+                <div class="results-panel">
+                    <h3 style="margin-top: 0; margin-bottom: 25px;">Step-Up SIP Summary</h3>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Total Investment:</span>
+                        <span class="result-value" id="totalInvestment">₹15,43,500</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Total Returns:</span>
+                        <span class="result-value" id="totalReturns">₹32,85,678</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Maturity Value:</span>
+                        <span class="result-value" id="maturityValue">₹48,29,178</span>
+                    </div>
+                    
+                    <div class="result-item" style="border-bottom: none;">
+                        <span class="result-label">Final SIP Amount:</span>
+                        <span class="result-value" id="finalSIP">₹20,886</span>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="stepUpChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+                
+                <div id="comparisonResults" style="display: none;"></div>
+                <div id="yearlyBreakdown"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Skrollmates.com</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="menu.js" defer></script>
+    <script>
+        let chartInstance = null;
+        let yearlyData = [];
+        
+        function calculateStepUpSIP() {
+            const initialSIP = parseFloat(document.getElementById('initialSIP').value) || 5000;
+            const stepUpPercent = parseFloat(document.getElementById('stepUpPercent').value) || 10;
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value) || 12;
+            const tenure = parseFloat(document.getElementById('tenure').value) || 15;
+            
+            const monthlyReturn = annualReturn / 12 / 100;
+            let totalInvestment = 0;
+            let maturityValue = 0;
+            let currentSIP = initialSIP;
+            yearlyData = [];
+            
+            for (let year = 1; year <= tenure; year++) {
+                let yearlyInvestment = currentSIP * 12;
+                let yearlyMaturity = 0;
+                
+                // Calculate monthly contributions for this year
+                for (let month = 1; month <= 12; month++) {
+                    const monthsRemaining = (tenure - year) * 12 + (12 - month) + 1;
+                    const futureValue = currentSIP * Math.pow(1 + monthlyReturn, monthsRemaining - 1);
+                    yearlyMaturity += futureValue;
+                    totalInvestment += currentSIP;
+                }
+                
+                maturityValue += yearlyMaturity;
+                
+                yearlyData.push({
+                    year: year,
+                    sipAmount: currentSIP,
+                    yearlyInvestment: yearlyInvestment,
+                    cumulativeInvestment: totalInvestment,
+                    cumulativeValue: maturityValue
+                });
+                
+                // Step up for next year
+                if (year < tenure) {
+                    currentSIP = Math.round(currentSIP * (1 + stepUpPercent / 100));
+                }
+            }
+            
+            const totalReturns = maturityValue - totalInvestment;
+            const finalSIPAmount = currentSIP;
+            
+            // Update display
+            document.getElementById('totalInvestment').textContent = '₹' + Math.round(totalInvestment).toLocaleString('en-IN');
+            document.getElementById('totalReturns').textContent = '₹' + Math.round(totalReturns).toLocaleString('en-IN');
+            document.getElementById('maturityValue').textContent = '₹' + Math.round(maturityValue).toLocaleString('en-IN');
+            document.getElementById('finalSIP').textContent = '₹' + finalSIPAmount.toLocaleString('en-IN');
+            
+            // Update chart
+            updateChart();
+            
+            // Update yearly breakdown
+            updateYearlyBreakdown();
+        }
+        
+        function updateChart() {
+            const ctx = document.getElementById('stepUpChart').getContext('2d');
+            
+            const labels = yearlyData.map(d => `Year ${d.year}`);
+            const investments = yearlyData.map(d => Math.round(d.cumulativeInvestment));
+            const values = yearlyData.map(d => Math.round(d.cumulativeValue));
+            const sipAmounts = yearlyData.map(d => d.sipAmount);
+            
+            // Destroy existing chart if it exists
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Cumulative Investment (₹)',
+                        data: investments,
+                        borderColor: '#ff9800',
+                        backgroundColor: 'rgba(255, 152, 0, 0.1)',
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4,
+                        yAxisID: 'y'
+                    }, {
+                        label: 'Maturity Value (₹)',
+                        data: values,
+                        borderColor: '#4caf50',
+                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        yAxisID: 'y'
+                    }, {
+                        label: 'Monthly SIP Amount (₹)',
+                        data: sipAmounts,
+                        borderColor: '#ffd600',
+                        backgroundColor: 'rgba(255, 214, 0, 0.1)',
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.4,
+                        yAxisID: 'y1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#333'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#333'
+                            }
+                        },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            ticks: {
+                                color: '#333',
+                                callback: function(value) {
+                                    return '₹' + (value / 100000).toFixed(1) + 'L';
+                                }
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            ticks: {
+                                color: '#333',
+                                callback: function(value) {
+                                    return '₹' + value.toLocaleString('en-IN');
+                                }
+                            },
+                            grid: {
+                                drawOnChartArea: false,
+                            },
+                        }
+                    }
+                }
+            });
+        }
+        
+        function updateYearlyBreakdown() {
+            const container = document.getElementById('yearlyBreakdown');
+            
+            let table = `
+                <h4 style="margin-top: 30px;">Year-wise Breakdown</h4>
+                <table class="year-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>SIP Amount</th>
+                            <th>Annual Investment</th>
+                            <th>Cumulative Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            yearlyData.forEach(row => {
+                table += `
+                    <tr>
+                        <td>${row.year}</td>
+                        <td>₹${row.sipAmount.toLocaleString('en-IN')}</td>
+                        <td>₹${row.yearlyInvestment.toLocaleString('en-IN')}</td>
+                        <td>₹${Math.round(row.cumulativeValue).toLocaleString('en-IN')}</td>
+                    </tr>
+                `;
+            });
+            
+            table += `
+                    </tbody>
+                </table>
+            `;
+            
+            container.innerHTML = table;
+        }
+        
+        function showComparison() {
+            const initialSIP = parseFloat(document.getElementById('initialSIP').value) || 5000;
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value) || 12;
+            const tenure = parseFloat(document.getElementById('tenure').value) || 15;
+            
+            // Calculate regular SIP
+            const monthlyReturn = annualReturn / 12 / 100;
+            const totalMonths = tenure * 12;
+            const regularSIPValue = initialSIP * (((Math.pow(1 + monthlyReturn, totalMonths) - 1) / monthlyReturn) * (1 + monthlyReturn));
+            const regularSIPInvestment = initialSIP * totalMonths;
+            
+            // Get step-up values
+            const stepUpValue = parseFloat(document.getElementById('maturityValue').textContent.replace(/[₹,]/g, ''));
+            const stepUpInvestment = parseFloat(document.getElementById('totalInvestment').textContent.replace(/[₹,]/g, ''));
+            
+            const extraValue = stepUpValue - regularSIPValue;
+            const extraInvestment = stepUpInvestment - regularSIPInvestment;
+            
+            const comparisonHTML = `
+                <div class="comparison-panel">
+                    <h4>Step-Up vs Regular SIP Comparison</h4>
+                    <div class="result-item">
+                        <span>Regular SIP Value:</span>
+                        <span>₹${Math.round(regularSIPValue).toLocaleString('en-IN')}</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Step-Up SIP Value:</span>
+                        <span>₹${Math.round(stepUpValue).toLocaleString('en-IN')}</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Extra Investment:</span>
+                        <span>₹${Math.round(extraInvestment).toLocaleString('en-IN')}</span>
+                    </div>
+                    <div class="result-item" style="border-bottom: none; font-weight: bold;">
+                        <span>Extra Returns:</span>
+                        <span>₹${Math.round(extraValue).toLocaleString('en-IN')}</span>
+                    </div>
+                    <div style="margin-top: 15px; text-align: center;">
+                        <strong>Step-Up SIP generates ${Math.round((extraValue/regularSIPValue)*100)}% more wealth!</strong>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('comparisonResults').innerHTML = comparisonHTML;
+            document.getElementById('comparisonResults').style.display = 'block';
+        }
+        
+        function printResults() {
+            window.print();
+        }
+        
+        // Calculate on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateStepUpSIP();
+            
+            // Auto-calculate on input change
+            ['initialSIP', 'stepUpPercent', 'annualReturn', 'tenure'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateStepUpSIP);
+            });
+        });
+    </script>
+</body>
+</html>

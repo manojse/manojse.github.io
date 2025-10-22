@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7KZY0CS6R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} 
+        gtag('js', new Date());
+
+        gtag('config', 'G-K7KZY0CS6R');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate PPF maturity amount, interest, and tax benefits. Free Public Provident Fund calculator with 15-year projections and charts.">
+    <title>PPF Calculator - Public Provident Fund Calculator | Skrollmates</title>
+    <link rel="canonical" href="https://skrollmates.com/ppf-calculator.html">
+    <meta property="og:title" content="PPF Calculator - Public Provident Fund Calculator">
+    <meta property="og:description" content="Calculate PPF maturity amount, interest, and tax benefits with detailed projections.">
+    <meta property="og:url" content="https://skrollmates.com/ppf-calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://skrollmates.com/skrollmates-512.webp">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:site_name" content="Skrollmates">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:image:alt" content="Skrollmates logo">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@skrollmates">
+    <meta name="robots" content="index, follow">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3029851571351657"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "PPF Calculator",
+        "description": "Calculate Public Provident Fund maturity amount and tax benefits",
+        "url": "https://skrollmates.com/ppf-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+    <style>
+        .calculator-container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .input-field, .select-field {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-field:focus, .select-field:focus {
+            outline: none;
+            border-color: #009688;
+        }
+        
+        .results-panel {
+            background: linear-gradient(135deg, #009688 0%, #00bcd4 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .info-box {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .year-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .year-table th, .year-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .year-table th {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            height: 300px;
+        }
+        
+        .print-btn, .calc-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .calc-btn {
+            background: #009688;
+            color: white;
+        }
+        
+        .print-btn {
+            background: #666;
+            color: white;
+        }
+        
+        .calc-btn:hover { background: #00796b; }
+        .print-btn:hover { background: #555; }
+        
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .calculator-container {
+                margin-top: 90px;
+                padding: 15px;
+            }
+        }
+        
+        @media print {
+            .navbar, .print-btn, .calc-btn { display: none; }
+            .calculator-container { margin: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <img src="skrollmates.webp" alt="Skrollmates logo">
+            <span class="brand-name">Skrollmates</span>
+        </div>
+        <span class="menu-toggle" aria-label="Toggle menu" id="menuToggle" tabindex="1">&#9776;</span>
+        <ul id="mainMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="whatsapp-extension.html">WhatsApp Extension</a></li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">EMI Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="emi-calculator.html">General EMI Calculator</a></li>
+                    <li><a href="home-loan.html">Home Loan EMI</a></li>
+                    <li><a href="personal-loan.html">Personal Loan EMI</a></li>
+                    <li><a href="car-loan.html">Car Loan EMI</a></li>
+                    <li><a href="two-wheeler-loan.html">Two Wheeler Loan EMI</a></li>
+                    <li><a href="lap-loan.html">LAP Loan EMI</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Investment Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="sip-calculator.html">SIP Calculator</a></li>
+                    <li><a href="lumpsum-calculator.html">Lumpsum Calculator</a></li>
+                    <li><a href="step-up-sip-calculator.html">Step-Up SIP Calculator</a></li>
+                    <li><a href="swp-calculator.html">SWP Calculator</a></li>
+                    <li><a href="mf-calculator.html">Mutual Fund Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Savings Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="fd-calculator.html">FD Calculator</a></li>
+                    <li><a href="rd-calculator.html">RD Calculator</a></li>
+                    <li class="active"><a href="ppf-calculator.html">PPF Calculator</a></li>
+                    <li><a href="epf-calculator.html">EPF Calculator</a></li>
+                    <li><a href="ssy-calculator.html">SSY Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Tax & Trading <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                    <li><a href="hra-calculator.html">HRA Calculator</a></li>
+                    <li><a href="salary-calculator.html">Salary Calculator</a></li>
+                    <li><a href="tds-calculator.html">TDS Calculator</a></li>
+                    <li><a href="gst-calculator.html">GST Calculator</a></li>
+                    <li><a href="brokerage-calculator.html">Brokerage Calculator</a></li>
+                    <li><a href="margin-calculator.html">Margin Calculator</a></li>
+                    <li><a href="stock-average-calculator.html">Stock Average Calculator</a></li>
+                </ul>
+            </li>
+            <li><a href="repo-rates.html">Repo Rates</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+    </nav>
+
+    <main class="calculator-container">
+        <h1>PPF Calculator</h1>
+        <p>Calculate your Public Provident Fund maturity amount with current interest rates and tax benefits.</p>
+        
+        <div class="calc-grid">
+            <div class="inputs-section">
+                <div class="input-group">
+                    <label class="input-label" for="yearlyInvestment">Yearly Investment (₹)</label>
+                    <input type="number" id="yearlyInvestment" class="input-field" value="150000" min="500" max="150000" step="500">
+                    <small style="color: #666;">Maximum: ₹1,50,000 per year</small>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="currentAge">Current Age</label>
+                    <input type="number" id="currentAge" class="input-field" value="30" min="18" max="65">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="tenure">Investment Period (Years)</label>
+                    <select id="tenure" class="select-field">
+                        <option value="15">15 Years (Minimum)</option>
+                        <option value="20">20 Years</option>
+                        <option value="25">25 Years</option>
+                        <option value="30">30 Years</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="interestRate">Current PPF Rate (%)</label>
+                    <input type="number" id="interestRate" class="input-field" value="7.1" min="6" max="10" step="0.1">
+                    <small style="color: #666;">Current rate: 7.1% (2024-25)</small>
+                </div>
+                
+                <button onclick="calculatePPF()" class="calc-btn">Calculate PPF</button>
+                <button onclick="printResults()" class="print-btn">Print Results</button>
+                
+                <div class="info-box">
+                    <strong>PPF Benefits:</strong><br>
+                    • Tax deduction under 80C<br>
+                    • Tax-free interest & maturity<br>
+                    • Government guaranteed returns<br>
+                    • 15-year lock-in period
+                </div>
+            </div>
+            
+            <div class="results-section">
+                <div class="results-panel">
+                    <h3 style="margin-top: 0; margin-bottom: 25px;">PPF Summary</h3>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Total Investment:</span>
+                        <span class="result-value" id="totalInvestment">₹22,50,000</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Total Interest:</span>
+                        <span class="result-value" id="totalInterest">₹17,85,678</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Maturity Amount:</span>
+                        <span class="result-value" id="maturityAmount">₹40,35,678</span>
+                    </div>
+                    
+                    <div class="result-item" style="border-bottom: none;">
+                        <span class="result-label">Tax Saved (30%):</span>
+                        <span class="result-value" id="taxSaved">₹6,75,000</span>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="ppfChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+                
+                <div id="yearlyBreakdown" style="margin-top: 20px;"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Skrollmates.com</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="menu.js" defer></script>
+    <script>
+        let chartInstance = null;
+        
+        function calculatePPF() {
+            const yearlyInvestment = Math.min(parseFloat(document.getElementById('yearlyInvestment').value) || 150000, 150000);
+            const currentAge = parseFloat(document.getElementById('currentAge').value) || 30;
+            const tenure = parseFloat(document.getElementById('tenure').value) || 15;
+            const interestRate = parseFloat(document.getElementById('interestRate').value) || 7.1;
+            
+            let balance = 0;
+            const yearlyData = [];
+            
+            // Calculate year by year
+            for (let year = 1; year <= tenure; year++) {
+                balance += yearlyInvestment;
+                const interest = balance * (interestRate / 100);
+                balance += interest;
+                
+                yearlyData.push({
+                    year: year,
+                    investment: yearlyInvestment,
+                    interest: interest,
+                    balance: balance
+                });
+            }
+            
+            const totalInvestment = yearlyInvestment * tenure;
+            const totalInterest = balance - totalInvestment;
+            const taxSaved = totalInvestment * 0.3; // Assuming 30% tax bracket
+            
+            // Update display
+            document.getElementById('totalInvestment').textContent = '₹' + totalInvestment.toLocaleString('en-IN');
+            document.getElementById('totalInterest').textContent = '₹' + Math.round(totalInterest).toLocaleString('en-IN');
+            document.getElementById('maturityAmount').textContent = '₹' + Math.round(balance).toLocaleString('en-IN');
+            document.getElementById('taxSaved').textContent = '₹' + taxSaved.toLocaleString('en-IN');
+            
+            // Update chart
+            updateChart(yearlyData);
+            
+            // Update yearly breakdown
+            updateYearlyBreakdown(yearlyData);
+        }
+        
+        function updateChart(data) {
+            const ctx = document.getElementById('ppfChart').getContext('2d');
+            
+            const labels = data.map(d => `Year ${d.year}`);
+            const balances = data.map(d => Math.round(d.balance));
+            
+            // Destroy existing chart if it exists
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'PPF Balance (₹)',
+                        data: balances,
+                        borderColor: '#ffd600',
+                        backgroundColor: 'rgba(255, 214, 0, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#333'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#333',
+                                callback: function(value) {
+                                    return '₹' + (value / 100000).toFixed(1) + 'L';
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#333'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function updateYearlyBreakdown(data) {
+            const container = document.getElementById('yearlyBreakdown');
+            
+            let table = `
+                <h4>Year-wise Breakdown</h4>
+                <table class="year-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Investment</th>
+                            <th>Interest</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            data.forEach(row => {
+                table += `
+                    <tr>
+                        <td>${row.year}</td>
+                        <td>₹${row.investment.toLocaleString('en-IN')}</td>
+                        <td>₹${Math.round(row.interest).toLocaleString('en-IN')}</td>
+                        <td>₹${Math.round(row.balance).toLocaleString('en-IN')}</td>
+                    </tr>
+                `;
+            });
+            
+            table += `
+                    </tbody>
+                </table>
+            `;
+            
+            container.innerHTML = table;
+        }
+        
+        function printResults() {
+            window.print();
+        }
+        
+        // Calculate on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            calculatePPF();
+            
+            // Auto-calculate on input change
+            ['yearlyInvestment', 'currentAge', 'tenure', 'interestRate'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculatePPF);
+                document.getElementById(id).addEventListener('change', calculatePPF);
+            });
+        });
+    </script>
+</body>
+</html>

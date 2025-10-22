@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate TDS deduction for salary, interest, rent, and professional payments. TDS calculator with rates and exemption limits.">
+    <title>TDS Calculator - Tax Deducted at Source Calculator | Skrollmates</title>
+    <link rel="canonical" href="https://skrollmates.com/tds-calculator.html">
+    <meta property="og:title" content="TDS Calculator - Tax Deducted at Source Calculator">
+    <meta property="og:description" content="Calculate TDS deduction for different income types with rates and exemption limits.">
+    <meta property="og:url" content="https://skrollmates.com/tds-calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://skrollmates.com/skrollmates-512.webp">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:site_name" content="Skrollmates">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:image:alt" content="Skrollmates logo">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@skrollmates">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "TDS Calculator",
+        "description": "Calculate Tax Deducted at Source for different income types",
+        "url": "https://skrollmates.com/tds-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+    <style>
+        .calculator-container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .input-field, .select-field {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-field:focus, .select-field:focus {
+            outline: none;
+            border-color: #3f51b5;
+        }
+        
+        .results-panel {
+            background: linear-gradient(135deg, #3f51b5 0%, #5c6bc0 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            height: 300px;
+        }
+        
+        .tds-rates-table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .tds-rates-table h4 {
+            background: #3f51b5;
+            color: white;
+            margin: 0;
+            padding: 15px;
+        }
+        
+        .rates-body {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .rates-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .rates-table th, .rates-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+        
+        .rates-table th {
+            background: #f5f5f5;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        .rates-table tr:hover {
+            background: #e8eaf6;
+            cursor: pointer;
+        }
+        
+        .rate-badge {
+            background: #3f51b5;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .exemption-info {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .exemption-info h4 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+        
+        .certificate-section {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .certificate-section h4 {
+            margin-top: 0;
+            color: #e65100;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .breakdown-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .breakdown-card h4 {
+            margin-top: 0;
+            color: #3f51b5;
+            border-bottom: 2px solid #e8eaf6;
+            padding-bottom: 10px;
+        }
+        
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .breakdown-item:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            background: #e8eaf6;
+            padding: 10px;
+            margin: 10px -10px -10px -10px;
+            border-radius: 4px;
+        }
+        
+        .print-btn, .calc-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .calc-btn {
+            background: #3f51b5;
+            color: white;
+        }
+        
+        .print-btn {
+            background: #666;
+            color: white;
+        }
+        
+        .calc-btn:hover { background: #303f9f; }
+        .print-btn:hover { background: #555; }
+        
+        .threshold-info {
+            background: #f3e5f5;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #4a148c;
+        }
+        
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .calculator-container {
+                margin-top: 90px;
+                padding: 15px;
+            }
+        }
+        
+        @media print {
+            .navbar, .print-btn, .calc-btn { display: none; }
+            .calculator-container { margin: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <img src="skrollmates.webp" alt="Skrollmates logo">
+            <span class="brand-name">Skrollmates</span>
+        </div>
+        <span class="menu-toggle" aria-label="Toggle menu" id="menuToggle" tabindex="1">&#9776;</span>
+        <ul id="mainMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="whatsapp-extension.html">WhatsApp Extension</a></li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">EMI Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="emi-calculator.html">General EMI Calculator</a></li>
+                    <li><a href="home-loan.html">Home Loan EMI</a></li>
+                    <li><a href="personal-loan.html">Personal Loan EMI</a></li>
+                    <li><a href="car-loan.html">Car Loan EMI</a></li>
+                    <li><a href="two-wheeler-loan.html">Two Wheeler Loan EMI</a></li>
+                    <li><a href="lap-loan.html">LAP Loan EMI</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Investment Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="sip-calculator.html">SIP Calculator</a></li>
+                    <li><a href="lumpsum-calculator.html">Lumpsum Calculator</a></li>
+                    <li><a href="step-up-sip-calculator.html">Step-Up SIP Calculator</a></li>
+                    <li><a href="swp-calculator.html">SWP Calculator</a></li>
+                    <li><a href="mf-calculator.html">Mutual Fund Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Savings Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="fd-calculator.html">FD Calculator</a></li>
+                    <li><a href="rd-calculator.html">RD Calculator</a></li>
+                    <li><a href="ppf-calculator.html">PPF Calculator</a></li>
+                    <li><a href="epf-calculator.html">EPF Calculator</a></li>
+                    <li><a href="ssy-calculator.html">SSY Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Tax & Trading <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                    <li><a href="hra-calculator.html">HRA Calculator</a></li>
+                    <li><a href="salary-calculator.html">Salary Calculator</a></li>
+                    <li class="active"><a href="tds-calculator.html">TDS Calculator</a></li>
+                    <li><a href="gst-calculator.html">GST Calculator</a></li>
+                    <li><a href="brokerage-calculator.html">Brokerage Calculator</a></li>
+                    <li><a href="margin-calculator.html">Margin Calculator</a></li>
+                    <li><a href="stock-average-calculator.html">Stock Average Calculator</a></li>
+                </ul>
+            </li>
+            <li><a href="repo-rates.html">Repo Rates</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+    </nav>
+
+    <main class="calculator-container">
+        <h1>TDS Calculator</h1>
+        <p>Calculate Tax Deducted at Source for different types of income including salary, interest, rent, and professional payments.</p>
+        
+        <div class="calc-grid">
+            <div class="inputs-section">
+                <div class="input-group">
+                    <label class="input-label" for="incomeType">Income Type</label>
+                    <select id="incomeType" class="select-field">
+                        <option value="salary">Salary (Section 192)</option>
+                        <option value="interest" selected>Interest on Securities (Section 193)</option>
+                        <option value="interest-others">Interest - Others (Section 194A)</option>
+                        <option value="rent">Rent (Section 194I)</option>
+                        <option value="professional">Professional/Technical Services (Section 194J)</option>
+                        <option value="commission">Commission/Brokerage (Section 194H)</option>
+                        <option value="contractor">Contractor (Section 194C)</option>
+                        <option value="fd">Fixed Deposit Interest (Section 194A)</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="amount">Amount (₹)</label>
+                    <input type="number" id="amount" class="input-field" value="100000" min="0" step="1000">
+                    <div class="threshold-info" id="thresholdInfo">
+                        TDS applicable if amount > ₹40,000 per year
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="payeeType">Payee Type</label>
+                    <select id="payeeType" class="select-field">
+                        <option value="individual">Individual/HUF</option>
+                        <option value="company">Company</option>
+                        <option value="firm">Partnership Firm</option>
+                        <option value="other">Other Entity</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="panStatus">PAN Status</label>
+                    <select id="panStatus" class="select-field">
+                        <option value="available" selected>PAN Available</option>
+                        <option value="not-available">PAN Not Available</option>
+                    </select>
+                </div>
+                
+                <div class="certificate-section">
+                    <h4>Lower/NIL TDS Certificate</h4>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="hasLowerTDS">
+                        <label for="hasLowerTDS">I have Lower/NIL TDS Certificate</label>
+                    </div>
+                    <div class="input-group" style="margin-bottom: 0;">
+                        <label class="input-label" for="certificateRate">Certificate Rate (%)</label>
+                        <input type="number" id="certificateRate" class="input-field" value="0" min="0" max="30" step="0.1" disabled>
+                    </div>
+                </div>
+                
+                <button onclick="calculateTDS()" class="calc-btn">Calculate TDS</button>
+                <button onclick="printResults()" class="print-btn">Print Results</button>
+                
+                <div class="exemption-info">
+                    <h4>Key Points</h4>
+                    <ul style="margin: 0; padding-left: 20px;">
+                        <li>TDS rates vary by income type and payee category</li>
+                        <li>Higher rates apply if PAN is not provided</li>
+                        <li>Thresholds determine when TDS is applicable</li>
+                        <li>Lower/NIL TDS certificates can reduce deduction</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="results-section">
+                <div class="results-panel">
+                    <h3 style="margin-top: 0; margin-bottom: 25px;">TDS Calculation</h3>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Gross Amount:</span>
+                        <span class="result-value" id="grossAmount">₹1,00,000</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">TDS Rate:</span>
+                        <span class="result-value" id="tdsRate">10.0%</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">TDS Amount:</span>
+                        <span class="result-value" id="tdsAmount">₹10,000</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Net Amount Receivable:</span>
+                        <span class="result-value" id="netAmount">₹90,000</span>
+                    </div>
+                    
+                    <div class="result-item" style="border-bottom: none;">
+                        <span class="result-label">TDS Applicable:</span>
+                        <span class="result-value" id="tdsApplicable">Yes</span>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="tdsChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+                
+                <div class="breakdown-card">
+                    <h4>TDS Breakdown</h4>
+                    <div class="breakdown-item">
+                        <span>Income Type:</span>
+                        <span id="incomeTypeDisplay">Interest on Securities</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Threshold Limit:</span>
+                        <span id="thresholdLimit">₹40,000</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Standard Rate:</span>
+                        <span id="standardRate">10.0%</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Applied Rate:</span>
+                        <span id="appliedRate">10.0%</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Net Payable:</span>
+                        <span id="netPayable">₹90,000</span>
+                    </div>
+                </div>
+                
+                <div class="tds-rates-table">
+                    <h4>TDS Rates Reference</h4>
+                    <div class="rates-body">
+                        <table class="rates-table">
+                            <thead>
+                                <tr>
+                                    <th>Income Type</th>
+                                    <th>Section</th>
+                                    <th>Rate</th>
+                                    <th>Threshold</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr onclick="setIncomeType('salary')">
+                                    <td>Salary</td>
+                                    <td>192</td>
+                                    <td><span class="rate-badge">As per slab</span></td>
+                                    <td>₹2.5L</td>
+                                </tr>
+                                <tr onclick="setIncomeType('interest')">
+                                    <td>Interest on Securities</td>
+                                    <td>193</td>
+                                    <td><span class="rate-badge">10%</span></td>
+                                    <td>₹40K</td>
+                                </tr>
+                                <tr onclick="setIncomeType('interest-others')">
+                                    <td>Interest - Others</td>
+                                    <td>194A</td>
+                                    <td><span class="rate-badge">10%</span></td>
+                                    <td>₹40K</td>
+                                </tr>
+                                <tr onclick="setIncomeType('rent')">
+                                    <td>Rent</td>
+                                    <td>194I</td>
+                                    <td><span class="rate-badge">10%</span></td>
+                                    <td>₹2.4L</td>
+                                </tr>
+                                <tr onclick="setIncomeType('professional')">
+                                    <td>Professional Services</td>
+                                    <td>194J</td>
+                                    <td><span class="rate-badge">10%</span></td>
+                                    <td>₹30K</td>
+                                </tr>
+                                <tr onclick="setIncomeType('commission')">
+                                    <td>Commission</td>
+                                    <td>194H</td>
+                                    <td><span class="rate-badge">5%</span></td>
+                                    <td>₹15K</td>
+                                </tr>
+                                <tr onclick="setIncomeType('contractor')">
+                                    <td>Contractor Payment</td>
+                                    <td>194C</td>
+                                    <td><span class="rate-badge">1%/2%</span></td>
+                                    <td>₹30K</td>
+                                </tr>
+                                <tr onclick="setIncomeType('fd')">
+                                    <td>FD Interest</td>
+                                    <td>194A</td>
+                                    <td><span class="rate-badge">10%</span></td>
+                                    <td>₹40K</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Skrollmates.com</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="menu.js" defer></script>
+    <script>
+        let chartInstance = null;
+        
+        const tdsRates = {
+            'salary': { rate: 0, threshold: 250000, section: '192', name: 'Salary' },
+            'interest': { rate: 10, threshold: 40000, section: '193', name: 'Interest on Securities' },
+            'interest-others': { rate: 10, threshold: 40000, section: '194A', name: 'Interest - Others' },
+            'rent': { rate: 10, threshold: 240000, section: '194I', name: 'Rent' },
+            'professional': { rate: 10, threshold: 30000, section: '194J', name: 'Professional/Technical Services' },
+            'commission': { rate: 5, threshold: 15000, section: '194H', name: 'Commission/Brokerage' },
+            'contractor': { rate: 1, threshold: 30000, section: '194C', name: 'Contractor Payment' },
+            'fd': { rate: 10, threshold: 40000, section: '194A', name: 'Fixed Deposit Interest' }
+        };
+        
+        function calculateTDS() {
+            const incomeType = document.getElementById('incomeType').value;
+            const amount = parseFloat(document.getElementById('amount').value) || 0;
+            const payeeType = document.getElementById('payeeType').value;
+            const panStatus = document.getElementById('panStatus').value;
+            const hasLowerTDS = document.getElementById('hasLowerTDS').checked;
+            const certificateRate = parseFloat(document.getElementById('certificateRate').value) || 0;
+            
+            const rateInfo = tdsRates[incomeType];
+            let tdsRate = rateInfo.rate;
+            let threshold = rateInfo.threshold;
+            
+            // Adjust rates based on payee type and conditions
+            if (incomeType === 'contractor' && payeeType === 'company') {
+                tdsRate = 2; // 2% for companies
+            }
+            
+            // Higher rate if PAN not available (20% or existing rate + 20%, whichever is higher)
+            if (panStatus === 'not-available') {
+                tdsRate = Math.max(20, tdsRate + 20);
+            }
+            
+            // Apply certificate rate if available
+            if (hasLowerTDS) {
+                tdsRate = certificateRate;
+            }
+            
+            // Check if TDS is applicable
+            const isTDSApplicable = amount >= threshold;
+            const tdsAmount = isTDSApplicable ? (amount * tdsRate / 100) : 0;
+            const netAmount = amount - tdsAmount;
+            
+            // Update display
+            document.getElementById('grossAmount').textContent = '₹' + amount.toLocaleString('en-IN');
+            document.getElementById('tdsRate').textContent = tdsRate.toFixed(1) + '%';
+            document.getElementById('tdsAmount').textContent = '₹' + Math.round(tdsAmount).toLocaleString('en-IN');
+            document.getElementById('netAmount').textContent = '₹' + Math.round(netAmount).toLocaleString('en-IN');
+            document.getElementById('tdsApplicable').textContent = isTDSApplicable ? 'Yes' : 'No';
+            
+            // Update breakdown
+            document.getElementById('incomeTypeDisplay').textContent = rateInfo.name;
+            document.getElementById('thresholdLimit').textContent = '₹' + threshold.toLocaleString('en-IN');
+            document.getElementById('standardRate').textContent = rateInfo.rate.toFixed(1) + '%';
+            document.getElementById('appliedRate').textContent = tdsRate.toFixed(1) + '%';
+            document.getElementById('netPayable').textContent = '₹' + Math.round(netAmount).toLocaleString('en-IN');
+            
+            // Update threshold info
+            updateThresholdInfo(incomeType, threshold);
+            
+            // Update chart
+            updateChart(netAmount, tdsAmount);
+        }
+        
+        function updateThresholdInfo(incomeType, threshold) {
+            const thresholdInfo = document.getElementById('thresholdInfo');
+            const rateInfo = tdsRates[incomeType];
+            
+            if (incomeType === 'salary') {
+                thresholdInfo.textContent = 'TDS as per income tax slabs';
+            } else {
+                thresholdInfo.textContent = `TDS applicable if amount > ₹${threshold.toLocaleString('en-IN')} per year`;
+            }
+        }
+        
+        function updateChart(netAmount, tdsAmount) {
+            const ctx = document.getElementById('tdsChart').getContext('2d');
+            
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            const data = [];
+            const labels = [];
+            const colors = [];
+            
+            if (netAmount > 0) {
+                labels.push('Net Amount');
+                data.push(Math.round(netAmount));
+                colors.push('#4caf50');
+            }
+            
+            if (tdsAmount > 0) {
+                labels.push('TDS Deducted');
+                data.push(Math.round(tdsAmount));
+                colors.push('#f44336');
+            }
+            
+            if (data.length === 0) {
+                data.push(1);
+                labels.push('No TDS');
+                colors.push('#e0e0e0');
+            }
+            
+            chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: colors,
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#333',
+                                padding: 15,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    if (label === 'No TDS') return label;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${label}: ₹${value.toLocaleString('en-IN')} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function setIncomeType(type) {
+            document.getElementById('incomeType').value = type;
+            calculateTDS();
+        }
+        
+        function printResults() {
+            window.print();
+        }
+        
+        // Handle certificate checkbox
+        document.getElementById('hasLowerTDS').addEventListener('change', function() {
+            const certificateRate = document.getElementById('certificateRate');
+            certificateRate.disabled = !this.checked;
+            if (!this.checked) {
+                certificateRate.value = 0;
+            }
+            calculateTDS();
+        });
+        
+        // Calculate on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateTDS();
+            
+            // Auto-calculate on input change
+            ['incomeType', 'amount', 'payeeType', 'panStatus', 'certificateRate'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateTDS);
+                document.getElementById(id).addEventListener('change', calculateTDS);
+            });
+            
+            document.getElementById('hasLowerTDS').addEventListener('change', calculateTDS);
+        });
+    </script>
+</body>
+</html>

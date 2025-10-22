@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate trading margin requirements for equity, F&O, and commodity trading. Margin calculator with leverage and exposure limits.">
+    <title>Margin Calculator - Trading Margin & Leverage Calculator | Skrollmates</title>
+    <link rel="canonical" href="https://skrollmates.com/margin-calculator.html">
+    <meta property="og:title" content="Margin Calculator - Trading Margin & Leverage Calculator">
+    <meta property="og:description" content="Calculate trading margin requirements and leverage for different market segments.">
+    <meta property="og:url" content="https://skrollmates.com/margin-calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://skrollmates.com/skrollmates-512.webp">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:site_name" content="Skrollmates">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:image:alt" content="Skrollmates logo">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@skrollmates">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Margin Calculator",
+        "description": "Calculate trading margin requirements and leverage for stock trading",
+        "url": "https://skrollmates.com/margin-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+    <style>
+        .calculator-container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .input-field, .select-field {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-field:focus, .select-field:focus {
+            outline: none;
+            border-color: #607d8b;
+        }
+        
+        .segment-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .segment-option {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .segment-option.active {
+            background: #607d8b;
+            color: white;
+            border-color: #607d8b;
+        }
+        
+        .segment-option:hover {
+            border-color: #607d8b;
+        }
+        
+        .results-panel {
+            background: linear-gradient(135deg, #607d8b 0%, #78909c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            height: 300px;
+        }
+        
+        .margin-breakdown {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .margin-breakdown h4 {
+            margin-top: 0;
+            color: #607d8b;
+            border-bottom: 2px solid #eceff1;
+            padding-bottom: 10px;
+        }
+        
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            border-left: 4px solid #607d8b;
+        }
+        
+        .breakdown-item.total {
+            background: #e8f5e8;
+            border-left-color: #4caf50;
+            font-weight: 600;
+        }
+        
+        .leverage-info {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .leverage-info h4 {
+            margin-top: 0;
+            color: #e65100;
+        }
+        
+        .risk-warning {
+            background: #ffebee;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #f44336;
+        }
+        
+        .risk-warning h4 {
+            margin-top: 0;
+            color: #c62828;
+        }
+        
+        .margin-table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .margin-table h4 {
+            background: #607d8b;
+            color: white;
+            margin: 0;
+            padding: 15px;
+        }
+        
+        .table-body {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        
+        .rates-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .rates-table th, .rates-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+        
+        .rates-table th {
+            background: #f5f5f5;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        .rates-table tr:hover {
+            background: #eceff1;
+            cursor: pointer;
+        }
+        
+        .print-btn, .calc-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .calc-btn {
+            background: #607d8b;
+            color: white;
+        }
+        
+        .print-btn {
+            background: #666;
+            color: white;
+        }
+        
+        .calc-btn:hover { background: #546e7a; }
+        .print-btn:hover { background: #555; }
+        
+        .exposure-display {
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #1565c0;
+        }
+        
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .segment-selector {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-container {
+                margin-top: 90px;
+                padding: 15px;
+            }
+        }
+        
+        @media print {
+            .navbar, .print-btn, .calc-btn { display: none; }
+            .calculator-container { margin: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <img src="skrollmates.webp" alt="Skrollmates logo">
+            <span class="brand-name">Skrollmates</span>
+        </div>
+        <span class="menu-toggle" aria-label="Toggle menu" id="menuToggle" tabindex="1">&#9776;</span>
+        <ul id="mainMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="whatsapp-extension.html">WhatsApp Extension</a></li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">EMI Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="emi-calculator.html">General EMI Calculator</a></li>
+                    <li><a href="home-loan.html">Home Loan EMI</a></li>
+                    <li><a href="personal-loan.html">Personal Loan EMI</a></li>
+                    <li><a href="car-loan.html">Car Loan EMI</a></li>
+                    <li><a href="two-wheeler-loan.html">Two Wheeler Loan EMI</a></li>
+                    <li><a href="lap-loan.html">LAP Loan EMI</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Investment Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="sip-calculator.html">SIP Calculator</a></li>
+                    <li><a href="lumpsum-calculator.html">Lumpsum Calculator</a></li>
+                    <li><a href="step-up-sip-calculator.html">Step-Up SIP Calculator</a></li>
+                    <li><a href="swp-calculator.html">SWP Calculator</a></li>
+                    <li><a href="mf-calculator.html">Mutual Fund Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Savings Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="fd-calculator.html">FD Calculator</a></li>
+                    <li><a href="rd-calculator.html">RD Calculator</a></li>
+                    <li><a href="ppf-calculator.html">PPF Calculator</a></li>
+                    <li><a href="epf-calculator.html">EPF Calculator</a></li>
+                    <li><a href="ssy-calculator.html">SSY Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Tax & Trading <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                    <li><a href="hra-calculator.html">HRA Calculator</a></li>
+                    <li><a href="salary-calculator.html">Salary Calculator</a></li>
+                    <li><a href="tds-calculator.html">TDS Calculator</a></li>
+                    <li><a href="gst-calculator.html">GST Calculator</a></li>
+                    <li><a href="brokerage-calculator.html">Brokerage Calculator</a></li>
+                    <li class="active"><a href="margin-calculator.html">Margin Calculator</a></li>
+                    <li><a href="stock-average-calculator.html">Stock Average Calculator</a></li>
+                </ul>
+            </li>
+            <li><a href="repo-rates.html">Repo Rates</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+    </nav>
+
+    <main class="calculator-container">
+        <h1>Margin Calculator</h1>
+        <p>Calculate trading margin requirements and leverage for equity, F&O, and commodity trading with exposure limits.</p>
+        
+        <div class="calc-grid">
+            <div class="inputs-section">
+                <div class="input-group">
+                    <label class="input-label">Trading Segment</label>
+                    <div class="segment-selector">
+                        <div class="segment-option active" onclick="setSegment('equity')">Equity</div>
+                        <div class="segment-option" onclick="setSegment('fno')">F&O</div>
+                        <div class="segment-option" onclick="setSegment('commodity')">Commodity</div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="investmentAmount">Investment Amount (₹)</label>
+                    <input type="text" id="investmentAmount" class="input-field" value="1,00,000" placeholder="Enter amount">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="stockPrice">Stock/Contract Price (₹)</label>
+                    <input type="text" id="stockPrice" class="input-field" value="1,500" placeholder="Enter price">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="quantity">Quantity</label>
+                    <input type="number" id="quantity" class="input-field" value="100" min="1" step="1">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="marginPercentage">Margin Requirement (%)</label>
+                    <input type="number" id="marginPercentage" class="input-field" value="20" min="1" max="100" step="0.5">
+                    <div class="exposure-display" id="exposureDisplay">
+                        Leverage: 5x | Max Exposure: ₹5,00,000
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="brokerType">Broker Type</label>
+                    <select id="brokerType" class="select-field">
+                        <option value="discount">Discount Broker</option>
+                        <option value="full-service" selected>Full Service Broker</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="positionType">Position Type</label>
+                    <select id="positionType" class="select-field">
+                        <option value="delivery" selected>Delivery</option>
+                        <option value="intraday">Intraday</option>
+                        <option value="btst">BTST</option>
+                    </select>
+                </div>
+                
+                <button onclick="calculateMargin()" class="calc-btn">Calculate Margin</button>
+                <button onclick="printResults()" class="print-btn">Print Results</button>
+                
+                <div class="leverage-info">
+                    <h4>Leverage Information</h4>
+                    <p><strong>Equity Delivery:</strong> 1:1 (No leverage)</p>
+                    <p><strong>Equity Intraday:</strong> Up to 5x leverage</p>
+                    <p><strong>F&O Trading:</strong> Up to 10x leverage</p>
+                    <p><strong>Commodity:</strong> Up to 20x leverage</p>
+                </div>
+                
+                <div class="risk-warning">
+                    <h4>⚠️ Risk Warning</h4>
+                    <p>Leverage amplifies both profits and losses. Trade with caution and proper risk management.</p>
+                </div>
+            </div>
+            
+            <div class="results-section">
+                <div class="results-panel">
+                    <h3 style="margin-top: 0; margin-bottom: 25px;">Margin Summary</h3>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Total Investment Value:</span>
+                        <span class="result-value" id="totalValue">₹1,50,000</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Required Margin:</span>
+                        <span class="result-value" id="requiredMargin">₹30,000</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Available Leverage:</span>
+                        <span class="result-value" id="availableLeverage">5x</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Maximum Exposure:</span>
+                        <span class="result-value" id="maxExposure">₹5,00,000</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Brokerage (Est.):</span>
+                        <span class="result-value" id="brokerageAmount">₹150</span>
+                    </div>
+                    
+                    <div class="result-item" style="border-bottom: none;">
+                        <span class="result-label">Net Required Amount:</span>
+                        <span class="result-value" id="netRequired">₹30,150</span>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="marginChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+                
+                <div class="margin-breakdown">
+                    <h4>Margin Breakdown</h4>
+                    <div class="breakdown-item">
+                        <span>Initial Margin (SPAN):</span>
+                        <span id="spanMargin">₹25,000</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Exposure Margin:</span>
+                        <span id="exposureMargin">₹4,500</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Additional Charges:</span>
+                        <span id="additionalCharges">₹500</span>
+                    </div>
+                    <div class="breakdown-item total">
+                        <span>Total Margin Required:</span>
+                        <span id="totalMarginRequired">₹30,000</span>
+                    </div>
+                </div>
+                
+                <div class="margin-table">
+                    <h4>Typical Margin Requirements</h4>
+                    <div class="table-body">
+                        <table class="rates-table">
+                            <thead>
+                                <tr>
+                                    <th>Segment</th>
+                                    <th>Position</th>
+                                    <th>Margin</th>
+                                    <th>Leverage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr onclick="setMarginValues('equity', 'delivery', 100)">
+                                    <td>Equity</td>
+                                    <td>Delivery</td>
+                                    <td>100%</td>
+                                    <td>1x</td>
+                                </tr>
+                                <tr onclick="setMarginValues('equity', 'intraday', 20)">
+                                    <td>Equity</td>
+                                    <td>Intraday</td>
+                                    <td>20%</td>
+                                    <td>5x</td>
+                                </tr>
+                                <tr onclick="setMarginValues('equity', 'btst', 40)">
+                                    <td>Equity</td>
+                                    <td>BTST</td>
+                                    <td>40%</td>
+                                    <td>2.5x</td>
+                                </tr>
+                                <tr onclick="setMarginValues('fno', 'futures', 15)">
+                                    <td>F&O</td>
+                                    <td>Futures</td>
+                                    <td>15%</td>
+                                    <td>6.7x</td>
+                                </tr>
+                                <tr onclick="setMarginValues('fno', 'options', 100)">
+                                    <td>F&O</td>
+                                    <td>Options Buy</td>
+                                    <td>100%</td>
+                                    <td>1x</td>
+                                </tr>
+                                <tr onclick="setMarginValues('commodity', 'futures', 5)">
+                                    <td>Commodity</td>
+                                    <td>Futures</td>
+                                    <td>5%</td>
+                                    <td>20x</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Skrollmates.com</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="menu.js" defer></script>
+    <script>
+        let chartInstance = null;
+        let currentSegment = 'equity';
+        
+        // Indian rupee formatter
+        function formatIndianRupee(amount) {
+            return '₹' + Math.round(amount).toLocaleString('en-IN');
+        }
+        
+        // Format input fields with commas
+        function formatNumberInput(input) {
+            let value = input.value.replace(/[^\d]/g, '');
+            if (value) {
+                input.value = parseInt(value).toLocaleString('en-IN');
+            }
+        }
+        
+        // Parse Indian formatted number
+        function parseIndianNumber(str) {
+            return parseFloat(str.replace(/[₹,]/g, '')) || 0;
+        }
+        
+        function setSegment(segment) {
+            currentSegment = segment;
+            
+            // Update button states
+            document.querySelectorAll('.segment-option').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update default margin based on segment
+            const marginInput = document.getElementById('marginPercentage');
+            if (segment === 'equity') {
+                marginInput.value = 20;
+            } else if (segment === 'fno') {
+                marginInput.value = 15;
+            } else {
+                marginInput.value = 5;
+            }
+            
+            calculateMargin();
+        }
+        
+        function setMarginValues(segment, position, margin) {
+            document.getElementById('marginPercentage').value = margin;
+            calculateMargin();
+        }
+        
+        function calculateMargin() {
+            const investmentAmount = parseIndianNumber(document.getElementById('investmentAmount').value) || 100000;
+            const stockPrice = parseIndianNumber(document.getElementById('stockPrice').value) || 1500;
+            const quantity = parseInt(document.getElementById('quantity').value) || 100;
+            const marginPercentage = parseFloat(document.getElementById('marginPercentage').value) || 20;
+            const brokerType = document.getElementById('brokerType').value;
+            const positionType = document.getElementById('positionType').value;
+            
+            const totalValue = stockPrice * quantity;
+            const requiredMargin = totalValue * (marginPercentage / 100);
+            const leverage = 100 / marginPercentage;
+            const maxExposure = investmentAmount * leverage;
+            
+            // Calculate brokerage
+            let brokerageRate = 0.0025; // 0.25% for full service
+            if (brokerType === 'discount') {
+                brokerageRate = positionType === 'delivery' ? 0 : 0.0003; // Flat fee for discount brokers
+            }
+            
+            const brokerageAmount = totalValue * brokerageRate;
+            const netRequired = requiredMargin + brokerageAmount;
+            
+            // Margin breakdown
+            const spanMargin = requiredMargin * 0.8; // 80% SPAN margin
+            const exposureMargin = requiredMargin * 0.15; // 15% exposure margin
+            const additionalCharges = requiredMargin * 0.05; // 5% additional charges
+            
+            // Update display
+            document.getElementById('totalValue').textContent = formatIndianRupee(totalValue);
+            document.getElementById('requiredMargin').textContent = formatIndianRupee(requiredMargin);
+            document.getElementById('availableLeverage').textContent = leverage.toFixed(1) + 'x';
+            document.getElementById('maxExposure').textContent = formatIndianRupee(maxExposure);
+            document.getElementById('brokerageAmount').textContent = formatIndianRupee(brokerageAmount);
+            document.getElementById('netRequired').textContent = formatIndianRupee(netRequired);
+            
+            // Update breakdown
+            document.getElementById('spanMargin').textContent = formatIndianRupee(spanMargin);
+            document.getElementById('exposureMargin').textContent = formatIndianRupee(exposureMargin);
+            document.getElementById('additionalCharges').textContent = formatIndianRupee(additionalCharges);
+            document.getElementById('totalMarginRequired').textContent = formatIndianRupee(requiredMargin);
+            
+            // Update exposure display
+            document.getElementById('exposureDisplay').textContent = 
+                `Leverage: ${leverage.toFixed(1)}x | Max Exposure: ${formatIndianRupee(maxExposure)}`;
+            
+            // Update chart
+            updateChart(investmentAmount, requiredMargin, maxExposure - investmentAmount);
+        }
+        
+        function updateChart(investment, margin, leverageAmount) {
+            const ctx = document.getElementById('marginChart').getContext('2d');
+            
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Your Investment', 'Required Margin', 'Additional Exposure'],
+                    datasets: [{
+                        data: [Math.round(investment), Math.round(margin), Math.round(leverageAmount)],
+                        backgroundColor: ['#607d8b', '#4caf50', '#ff9800'],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#333',
+                                padding: 15,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    return `${label}: ${formatIndianRupee(value)}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function printResults() {
+            window.print();
+        }
+        
+        // Add event listeners for input formatting
+        document.addEventListener('DOMContentLoaded', function() {
+            // Format number inputs
+            ['investmentAmount', 'stockPrice'].forEach(id => {
+                const input = document.getElementById(id);
+                input.addEventListener('input', function() {
+                    formatNumberInput(this);
+                    calculateMargin();
+                });
+                input.addEventListener('blur', function() {
+                    formatNumberInput(this);
+                    calculateMargin();
+                });
+            });
+            
+            // Auto-calculate on other input changes
+            ['quantity', 'marginPercentage', 'brokerType', 'positionType'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateMargin);
+                document.getElementById(id).addEventListener('change', calculateMargin);
+            });
+            
+            calculateMargin();
+        });
+    </script>
+</body>
+</html>

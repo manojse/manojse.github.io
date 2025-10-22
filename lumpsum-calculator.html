@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7KZY0CS6R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} 
+        gtag('js', new Date());
+
+        gtag('config', 'G-K7KZY0CS6R');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate lumpsum investment returns with compound interest. Free lumpsum calculator with charts and detailed projections.">
+    <title>Lumpsum Calculator - Investment Growth Calculator | Skrollmates</title>
+    <link rel="canonical" href="https://skrollmates.com/lumpsum-calculator.html">
+    <meta property="og:title" content="Lumpsum Calculator - Investment Growth Calculator">
+    <meta property="og:description" content="Calculate lumpsum investment returns with compound interest. Free calculator with charts and projections.">
+    <meta property="og:url" content="https://skrollmates.com/lumpsum-calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://skrollmates.com/skrollmates-512.webp">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:site_name" content="Skrollmates">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:image:alt" content="Skrollmates logo">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@skrollmates">
+    <meta name="robots" content="index, follow">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3029851571351657"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Lumpsum Calculator",
+        "description": "Calculate lumpsum investment returns with compound interest",
+        "url": "https://skrollmates.com/lumpsum-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+    <style>
+        .calculator-container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #009688;
+        }
+        
+        .results-panel {
+            background: linear-gradient(135deg, #009688 0%, #00bcd4 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            height: 300px;
+        }
+        
+        .print-btn, .calc-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .calc-btn {
+            background: #009688;
+            color: white;
+        }
+        
+        .print-btn {
+            background: #666;
+            color: white;
+        }
+        
+        .calc-btn:hover { background: #00796b; }
+        .print-btn:hover { background: #555; }
+        
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .calculator-container {
+                margin-top: 90px;
+                padding: 15px;
+            }
+        }
+        
+        @media print {
+            .navbar, .print-btn, .calc-btn { display: none; }
+            .calculator-container { margin: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <img src="skrollmates.webp" alt="Skrollmates logo">
+            <span class="brand-name">Skrollmates</span>
+        </div>
+        <span class="menu-toggle" aria-label="Toggle menu" id="menuToggle" tabindex="1">&#9776;</span>
+        <ul id="mainMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="whatsapp-extension.html">WhatsApp Extension</a></li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">EMI Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="emi-calculator.html">General EMI Calculator</a></li>
+                    <li><a href="home-loan.html">Home Loan EMI</a></li>
+                    <li><a href="personal-loan.html">Personal Loan EMI</a></li>
+                    <li><a href="car-loan.html">Car Loan EMI</a></li>
+                    <li><a href="two-wheeler-loan.html">Two Wheeler Loan EMI</a></li>
+                    <li><a href="lap-loan.html">LAP Loan EMI</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Investment Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="sip-calculator.html">SIP Calculator</a></li>
+                    <li class="active"><a href="lumpsum-calculator.html">Lumpsum Calculator</a></li>
+                    <li><a href="step-up-sip-calculator.html">Step-Up SIP Calculator</a></li>
+                    <li><a href="swp-calculator.html">SWP Calculator</a></li>
+                    <li><a href="mf-calculator.html">Mutual Fund Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Savings Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="fd-calculator.html">FD Calculator</a></li>
+                    <li><a href="rd-calculator.html">RD Calculator</a></li>
+                    <li><a href="ppf-calculator.html">PPF Calculator</a></li>
+                    <li><a href="epf-calculator.html">EPF Calculator</a></li>
+                    <li><a href="ssy-calculator.html">SSY Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Tax & Trading <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                    <li><a href="hra-calculator.html">HRA Calculator</a></li>
+                    <li><a href="salary-calculator.html">Salary Calculator</a></li>
+                    <li><a href="tds-calculator.html">TDS Calculator</a></li>
+                    <li><a href="gst-calculator.html">GST Calculator</a></li>
+                    <li><a href="brokerage-calculator.html">Brokerage Calculator</a></li>
+                    <li><a href="margin-calculator.html">Margin Calculator</a></li>
+                    <li><a href="stock-average-calculator.html">Stock Average Calculator</a></li>
+                </ul>
+            </li>
+            <li><a href="repo-rates.html">Repo Rates</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+    </nav>
+
+    <main class="calculator-container">
+        <h1>Lumpsum Calculator</h1>
+        <p>Calculate the future value of your one-time investment with compound interest over time.</p>
+        
+        <div class="calc-grid">
+            <div class="inputs-section">
+                <div class="input-group">
+                    <label class="input-label" for="investment">Investment Amount (₹)</label>
+                    <input type="text" id="investment" class="input-field" value="1,00,000" min="1000" step="1000" placeholder="Enter investment amount">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="annualReturn">Expected Annual Return (%)</label>
+                    <input type="number" id="annualReturn" class="input-field" value="12" min="1" max="30" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="tenure">Investment Period (Years)</label>
+                    <input type="number" id="tenure" class="input-field" value="10" min="1" max="50" step="1">
+                </div>
+                
+                <button onclick="calculateLumpsum()" class="calc-btn">Calculate Investment</button>
+                <button onclick="printResults()" class="print-btn">Print Results</button>
+            </div>
+            
+            <div class="results-section">
+                <div class="results-panel">
+                    <h3 style="margin-top: 0; margin-bottom: 25px;">Investment Summary</h3>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Initial Investment:</span>
+                        <span class="result-value" id="initialInvestment">₹1,00,000</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Total Returns:</span>
+                        <span class="result-value" id="totalReturns">₹2,10,584</span>
+                    </div>
+                    
+                    <div class="result-item" style="border-bottom: none;">
+                        <span class="result-label">Maturity Value:</span>
+                        <span class="result-value" id="maturityValue">₹3,10,584</span>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="growthChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Skrollmates.com</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="menu.js" defer></script>
+    <script>
+        let chartInstance = null;
+        
+        function calculateLumpsum() {
+            const investment = parseIndianNumber(document.getElementById('investment').value) || 100000;
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value) || 12;
+            const tenure = parseFloat(document.getElementById('tenure').value) || 10;
+            
+            // Compound interest formula: A = P(1 + r)^t
+            const maturityAmount = investment * Math.pow(1 + (annualReturn / 100), tenure);
+            const totalReturns = maturityAmount - investment;
+            
+            // Update display
+            document.getElementById('initialInvestment').textContent = '₹' + investment.toLocaleString('en-IN');
+            document.getElementById('totalReturns').textContent = '₹' + Math.round(totalReturns).toLocaleString('en-IN');
+            document.getElementById('maturityValue').textContent = '₹' + Math.round(maturityAmount).toLocaleString('en-IN');
+            
+            // Update chart
+            updateChart(investment, annualReturn, tenure);
+        }
+        
+        function updateChart(principal, rate, years) {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            
+            // Generate data points for each year
+            const labels = [];
+            const values = [];
+            
+            for (let year = 0; year <= years; year++) {
+                labels.push(`Year ${year}`);
+                const value = principal * Math.pow(1 + (rate / 100), year);
+                values.push(Math.round(value));
+            }
+            
+            // Destroy existing chart if it exists
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Investment Value (₹)',
+                        data: values,
+                        borderColor: '#ffd600',
+                        backgroundColor: 'rgba(255, 214, 0, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#333'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#333',
+                                callback: function(value) {
+                                    return '₹' + value.toLocaleString('en-IN');
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#333'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function printResults() {
+            window.print();
+        }
+        
+        // Indian rupee formatter
+        function formatIndianRupee(amount) {
+            return '₹' + Math.round(amount).toLocaleString('en-IN');
+        }
+        
+        // Format input fields with commas
+        function formatNumberInput(input) {
+            let value = input.value.replace(/[^\d]/g, '');
+            if (value) {
+                input.value = parseInt(value).toLocaleString('en-IN');
+            }
+        }
+        
+        // Parse Indian formatted number
+        function parseIndianNumber(str) {
+            return parseFloat(str.replace(/[₹,]/g, '')) || 0;
+        }
+        
+        // Calculate on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateLumpsum();
+            
+            // Format number inputs
+            const investmentInput = document.getElementById('investment');
+            if (investmentInput) {
+                investmentInput.addEventListener('input', function() {
+                    formatNumberInput(this);
+                    calculateLumpsum();
+                });
+                investmentInput.addEventListener('blur', function() {
+                    formatNumberInput(this);
+                    calculateLumpsum();
+                });
+            }
+            
+            // Auto-calculate on input change
+            ['annualReturn', 'tenure'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateLumpsum);
+            });
+        });
+    </script>
+</body>
+</html>

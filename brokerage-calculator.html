@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate stock brokerage charges, STT, GST and other trading fees. Free brokerage calculator for equity, F&O, and commodity trading.">
+    <title>Brokerage Calculator - Stock Trading Charges Calculator | Skrollmates</title>
+    <link rel="canonical" href="https://skrollmates.com/brokerage-calculator.html">
+    <meta property="og:title" content="Brokerage Calculator - Stock Trading Charges Calculator">
+    <meta property="og:description" content="Calculate trading charges including brokerage, STT, GST for equity and F&O trading.">
+    <meta property="og:url" content="https://skrollmates.com/brokerage-calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://skrollmates.com/skrollmates-512.webp">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:site_name" content="Skrollmates">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:image:alt" content="Skrollmates logo">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@skrollmates">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Brokerage Calculator",
+        "description": "Calculate stock trading charges including brokerage, STT, GST for equity trading",
+        "url": "https://skrollmates.com/brokerage-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+    <style>
+        .calculator-container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .input-field, .select-field {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-field:focus, .select-field:focus {
+            outline: none;
+            border-color: #009688;
+        }
+        
+        .trade-type-selector {
+            display: flex;
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .trade-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .trade-btn.active {
+            background: #009688;
+            color: white;
+        }
+        
+        .trade-btn:not(.active) {
+            background: transparent;
+            color: #666;
+        }
+        
+        .results-panel {
+            background: linear-gradient(135deg, #009688 0%, #00bcd4 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .breakdown-panel {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .breakdown-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .breakdown-table th, .breakdown-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .breakdown-table th {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            height: 250px;
+        }
+        
+        .broker-selector {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .print-btn, .calc-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .calc-btn {
+            background: #009688;
+            color: white;
+        }
+        
+        .print-btn {
+            background: #666;
+            color: white;
+        }
+        
+        .calc-btn:hover { background: #00796b; }
+        .print-btn:hover { background: #555; }
+        
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .calculator-container {
+                margin-top: 90px;
+                padding: 15px;
+            }
+        }
+        
+        @media print {
+            .navbar, .print-btn, .calc-btn { display: none; }
+            .calculator-container { margin: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <img src="skrollmates.webp" alt="Skrollmates logo">
+            <span class="brand-name">Skrollmates</span>
+        </div>
+        <span class="menu-toggle" aria-label="Toggle menu" id="menuToggle" tabindex="1">&#9776;</span>
+        <ul id="mainMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="whatsapp-extension.html">WhatsApp Extension</a></li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">EMI Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="emi-calculator.html">General EMI Calculator</a></li>
+                    <li><a href="home-loan.html">Home Loan EMI</a></li>
+                    <li><a href="personal-loan.html">Personal Loan EMI</a></li>
+                    <li><a href="car-loan.html">Car Loan EMI</a></li>
+                    <li><a href="two-wheeler-loan.html">Two Wheeler Loan EMI</a></li>
+                    <li><a href="lap-loan.html">LAP Loan EMI</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Investment Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="sip-calculator.html">SIP Calculator</a></li>
+                    <li><a href="lumpsum-calculator.html">Lumpsum Calculator</a></li>
+                    <li><a href="step-up-sip-calculator.html">Step-Up SIP Calculator</a></li>
+                    <li><a href="swp-calculator.html">SWP Calculator</a></li>
+                    <li><a href="mf-calculator.html">Mutual Fund Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Savings Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="fd-calculator.html">FD Calculator</a></li>
+                    <li><a href="rd-calculator.html">RD Calculator</a></li>
+                    <li><a href="ppf-calculator.html">PPF Calculator</a></li>
+                    <li><a href="epf-calculator.html">EPF Calculator</a></li>
+                    <li><a href="ssy-calculator.html">SSY Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Tax & Trading <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                    <li><a href="hra-calculator.html">HRA Calculator</a></li>
+                    <li><a href="salary-calculator.html">Salary Calculator</a></li>
+                    <li><a href="tds-calculator.html">TDS Calculator</a></li>
+                    <li><a href="gst-calculator.html">GST Calculator</a></li>
+                    <li class="active"><a href="brokerage-calculator.html">Brokerage Calculator</a></li>
+                    <li><a href="margin-calculator.html">Margin Calculator</a></li>
+                    <li><a href="stock-average-calculator.html">Stock Average Calculator</a></li>
+                </ul>
+            </li>
+            <li><a href="repo-rates.html">Repo Rates</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+    </nav>
+
+    <main class="calculator-container">
+        <h1>Brokerage Calculator</h1>
+        <p>Calculate comprehensive trading charges including brokerage, STT, exchange charges, GST and other fees.</p>
+        
+        <div class="calc-grid">
+            <div class="inputs-section">
+                <div class="trade-type-selector">
+                    <button class="trade-btn active" onclick="selectTradeType('buy')" id="buyBtn">Buy</button>
+                    <button class="trade-btn" onclick="selectTradeType('sell')" id="sellBtn">Sell</button>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="segment">Trading Segment</label>
+                    <select id="segment" class="select-field">
+                        <option value="equity">Equity Cash</option>
+                        <option value="equity_intraday">Equity Intraday</option>
+                        <option value="futures">Futures</option>
+                        <option value="options">Options</option>
+                        <option value="commodity">Commodity</option>
+                    </select>
+                </div>
+                
+                <div class="broker-selector">
+                    <label class="input-label" for="brokerType">Broker Type</label>
+                    <select id="brokerType" class="select-field">
+                        <option value="discount">Discount Broker (₹20/order)</option>
+                        <option value="full_service">Full Service (0.5%)</option>
+                        <option value="custom">Custom Rate</option>
+                    </select>
+                </div>
+                
+                <div class="input-group" id="customBrokerageGroup" style="display: none;">
+                    <label class="input-label" for="customBrokerage">Custom Brokerage (%)</label>
+                    <input type="number" id="customBrokerage" class="input-field" value="0.1" min="0" max="2" step="0.01">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="quantity">Quantity</label>
+                    <input type="number" id="quantity" class="input-field" value="100" min="1">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="price">Price per Share (₹)</label>
+                    <input type="number" id="price" class="input-field" value="1000" min="0.01" step="0.01">
+                </div>
+                
+                <button onclick="calculateBrokerage()" class="calc-btn">Calculate Charges</button>
+                <button onclick="printResults()" class="print-btn">Print Results</button>
+            </div>
+            
+            <div class="results-section">
+                <div class="results-panel">
+                    <h3 style="margin-top: 0; margin-bottom: 25px;">Trading Charges Summary</h3>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Trade Value:</span>
+                        <span class="result-value" id="tradeValue">₹1,00,000</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Total Charges:</span>
+                        <span class="result-value" id="totalCharges">₹156.70</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Net Amount:</span>
+                        <span class="result-value" id="netAmount">₹99,843.30</span>
+                    </div>
+                    
+                    <div class="result-item" style="border-bottom: none;">
+                        <span class="result-label">Effective Rate:</span>
+                        <span class="result-value" id="effectiveRate">0.16%</span>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="chargesChart" width="400" height="150"></canvas>
+                    </div>
+                </div>
+                
+                <div class="breakdown-panel">
+                    <h4>Detailed Charges Breakdown</h4>
+                    <table class="breakdown-table" id="chargesBreakdown">
+                        <thead>
+                            <tr>
+                                <th>Charge Type</th>
+                                <th>Rate</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="chargesBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Skrollmates.com</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="menu.js" defer></script>
+    <script>
+        let chartInstance = null;
+        let currentTradeType = 'buy';
+        
+        // Trading charges structure
+        const charges = {
+            equity: {
+                stt: { buy: 0.1, sell: 0.1 }, // % of turnover
+                exchangeCharges: 0.00345, // % of turnover
+                gst: 18, // % on (brokerage + exchange charges)
+                sebiCharges: 0.0001, // % of turnover
+                stampDuty: 0.015 // % of turnover (buy only)
+            },
+            equity_intraday: {
+                stt: { buy: 0.025, sell: 0.025 },
+                exchangeCharges: 0.00345,
+                gst: 18,
+                sebiCharges: 0.0001,
+                stampDuty: 0.003
+            },
+            futures: {
+                stt: { buy: 0, sell: 0.0125 },
+                exchangeCharges: 0.0019,
+                gst: 18,
+                sebiCharges: 0.0001,
+                stampDuty: 0.002
+            },
+            options: {
+                stt: { buy: 0, sell: 0.0625 },
+                exchangeCharges: 0.035, // % of premium
+                gst: 18,
+                sebiCharges: 0.0001,
+                stampDuty: 0.003
+            }
+        };
+        
+        function selectTradeType(type) {
+            currentTradeType = type;
+            
+            document.getElementById('buyBtn').classList.toggle('active', type === 'buy');
+            document.getElementById('sellBtn').classList.toggle('active', type === 'sell');
+            
+            calculateBrokerage();
+        }
+        
+        function calculateBrokerage() {
+            const segment = document.getElementById('segment').value;
+            const brokerType = document.getElementById('brokerType').value;
+            const quantity = parseFloat(document.getElementById('quantity').value) || 0;
+            const price = parseFloat(document.getElementById('price').value) || 0;
+            const customBrokerage = parseFloat(document.getElementById('customBrokerage').value) || 0;
+            
+            const tradeValue = quantity * price;
+            const segmentCharges = charges[segment] || charges.equity;
+            
+            let breakdown = [];
+            let totalCharges = 0;
+            
+            // Brokerage calculation
+            let brokerage = 0;
+            if (brokerType === 'discount') {
+                brokerage = Math.min(20, tradeValue * 0.01); // ₹20 or 0.01% whichever is lower
+            } else if (brokerType === 'full_service') {
+                brokerage = tradeValue * 0.005; // 0.5%
+            } else {
+                brokerage = tradeValue * (customBrokerage / 100);
+            }
+            
+            breakdown.push({
+                type: 'Brokerage',
+                rate: brokerType === 'discount' ? '₹20 or 0.01%' : (brokerType === 'full_service' ? '0.5%' : customBrokerage + '%'),
+                amount: brokerage
+            });
+            totalCharges += brokerage;
+            
+            // STT
+            const sttRate = segmentCharges.stt[currentTradeType] || 0;
+            const stt = tradeValue * (sttRate / 100);
+            if (stt > 0) {
+                breakdown.push({
+                    type: 'STT',
+                    rate: sttRate + '%',
+                    amount: stt
+                });
+                totalCharges += stt;
+            }
+            
+            // Exchange charges
+            const exchangeCharges = tradeValue * (segmentCharges.exchangeCharges / 100);
+            breakdown.push({
+                type: 'Exchange Charges',
+                rate: segmentCharges.exchangeCharges + '%',
+                amount: exchangeCharges
+            });
+            totalCharges += exchangeCharges;
+            
+            // GST
+            const gstBase = brokerage + exchangeCharges;
+            const gst = gstBase * (segmentCharges.gst / 100);
+            breakdown.push({
+                type: 'GST',
+                rate: segmentCharges.gst + '%',
+                amount: gst
+            });
+            totalCharges += gst;
+            
+            // SEBI charges
+            const sebiCharges = tradeValue * (segmentCharges.sebiCharges / 100);
+            breakdown.push({
+                type: 'SEBI Charges',
+                rate: segmentCharges.sebiCharges + '%',
+                amount: sebiCharges
+            });
+            totalCharges += sebiCharges;
+            
+            // Stamp duty (buy only)
+            if (currentTradeType === 'buy') {
+                const stampDuty = tradeValue * (segmentCharges.stampDuty / 100);
+                breakdown.push({
+                    type: 'Stamp Duty',
+                    rate: segmentCharges.stampDuty + '%',
+                    amount: stampDuty
+                });
+                totalCharges += stampDuty;
+            }
+            
+            const netAmount = currentTradeType === 'buy' ? 
+                tradeValue + totalCharges : 
+                tradeValue - totalCharges;
+            
+            const effectiveRate = (totalCharges / tradeValue) * 100;
+            
+            // Update display
+            document.getElementById('tradeValue').textContent = '₹' + tradeValue.toLocaleString('en-IN');
+            document.getElementById('totalCharges').textContent = '₹' + totalCharges.toFixed(2);
+            document.getElementById('netAmount').textContent = '₹' + netAmount.toFixed(2);
+            document.getElementById('effectiveRate').textContent = effectiveRate.toFixed(3) + '%';
+            
+            // Update breakdown table
+            updateBreakdownTable(breakdown);
+            
+            // Update chart
+            updateChart(breakdown);
+        }
+        
+        function updateBreakdownTable(breakdown) {
+            const tbody = document.getElementById('chargesBody');
+            tbody.innerHTML = '';
+            
+            breakdown.forEach(item => {
+                const row = tbody.insertRow();
+                row.insertCell(0).textContent = item.type;
+                row.insertCell(1).textContent = item.rate;
+                row.insertCell(2).textContent = '₹' + item.amount.toFixed(2);
+            });
+        }
+        
+        function updateChart(breakdown) {
+            const ctx = document.getElementById('chargesChart').getContext('2d');
+            
+            const labels = breakdown.map(item => item.type);
+            const amounts = breakdown.map(item => item.amount);
+            const colors = ['#009688', '#00bcd4', '#4caf50', '#ff9800', '#f44336', '#9c27b0'];
+            
+            // Destroy existing chart if it exists
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: amounts,
+                        backgroundColor: colors.slice(0, amounts.length),
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#333',
+                                padding: 10,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    const percentage = ((value / amounts.reduce((a, b) => a + b, 0)) * 100).toFixed(1);
+                                    return `${label}: ₹${value.toFixed(2)} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function printResults() {
+            window.print();
+        }
+        
+        // Show/hide custom brokerage input
+        document.getElementById('brokerType').addEventListener('change', function() {
+            const customGroup = document.getElementById('customBrokerageGroup');
+            customGroup.style.display = this.value === 'custom' ? 'block' : 'none';
+            calculateBrokerage();
+        });
+        
+        // Calculate on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateBrokerage();
+            
+            // Auto-calculate on input change
+            ['segment', 'quantity', 'price', 'customBrokerage', 'brokerType'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', calculateBrokerage);
+                    element.addEventListener('change', calculateBrokerage);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

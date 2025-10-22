@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7KZY0CS6R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} 
+        gtag('js', new Date());
+
+        gtag('config', 'G-K7KZY0CS6R');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate SIP returns with our free SIP calculator. Plan your systematic investment plan with accurate projections and charts.">
+    <title>SIP Calculator - Systematic Investment Plan Calculator | Skrollmates</title>
+    <link rel="canonical" href="https://skrollmates.com/sip-calculator.html">
+    <meta property="og:title" content="SIP Calculator - Systematic Investment Plan Calculator">
+    <meta property="og:description" content="Calculate SIP returns with accurate projections, charts, and goal planning tools.">
+    <meta property="og:url" content="https://skrollmates.com/sip-calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://skrollmates.com/skrollmates-512.webp">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:site_name" content="Skrollmates">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:image:alt" content="Skrollmates logo">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@skrollmates">
+    <meta name="robots" content="index, follow">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3029851571351657"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "SIP Calculator",
+        "description": "Calculate Systematic Investment Plan returns with detailed projections",
+        "url": "https://skrollmates.com/sip-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+    <style>
+        .calculator-container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #009688;
+        }
+        
+        .results-panel {
+            background: linear-gradient(135deg, #009688 0%, #00bcd4 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .result-label {
+            font-weight: 500;
+        }
+        
+        .result-value {
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            height: 300px;
+        }
+        
+        .goal-planner {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #009688;
+        }
+        
+        .goal-input {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            align-items: center;
+        }
+        
+        .goal-input input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .goal-result {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #009688;
+        }
+        
+        .print-btn, .calc-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .calc-btn {
+            background: #009688;
+            color: white;
+        }
+        
+        .print-btn {
+            background: #666;
+            color: white;
+        }
+        
+        .calc-btn:hover { background: #00796b; }
+        .print-btn:hover { background: #555; }
+        
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .calculator-container {
+                margin-top: 90px;
+                padding: 15px;
+            }
+            
+            .goal-input {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+        
+        @media print {
+            .navbar, .print-btn, .calc-btn { display: none; }
+            .calculator-container { margin: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <img src="skrollmates.webp" alt="Skrollmates logo">
+            <span class="brand-name">Skrollmates</span>
+        </div>
+        <span class="menu-toggle" aria-label="Toggle menu" id="menuToggle" tabindex="1">&#9776;</span>
+        <ul id="mainMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="whatsapp-extension.html">WhatsApp Extension</a></li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">EMI Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="emi-calculator.html">General EMI Calculator</a></li>
+                    <li><a href="home-loan.html">Home Loan EMI</a></li>
+                    <li><a href="personal-loan.html">Personal Loan EMI</a></li>
+                    <li><a href="car-loan.html">Car Loan EMI</a></li>
+                    <li><a href="two-wheeler-loan.html">Two Wheeler Loan EMI</a></li>
+                    <li><a href="lap-loan.html">LAP Loan EMI</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Investment Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li class="active"><a href="sip-calculator.html">SIP Calculator</a></li>
+                    <li><a href="lumpsum-calculator.html">Lumpsum Calculator</a></li>
+                    <li><a href="step-up-sip-calculator.html">Step-Up SIP Calculator</a></li>
+                    <li><a href="swp-calculator.html">SWP Calculator</a></li>
+                    <li><a href="mf-calculator.html">Mutual Fund Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Savings Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="fd-calculator.html">FD Calculator</a></li>
+                    <li><a href="rd-calculator.html">RD Calculator</a></li>
+                    <li><a href="ppf-calculator.html">PPF Calculator</a></li>
+                    <li><a href="epf-calculator.html">EPF Calculator</a></li>
+                    <li><a href="ssy-calculator.html">SSY Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Tax & Trading <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                    <li><a href="hra-calculator.html">HRA Calculator</a></li>
+                    <li><a href="salary-calculator.html">Salary Calculator</a></li>
+                    <li><a href="tds-calculator.html">TDS Calculator</a></li>
+                    <li><a href="gst-calculator.html">GST Calculator</a></li>
+                    <li><a href="brokerage-calculator.html">Brokerage Calculator</a></li>
+                    <li><a href="margin-calculator.html">Margin Calculator</a></li>
+                    <li><a href="stock-average-calculator.html">Stock Average Calculator</a></li>
+                </ul>
+            </li>
+            <li><a href="repo-rates.html">Repo Rates</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+    </nav>
+
+    <main class="calculator-container">
+        <h1>SIP Calculator</h1>
+        <p>Calculate the future value of your Systematic Investment Plan (SIP) with compound returns and goal planning.</p>
+        
+        <div class="calc-grid">
+            <div class="inputs-section">
+                <div class="input-group">
+                    <label class="input-label" for="monthlyAmount">Monthly SIP Amount (₹)</label>
+                    <input type="text" id="monthlyAmount" class="input-field" value="5,000" min="100" step="100" placeholder="Enter monthly SIP amount">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="annualReturn">Expected Annual Return (%)</label>
+                    <input type="number" id="annualReturn" class="input-field" value="12" min="1" max="30" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="tenure">Investment Period (Years)</label>
+                    <input type="number" id="tenure" class="input-field" value="10" min="1" max="50" step="1">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="stepUpPercent">Annual Step-up (%)</label>
+                    <input type="number" id="stepUpPercent" class="input-field" value="0" min="0" max="20" step="1">
+                    <small style="color: #666;">Increase SIP amount annually</small>
+                </div>
+                
+                <button onclick="calculateSIP()" class="calc-btn">Calculate SIP</button>
+                <button onclick="printResults()" class="print-btn">Print Results</button>
+                
+                <div class="goal-planner">
+                    <h4>Goal Planner</h4>
+                    <p>Calculate SIP needed for your financial goal:</p>
+                    <div class="goal-input">
+                        <label>Target Amount:</label>
+                        <input type="text" id="goalAmount" placeholder="₹10,00,000" value="10,00,000">
+                    </div>
+                    <div class="goal-input">
+                        <label>Time Period:</label>
+                        <input type="number" id="goalTenure" placeholder="Years" value="10">
+                    </div>
+                    <button onclick="calculateGoalSIP()" style="padding: 8px 16px; background: #009688; color: white; border: none; border-radius: 4px; cursor: pointer;">Calculate Required SIP</button>
+                    <div id="goalResult" class="goal-result" style="display: none;"></div>
+                </div>
+            </div>
+            
+            <div class="results-section">
+                <div class="results-panel">
+                    <h3 style="margin-top: 0; margin-bottom: 25px;">Investment Summary</h3>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Total Investment:</span>
+                        <span class="result-value" id="totalInvestment">₹6,00,000</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Total Returns:</span>
+                        <span class="result-value" id="totalReturns">₹5,63,070</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Maturity Value:</span>
+                        <span class="result-value" id="maturityValue">₹11,63,070</span>
+                    </div>
+                    
+                    <div class="result-item" style="border-bottom: none;">
+                        <span class="result-label">Return Multiple:</span>
+                        <span class="result-value" id="returnMultiple">1.94x</span>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="growthChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Skrollmates.com</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="menu.js" defer></script>
+    <script>
+        let chartInstance = null;
+        
+        function calculateSIP() {
+            const monthlyAmount = parseIndianNumber(document.getElementById('monthlyAmount').value) || 5000;
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value) || 12;
+            const tenure = parseFloat(document.getElementById('tenure').value) || 10;
+            const stepUpPercent = parseFloat(document.getElementById('stepUpPercent').value) || 0;
+            
+            const monthlyReturn = annualReturn / 12 / 100;
+            const totalMonths = tenure * 12;
+            
+            let maturityAmount = 0;
+            let totalInvestment = 0;
+            const yearlyData = [];
+            
+            if (stepUpPercent === 0) {
+                // Regular SIP calculation
+                if (monthlyReturn === 0) {
+                    maturityAmount = monthlyAmount * totalMonths;
+                } else {
+                    maturityAmount = monthlyAmount * (((Math.pow(1 + monthlyReturn, totalMonths) - 1) / monthlyReturn) * (1 + monthlyReturn));
+                }
+                totalInvestment = monthlyAmount * totalMonths;
+                
+                // Generate yearly data for chart
+                for (let year = 1; year <= tenure; year++) {
+                    const months = year * 12;
+                    const yearlyMaturity = monthlyAmount * (((Math.pow(1 + monthlyReturn, months) - 1) / monthlyReturn) * (1 + monthlyReturn));
+                    const yearlyInvestment = monthlyAmount * months;
+                    
+                    yearlyData.push({
+                        year: year,
+                        investment: yearlyInvestment,
+                        maturity: yearlyMaturity
+                    });
+                }
+            } else {
+                // Step-up SIP calculation
+                let currentAmount = monthlyAmount;
+                let runningTotal = 0;
+                
+                for (let year = 1; year <= tenure; year++) {
+                    for (let month = 1; month <= 12; month++) {
+                        const monthsRemaining = totalMonths - ((year - 1) * 12 + month - 1);
+                        const futureValue = currentAmount * Math.pow(1 + monthlyReturn, monthsRemaining - 1);
+                        runningTotal += futureValue;
+                        totalInvestment += currentAmount;
+                    }
+                    
+                    yearlyData.push({
+                        year: year,
+                        investment: totalInvestment,
+                        maturity: runningTotal
+                    });
+                    
+                    // Increase amount for next year
+                    if (year < tenure) {
+                        currentAmount = currentAmount * (1 + stepUpPercent / 100);
+                    }
+                }
+                
+                maturityAmount = runningTotal;
+            }
+            
+            const totalReturns = maturityAmount - totalInvestment;
+            const returnMultiple = maturityAmount / totalInvestment;
+            
+            // Update display
+            document.getElementById('totalInvestment').textContent = '₹' + Math.round(totalInvestment).toLocaleString('en-IN');
+            document.getElementById('totalReturns').textContent = '₹' + Math.round(totalReturns).toLocaleString('en-IN');
+            document.getElementById('maturityValue').textContent = '₹' + Math.round(maturityAmount).toLocaleString('en-IN');
+            document.getElementById('returnMultiple').textContent = returnMultiple.toFixed(2) + 'x';
+            
+            // Update chart
+            updateChart(yearlyData);
+        }
+        
+        function updateChart(data) {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            
+            const labels = data.map(d => `Year ${d.year}`);
+            const investments = data.map(d => Math.round(d.investment));
+            const maturities = data.map(d => Math.round(d.maturity));
+            
+            // Destroy existing chart if it exists
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Total Investment (₹)',
+                        data: investments,
+                        borderColor: '#ff9800',
+                        backgroundColor: 'rgba(255, 152, 0, 0.1)',
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4
+                    }, {
+                        label: 'Maturity Value (₹)',
+                        data: maturities,
+                        borderColor: '#ffd600',
+                        backgroundColor: 'rgba(255, 214, 0, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#333'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#333',
+                                callback: function(value) {
+                                    return '₹' + (value / 100000).toFixed(1) + 'L';
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#333'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function calculateGoalSIP() {
+            const goalAmount = parseIndianNumber(document.getElementById('goalAmount').value) || 1000000;
+            const goalTenure = parseFloat(document.getElementById('goalTenure').value) || 10;
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value) || 12;
+            
+            const monthlyReturn = annualReturn / 12 / 100;
+            const totalMonths = goalTenure * 12;
+            
+            // Calculate required monthly SIP
+            let requiredSIP;
+            if (monthlyReturn === 0) {
+                requiredSIP = goalAmount / totalMonths;
+            } else {
+                requiredSIP = goalAmount / (((Math.pow(1 + monthlyReturn, totalMonths) - 1) / monthlyReturn) * (1 + monthlyReturn));
+            }
+            
+            const goalResult = document.getElementById('goalResult');
+            goalResult.innerHTML = `
+                To achieve ₹${goalAmount.toLocaleString('en-IN')} in ${goalTenure} years,<br>
+                you need to invest <strong>₹${Math.ceil(requiredSIP).toLocaleString('en-IN')}</strong> per month
+            `;
+            goalResult.style.display = 'block';
+        }
+        
+        function printResults() {
+            window.print();
+        }
+        
+        // Indian rupee formatter
+        function formatIndianRupee(amount) {
+            return '₹' + Math.round(amount).toLocaleString('en-IN');
+        }
+        
+        // Format input fields with commas
+        function formatNumberInput(input) {
+            let value = input.value.replace(/[^\d]/g, '');
+            if (value) {
+                input.value = parseInt(value).toLocaleString('en-IN');
+            }
+        }
+        
+        // Parse Indian formatted number
+        function parseIndianNumber(str) {
+            return parseFloat(str.replace(/[₹,]/g, '')) || 0;
+        }
+        
+        // Calculate on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateSIP();
+            
+            // Format number inputs
+            ['monthlyAmount', 'goalAmount'].forEach(id => {
+                const input = document.getElementById(id);
+                if (input) {
+                    input.addEventListener('input', function() {
+                        formatNumberInput(this);
+                        calculateSIP();
+                    });
+                    input.addEventListener('blur', function() {
+                        formatNumberInput(this);
+                        calculateSIP();
+                    });
+                }
+            });
+            
+            // Auto-calculate on input change
+            ['annualReturn', 'tenure', 'stepUpPercent', 'goalTenure', 'annualReturn'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', calculateSIP);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

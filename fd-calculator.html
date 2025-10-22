@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7KZY0CS6R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} 
+        gtag('js', new Date());
+
+        gtag('config', 'G-K7KZY0CS6R');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate Fixed Deposit returns and maturity amount. Compare FD rates from different banks with quarterly, monthly compounding options.">
+    <title>FD Calculator - Fixed Deposit Calculator with Bank Rates | Skrollmates</title>
+    <link rel="canonical" href="https://skrollmates.com/fd-calculator.html">
+    <meta property="og:title" content="FD Calculator - Fixed Deposit Calculator with Bank Rates">
+    <meta property="og:description" content="Calculate FD returns and compare bank rates with different compounding options.">
+    <meta property="og:url" content="https://skrollmates.com/fd-calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://skrollmates.com/skrollmates-512.webp">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:site_name" content="Skrollmates">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:image:alt" content="Skrollmates logo">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@skrollmates">
+    <meta name="robots" content="index, follow">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3029851571351657"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "FD Calculator",
+        "description": "Calculate Fixed Deposit returns and maturity amount with bank rate comparison",
+        "url": "https://skrollmates.com/fd-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+    <style>
+        .calculator-container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .input-field, .select-field {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-field:focus, .select-field:focus {
+            outline: none;
+            border-color: #009688;
+        }
+        
+        .results-panel {
+            background: linear-gradient(135deg, #009688 0%, #00bcd4 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            height: 300px;
+        }
+        
+        .bank-rates {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .bank-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .bank-table th, .bank-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .bank-table th {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+        
+        .bank-table tr:hover {
+            background: #f9f9f9;
+            cursor: pointer;
+        }
+        
+        .tax-calculator {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .print-btn, .calc-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .calc-btn {
+            background: #009688;
+            color: white;
+        }
+        
+        .print-btn {
+            background: #666;
+            color: white;
+        }
+        
+        .calc-btn:hover { background: #00796b; }
+        .print-btn:hover { background: #555; }
+        
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .calculator-container {
+                margin-top: 90px;
+                padding: 15px;
+            }
+        }
+        
+        @media print {
+            .navbar, .print-btn, .calc-btn { display: none; }
+            .calculator-container { margin: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <img src="skrollmates.webp" alt="Skrollmates logo">
+            <span class="brand-name">Skrollmates</span>
+        </div>
+        <span class="menu-toggle" aria-label="Toggle menu" id="menuToggle" tabindex="1">&#9776;</span>
+        <ul id="mainMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="whatsapp-extension.html">WhatsApp Extension</a></li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">EMI Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="emi-calculator.html">General EMI Calculator</a></li>
+                    <li><a href="home-loan.html">Home Loan EMI</a></li>
+                    <li><a href="personal-loan.html">Personal Loan EMI</a></li>
+                    <li><a href="car-loan.html">Car Loan EMI</a></li>
+                    <li><a href="two-wheeler-loan.html">Two Wheeler Loan EMI</a></li>
+                    <li><a href="lap-loan.html">LAP Loan EMI</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Investment Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="sip-calculator.html">SIP Calculator</a></li>
+                    <li><a href="lumpsum-calculator.html">Lumpsum Calculator</a></li>
+                    <li><a href="step-up-sip-calculator.html">Step-Up SIP Calculator</a></li>
+                    <li><a href="swp-calculator.html">SWP Calculator</a></li>
+                    <li><a href="mf-calculator.html">Mutual Fund Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Savings Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li class="active"><a href="fd-calculator.html">FD Calculator</a></li>
+                    <li><a href="rd-calculator.html">RD Calculator</a></li>
+                    <li><a href="ppf-calculator.html">PPF Calculator</a></li>
+                    <li><a href="epf-calculator.html">EPF Calculator</a></li>
+                    <li><a href="ssy-calculator.html">SSY Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Tax & Trading <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                    <li><a href="hra-calculator.html">HRA Calculator</a></li>
+                    <li><a href="salary-calculator.html">Salary Calculator</a></li>
+                    <li><a href="tds-calculator.html">TDS Calculator</a></li>
+                    <li><a href="gst-calculator.html">GST Calculator</a></li>
+                    <li><a href="brokerage-calculator.html">Brokerage Calculator</a></li>
+                    <li><a href="margin-calculator.html">Margin Calculator</a></li>
+                    <li><a href="stock-average-calculator.html">Stock Average Calculator</a></li>
+                </ul>
+            </li>
+            <li><a href="repo-rates.html">Repo Rates</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+    </nav>
+
+    <main class="calculator-container">
+        <h1>FD Calculator</h1>
+        <p>Calculate Fixed Deposit maturity amount and interest with different compounding frequencies and bank rates.</p>
+        
+        <div class="calc-grid">
+            <div class="inputs-section">
+                <div class="input-group">
+                    <label class="input-label" for="principal">Principal Amount (₹)</label>
+                    <input type="number" id="principal" class="input-field" value="100000" min="1000" step="1000">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="interestRate">Annual Interest Rate (%)</label>
+                    <input type="number" id="interestRate" class="input-field" value="6.5" min="1" max="15" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="tenure">Tenure</label>
+                    <select id="tenure" class="select-field">
+                        <option value="0.25">3 Months</option>
+                        <option value="0.5">6 Months</option>
+                        <option value="1" selected>1 Year</option>
+                        <option value="2">2 Years</option>
+                        <option value="3">3 Years</option>
+                        <option value="5">5 Years</option>
+                        <option value="10">10 Years</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="compounding">Compounding Frequency</label>
+                    <select id="compounding" class="select-field">
+                        <option value="1">Annually</option>
+                        <option value="2">Half-Yearly</option>
+                        <option value="4" selected>Quarterly</option>
+                        <option value="12">Monthly</option>
+                        <option value="365">Daily</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="taxSlab">Tax Slab (%)</label>
+                    <select id="taxSlab" class="select-field">
+                        <option value="0">No Tax (Senior Citizen <₹50k)</option>
+                        <option value="5">5%</option>
+                        <option value="20">20%</option>
+                        <option value="30" selected>30%</option>
+                    </select>
+                </div>
+                
+                <button onclick="calculateFD()" class="calc-btn">Calculate FD</button>
+                <button onclick="printResults()" class="print-btn">Print Results</button>
+                
+                <div class="tax-calculator">
+                    <h4>FD Tax Information</h4>
+                    <p><strong>TDS:</strong> 10% if interest > ₹40,000 (₹50,000 for senior citizens)</p>
+                    <p><strong>Tax Exemption:</strong> Up to ₹40,000 under Section 80TTB for senior citizens</p>
+                </div>
+            </div>
+            
+            <div class="results-section">
+                <div class="results-panel">
+                    <h3 style="margin-top: 0; margin-bottom: 25px;">FD Summary</h3>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Principal Amount:</span>
+                        <span class="result-value" id="principalAmount">₹1,00,000</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Interest Earned:</span>
+                        <span class="result-value" id="interestEarned">₹6,699</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Maturity Amount:</span>
+                        <span class="result-value" id="maturityAmount">₹1,06,699</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Tax on Interest:</span>
+                        <span class="result-value" id="taxAmount">₹2,010</span>
+                    </div>
+                    
+                    <div class="result-item" style="border-bottom: none;">
+                        <span class="result-label">Post-Tax Returns:</span>
+                        <span class="result-value" id="postTaxReturns">₹1,04,689</span>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="fdChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+                
+                <div class="bank-rates">
+                    <h4>Current FD Rates (Indicative)</h4>
+                    <table class="bank-table" id="bankRatesTable">
+                        <thead>
+                            <tr>
+                                <th>Bank</th>
+                                <th>1 Year</th>
+                                <th>2-3 Years</th>
+                                <th>5 Years</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr onclick="setRate(6.8)">
+                                <td>SBI</td>
+                                <td>6.8%</td>
+                                <td>6.8%</td>
+                                <td>6.5%</td>
+                            </tr>
+                            <tr onclick="setRate(7.0)">
+                                <td>HDFC Bank</td>
+                                <td>7.0%</td>
+                                <td>7.0%</td>
+                                <td>6.75%</td>
+                            </tr>
+                            <tr onclick="setRate(7.25)">
+                                <td>ICICI Bank</td>
+                                <td>7.25%</td>
+                                <td>7.25%</td>
+                                <td>7.0%</td>
+                            </tr>
+                            <tr onclick="setRate(7.5)">
+                                <td>Kotak Mahindra</td>
+                                <td>7.5%</td>
+                                <td>7.25%</td>
+                                <td>7.0%</td>
+                            </tr>
+                            <tr onclick="setRate(8.0)">
+                                <td>Small Finance Banks</td>
+                                <td>8.0%</td>
+                                <td>8.25%</td>
+                                <td>8.0%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <small style="color: #666;">Click on any bank to use their rate. Rates are indicative and may vary.</small>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Skrollmates.com</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="menu.js" defer></script>
+    <script>
+        let chartInstance = null;
+        
+        function calculateFD() {
+            const principal = parseFloat(document.getElementById('principal').value) || 100000;
+            const rate = parseFloat(document.getElementById('interestRate').value) || 6.5;
+            const tenure = parseFloat(document.getElementById('tenure').value) || 1;
+            const compounding = parseFloat(document.getElementById('compounding').value) || 4;
+            const taxSlab = parseFloat(document.getElementById('taxSlab').value) || 30;
+            
+            // Compound interest formula: A = P(1 + r/n)^(nt)
+            const r = rate / 100;
+            const maturityAmount = principal * Math.pow(1 + (r / compounding), compounding * tenure);
+            const interestEarned = maturityAmount - principal;
+            
+            // Tax calculation
+            let taxableInterest = interestEarned;
+            
+            // Senior citizen exemption under 80TTB
+            if (taxSlab === 0) {
+                taxableInterest = Math.max(0, interestEarned - 50000);
+            } else {
+                // Standard exemption limit
+                taxableInterest = Math.max(0, interestEarned - 40000);
+            }
+            
+            const taxAmount = taxableInterest * (taxSlab / 100);
+            const postTaxReturns = principal + interestEarned - taxAmount;
+            
+            // Update display
+            document.getElementById('principalAmount').textContent = '₹' + principal.toLocaleString('en-IN');
+            document.getElementById('interestEarned').textContent = '₹' + Math.round(interestEarned).toLocaleString('en-IN');
+            document.getElementById('maturityAmount').textContent = '₹' + Math.round(maturityAmount).toLocaleString('en-IN');
+            document.getElementById('taxAmount').textContent = '₹' + Math.round(taxAmount).toLocaleString('en-IN');
+            document.getElementById('postTaxReturns').textContent = '₹' + Math.round(postTaxReturns).toLocaleString('en-IN');
+            
+            // Update chart
+            updateChart(principal, interestEarned, taxAmount);
+        }
+        
+        function updateChart(principal, interest, tax) {
+            const ctx = document.getElementById('fdChart').getContext('2d');
+            
+            // Destroy existing chart if it exists
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Principal', 'Interest Earned', 'Tax'],
+                    datasets: [{
+                        data: [principal, Math.round(interest), Math.round(tax)],
+                        backgroundColor: ['#009688', '#4caf50', '#f44336'],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#333',
+                                padding: 15,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${label}: ₹${value.toLocaleString('en-IN')} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function setRate(rate) {
+            document.getElementById('interestRate').value = rate;
+            calculateFD();
+        }
+        
+        function printResults() {
+            window.print();
+        }
+        
+        // Calculate on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateFD();
+            
+            // Auto-calculate on input change
+            ['principal', 'interestRate', 'tenure', 'compounding', 'taxSlab'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateFD);
+                document.getElementById(id).addEventListener('change', calculateFD);
+            });
+        });
+    </script>
+</body>
+</html>

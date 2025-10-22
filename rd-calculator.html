@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7KZY0CS6R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} 
+        gtag('js', new Date());
+
+        gtag('config', 'G-K7KZY0CS6R');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate Recurring Deposit returns and maturity amount. Compare RD rates from different banks with quarterly compounding.">
+    <title>RD Calculator - Recurring Deposit Calculator with Bank Rates | Skrollmates</title>
+    <link rel="canonical" href="https://skrollmates.com/rd-calculator.html">
+    <meta property="og:title" content="RD Calculator - Recurring Deposit Calculator with Bank Rates">
+    <meta property="og:description" content="Calculate RD returns and compare bank rates with different tenure options.">
+    <meta property="og:url" content="https://skrollmates.com/rd-calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://skrollmates.com/skrollmates-512.webp">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:site_name" content="Skrollmates">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:image:alt" content="Skrollmates logo">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@skrollmates">
+    <meta name="robots" content="index, follow">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3029851571351657"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "RD Calculator",
+        "description": "Calculate Recurring Deposit returns and maturity amount with bank rate comparison",
+        "url": "https://skrollmates.com/rd-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+    <style>
+        .calculator-container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .input-field, .select-field {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-field:focus, .select-field:focus {
+            outline: none;
+            border-color: #009688;
+        }
+        
+        .results-panel {
+            background: linear-gradient(135deg, #009688 0%, #00bcd4 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            height: 300px;
+        }
+        
+        .breakdown-table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+        
+        .table-wrapper {
+            max-height: 300px;
+            overflow-y: auto;
+            border-radius: 8px;
+        }
+        
+        .year-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .year-table th, .year-table td {
+            padding: 10px;
+            text-align: right;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+        
+        .year-table th {
+            background: #f5f5f5;
+            color: #333;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        .year-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .bank-rates {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .bank-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .bank-table th, .bank-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .bank-table th {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+        
+        .bank-table tr:hover {
+            background: #f9f9f9;
+            cursor: pointer;
+        }
+        
+        .print-btn, .calc-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .calc-btn {
+            background: #009688;
+            color: white;
+        }
+        
+        .print-btn {
+            background: #666;
+            color: white;
+        }
+        
+        .calc-btn:hover { background: #00796b; }
+        .print-btn:hover { background: #555; }
+        
+        .info-box {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #4caf50;
+        }
+        
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .calculator-container {
+                margin-top: 90px;
+                padding: 15px;
+            }
+        }
+        
+        @media print {
+            .navbar, .print-btn, .calc-btn { display: none; }
+            .calculator-container { margin: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <img src="skrollmates.webp" alt="Skrollmates logo">
+            <span class="brand-name">Skrollmates</span>
+        </div>
+        <span class="menu-toggle" aria-label="Toggle menu" id="menuToggle" tabindex="1">&#9776;</span>
+        <ul id="mainMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="whatsapp-extension.html">WhatsApp Extension</a></li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">EMI Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="emi-calculator.html">General EMI Calculator</a></li>
+                    <li><a href="home-loan.html">Home Loan EMI</a></li>
+                    <li><a href="personal-loan.html">Personal Loan EMI</a></li>
+                    <li><a href="car-loan.html">Car Loan EMI</a></li>
+                    <li><a href="two-wheeler-loan.html">Two Wheeler Loan EMI</a></li>
+                    <li><a href="lap-loan.html">LAP Loan EMI</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Investment Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="sip-calculator.html">SIP Calculator</a></li>
+                    <li><a href="lumpsum-calculator.html">Lumpsum Calculator</a></li>
+                    <li><a href="step-up-sip-calculator.html">Step-Up SIP Calculator</a></li>
+                    <li><a href="swp-calculator.html">SWP Calculator</a></li>
+                    <li><a href="mf-calculator.html">Mutual Fund Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Savings Calculators <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="fd-calculator.html">FD Calculator</a></li>
+                    <li class="active"><a href="rd-calculator.html">RD Calculator</a></li>
+                    <li><a href="ppf-calculator.html">PPF Calculator</a></li>
+                    <li><a href="epf-calculator.html">EPF Calculator</a></li>
+                    <li><a href="ssy-calculator.html">SSY Calculator</a></li>
+                </ul>
+            </li>
+            <li class="menu-dropdown">
+                <a href="javascript:void(0)" class="menu-dropdown-toggle" onclick="return false;">Tax & Trading <span class="dropdown-arrow">▼</span></a>
+                <ul class="menu-submenu">
+                    <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                    <li><a href="hra-calculator.html">HRA Calculator</a></li>
+                    <li><a href="salary-calculator.html">Salary Calculator</a></li>
+                    <li><a href="tds-calculator.html">TDS Calculator</a></li>
+                    <li><a href="gst-calculator.html">GST Calculator</a></li>
+                    <li><a href="brokerage-calculator.html">Brokerage Calculator</a></li>
+                    <li><a href="margin-calculator.html">Margin Calculator</a></li>
+                    <li><a href="stock-average-calculator.html">Stock Average Calculator</a></li>
+                </ul>
+            </li>
+            <li><a href="repo-rates.html">Repo Rates</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+    </nav>
+
+    <main class="calculator-container">
+        <h1>RD Calculator</h1>
+        <p>Calculate Recurring Deposit maturity amount and interest with different tenure and bank rates.</p>
+        
+        <div class="calc-grid">
+            <div class="inputs-section">
+                <div class="input-group">
+                    <label class="input-label" for="monthlyDeposit">Monthly Deposit (₹)</label>
+                    <input type="number" id="monthlyDeposit" class="input-field" value="5000" min="100" step="100">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="interestRate">Annual Interest Rate (%)</label>
+                    <input type="number" id="interestRate" class="input-field" value="6.5" min="1" max="12" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="tenure">Tenure (Years)</label>
+                    <select id="tenure" class="select-field">
+                        <option value="1">1 Year</option>
+                        <option value="2">2 Years</option>
+                        <option value="3">3 Years</option>
+                        <option value="5" selected>5 Years</option>
+                        <option value="10">10 Years</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="compounding">Compounding</label>
+                    <select id="compounding" class="select-field">
+                        <option value="4" selected>Quarterly</option>
+                        <option value="12">Monthly</option>
+                    </select>
+                </div>
+                
+                <button onclick="calculateRD()" class="calc-btn">Calculate RD</button>
+                <button onclick="printResults()" class="print-btn">Print Results</button>
+                
+                <div class="info-box">
+                    <h4>RD Features</h4>
+                    <p>• Fixed monthly deposits for chosen tenure</p>
+                    <p>• Quarterly compounding on most banks</p>
+                    <p>• Premature withdrawal penalties apply</p>
+                    <p>• TDS applicable if interest > ₹40,000</p>
+                </div>
+            </div>
+            
+            <div class="results-section">
+                <div class="results-panel">
+                    <h3 style="margin-top: 0; margin-bottom: 25px;">RD Summary</h3>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Monthly Deposit:</span>
+                        <span class="result-value" id="monthlyAmount">₹5,000</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Total Deposits:</span>
+                        <span class="result-value" id="totalDeposits">₹3,00,000</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Interest Earned:</span>
+                        <span class="result-value" id="interestEarned">₹55,077</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Maturity Amount:</span>
+                        <span class="result-value" id="maturityAmount">₹3,55,077</span>
+                    </div>
+                    
+                    <div class="result-item" style="border-bottom: none;">
+                        <span class="result-label">Effective Rate:</span>
+                        <span class="result-value" id="effectiveRate">7.2%</span>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="rdChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+                
+                <div class="breakdown-table">
+                    <h4 style="padding: 15px; margin: 0;">Year-wise Breakdown</h4>
+                    <div class="table-wrapper">
+                        <table class="year-table" id="breakdownTable">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Deposits</th>
+                                    <th>Interest</th>
+                                    <th>Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="yearBreakdown">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="bank-rates">
+                    <h4>Current RD Rates (Indicative)</h4>
+                    <table class="bank-table">
+                        <thead>
+                            <tr>
+                                <th>Bank</th>
+                                <th>General</th>
+                                <th>Senior Citizen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr onclick="setRate(6.5)">
+                                <td>SBI</td>
+                                <td>6.5%</td>
+                                <td>7.0%</td>
+                            </tr>
+                            <tr onclick="setRate(6.75)">
+                                <td>HDFC Bank</td>
+                                <td>6.75%</td>
+                                <td>7.25%</td>
+                            </tr>
+                            <tr onclick="setRate(7.0)">
+                                <td>ICICI Bank</td>
+                                <td>7.0%</td>
+                                <td>7.5%</td>
+                            </tr>
+                            <tr onclick="setRate(7.25)">
+                                <td>Kotak Mahindra</td>
+                                <td>7.25%</td>
+                                <td>7.75%</td>
+                            </tr>
+                            <tr onclick="setRate(7.5)">
+                                <td>Small Finance Banks</td>
+                                <td>7.5%</td>
+                                <td>8.0%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <small style="color: #666;">Click on any bank to use their rate. Rates are indicative and may vary.</small>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Skrollmates.com</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="menu.js" defer></script>
+    <script>
+        let chartInstance = null;
+        
+        function calculateRD() {
+            const monthlyDeposit = parseFloat(document.getElementById('monthlyDeposit').value) || 5000;
+            const rate = parseFloat(document.getElementById('interestRate').value) || 6.5;
+            const tenure = parseFloat(document.getElementById('tenure').value) || 5;
+            const compounding = parseFloat(document.getElementById('compounding').value) || 4;
+            
+            const months = tenure * 12;
+            const quarterlyRate = (rate / 100) / compounding;
+            
+            let totalDeposits = 0;
+            let maturityAmount = 0;
+            let yearBreakdown = [];
+            
+            // Calculate RD using compound interest for each installment
+            for (let month = 1; month <= months; month++) {
+                const remainingQuarters = Math.floor((months - month + 1) / 3);
+                const compoundValue = monthlyDeposit * Math.pow(1 + quarterlyRate, remainingQuarters);
+                maturityAmount += compoundValue;
+                totalDeposits += monthlyDeposit;
+                
+                // Year-wise breakdown
+                if (month % 12 === 0 || month === months) {
+                    const year = Math.ceil(month / 12);
+                    const yearDeposits = monthlyDeposit * (month <= year * 12 ? (month - (year - 1) * 12) : 12);
+                    const yearInterest = maturityAmount - totalDeposits;
+                    
+                    yearBreakdown.push({
+                        year: year,
+                        deposits: yearDeposits,
+                        interest: yearInterest,
+                        balance: maturityAmount
+                    });
+                }
+            }
+            
+            const interestEarned = maturityAmount - totalDeposits;
+            const effectiveRate = ((maturityAmount / totalDeposits - 1) / tenure * 100);
+            
+            // Update display
+            document.getElementById('monthlyAmount').textContent = '₹' + monthlyDeposit.toLocaleString('en-IN');
+            document.getElementById('totalDeposits').textContent = '₹' + totalDeposits.toLocaleString('en-IN');
+            document.getElementById('interestEarned').textContent = '₹' + Math.round(interestEarned).toLocaleString('en-IN');
+            document.getElementById('maturityAmount').textContent = '₹' + Math.round(maturityAmount).toLocaleString('en-IN');
+            document.getElementById('effectiveRate').textContent = effectiveRate.toFixed(2) + '%';
+            
+            // Update chart and breakdown
+            updateChart(totalDeposits, interestEarned);
+            updateBreakdown(yearBreakdown);
+        }
+        
+        function updateChart(deposits, interest) {
+            const ctx = document.getElementById('rdChart').getContext('2d');
+            
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Total Deposits', 'Interest Earned'],
+                    datasets: [{
+                        data: [deposits, Math.round(interest)],
+                        backgroundColor: ['#009688', '#4caf50'],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#333',
+                                padding: 15,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${label}: ₹${value.toLocaleString('en-IN')} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function updateBreakdown(breakdown) {
+            const tbody = document.getElementById('yearBreakdown');
+            tbody.innerHTML = '';
+            
+            let cumulativeDeposits = 0;
+            let cumulativeInterest = 0;
+            
+            breakdown.forEach((item, index) => {
+                const row = tbody.insertRow();
+                
+                cumulativeDeposits += item.deposits;
+                const currentInterest = item.balance - cumulativeDeposits;
+                
+                row.insertCell(0).textContent = `Year ${item.year}`;
+                row.insertCell(1).textContent = '₹' + cumulativeDeposits.toLocaleString('en-IN');
+                row.insertCell(2).textContent = '₹' + Math.round(currentInterest).toLocaleString('en-IN');
+                row.insertCell(3).textContent = '₹' + Math.round(item.balance).toLocaleString('en-IN');
+            });
+        }
+        
+        function setRate(rate) {
+            document.getElementById('interestRate').value = rate;
+            calculateRD();
+        }
+        
+        function printResults() {
+            window.print();
+        }
+        
+        // Calculate on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateRD();
+            
+            // Auto-calculate on input change
+            ['monthlyDeposit', 'interestRate', 'tenure', 'compounding'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateRD);
+                document.getElementById(id).addEventListener('change', calculateRD);
+            });
+        });
+    </script>
+</body>
+</html>
