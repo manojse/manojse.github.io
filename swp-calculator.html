@@ -32,7 +32,6 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="menu.css">
-    <link rel="stylesheet" href="mobile-responsive.css">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -188,21 +187,6 @@
                 margin-top: 90px;
                 padding: 15px;
             }
-            
-            .input-group {
-                margin-bottom: 20px;
-            }
-            
-            .input-field {
-                padding: 14px 12px;
-                font-size: 16px;
-                box-sizing: border-box;
-            }
-            
-            .input-label {
-                margin-bottom: 6px;
-                font-size: 14px;
-            }
         }
         
         @media print {
@@ -278,12 +262,12 @@
             <div class="inputs-section">
                 <div class="input-group">
                     <label class="input-label" for="initialInvestment">Initial Investment (₹)</label>
-                    <input type="text" id="initialInvestment" class="input-field" value="20,00,000" min="10000" step="10000" inputmode="numeric" placeholder="Enter initial investment">
+                    <input type="number" id="initialInvestment" class="input-field" value="2000000" min="10000" step="10000">
                 </div>
                 
                 <div class="input-group">
                     <label class="input-label" for="monthlyWithdrawal">Monthly Withdrawal (₹)</label>
-                    <input type="text" id="monthlyWithdrawal" class="input-field" value="15,000" min="1000" step="1000" inputmode="numeric" placeholder="Enter monthly withdrawal">
+                    <input type="number" id="monthlyWithdrawal" class="input-field" value="15000" min="1000" step="1000">
                 </div>
                 
                 <div class="input-group">
@@ -363,14 +347,13 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/indian-number-format.js"></script>
     <script src="menu.js" defer></script>
     <script>
         let chartInstance = null;
         
         function calculateSWP() {
-            const initialInvestment = parseIndianNumber(document.getElementById('initialInvestment').value) || 2000000;
-            const monthlyWithdrawal = parseIndianNumber(document.getElementById('monthlyWithdrawal').value) || 15000;
+            const initialInvestment = parseFloat(document.getElementById('initialInvestment').value) || 2000000;
+            const monthlyWithdrawal = parseFloat(document.getElementById('monthlyWithdrawal').value) || 15000;
             const annualReturn = parseFloat(document.getElementById('annualReturn').value) || 10;
             const inflationRate = parseFloat(document.getElementById('inflationRate').value) || 6;
             const withdrawalPeriod = parseFloat(document.getElementById('withdrawalPeriod').value) || 20;
@@ -537,14 +520,6 @@
         
         // Calculate on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // Add formatting to amount inputs
-            ['initialInvestment', 'monthlyWithdrawal'].forEach(id => {
-                const input = document.getElementById(id);
-                if (input) {
-                    formatNumberInput(input);
-                }
-            });
-            
             calculateSWP();
             
             // Auto-calculate on input change

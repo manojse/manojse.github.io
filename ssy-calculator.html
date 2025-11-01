@@ -32,7 +32,6 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="menu.css">
-    <link rel="stylesheet" href="mobile-responsive.css">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -235,21 +234,6 @@
                 margin-top: 90px;
                 padding: 15px;
             }
-            
-            .input-group {
-                margin-bottom: 20px;
-            }
-            
-            .input-field, .select-field {
-                padding: 14px 12px;
-                font-size: 16px;
-                box-sizing: border-box;
-            }
-            
-            .input-label {
-                margin-bottom: 6px;
-                font-size: 14px;
-            }
         }
         
         @media print {
@@ -342,7 +326,7 @@
                 
                 <div class="input-group">
                     <label class="input-label" for="annualInvestment">Annual Investment (₹)</label>
-                    <input type="text" id="annualInvestment" class="input-field" value="1,50,000" min="250" max="150000" step="1000" inputmode="numeric" placeholder="Enter annual investment">
+                    <input type="number" id="annualInvestment" class="input-field" value="150000" min="250" max="150000" step="1000">
                     <small style="color: #666;">Minimum: ₹250, Maximum: ₹1,50,000</small>
                 </div>
                 
@@ -456,14 +440,13 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/indian-number-format.js"></script>
     <script src="menu.js" defer></script>
     <script>
         let chartInstance = null;
         
         function calculateSSY() {
             const childAge = parseInt(document.getElementById('childAge').value) || 5;
-            const annualInvestment = parseIndianNumber(document.getElementById('annualInvestment').value) || 150000;
+            const annualInvestment = parseFloat(document.getElementById('annualInvestment').value) || 150000;
             const interestRate = parseFloat(document.getElementById('interestRate').value) || 8.0;
             const investmentPeriod = parseInt(document.getElementById('investmentPeriod').value) || 15;
             
@@ -611,12 +594,6 @@
         
         // Calculate on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // Add formatting to amount inputs
-            const annualInvestmentInput = document.getElementById('annualInvestment');
-            if (annualInvestmentInput) {
-                formatNumberInput(annualInvestmentInput);
-            }
-            
             updateInvestmentPeriod();
             calculateSSY();
             

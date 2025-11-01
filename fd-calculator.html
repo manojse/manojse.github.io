@@ -32,7 +32,6 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="menu.css">
-    <link rel="stylesheet" href="mobile-responsive.css">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -186,21 +185,6 @@
                 margin-top: 90px;
                 padding: 15px;
             }
-            
-            .input-group {
-                margin-bottom: 20px;
-            }
-            
-            .input-field, .select-field {
-                padding: 14px 12px;
-                font-size: 16px;
-                box-sizing: border-box;
-            }
-            
-            .input-label {
-                margin-bottom: 6px;
-                font-size: 14px;
-            }
         }
         
         @media print {
@@ -276,7 +260,7 @@
             <div class="inputs-section">
                 <div class="input-group">
                     <label class="input-label" for="principal">Principal Amount (₹)</label>
-                    <input type="text" id="principal" class="input-field" value="1,00,000" min="1000" step="1000" inputmode="numeric" placeholder="Enter amount">
+                    <input type="number" id="principal" class="input-field" value="100000" min="1000" step="1000">
                 </div>
                 
                 <div class="input-group">
@@ -422,7 +406,7 @@
         let chartInstance = null;
         
         function calculateFD() {
-            const principal = parseIndianNumber(document.getElementById('principal').value) || 100000;
+            const principal = parseFloat(document.getElementById('principal').value) || 100000;
             const rate = parseFloat(document.getElementById('interestRate').value) || 6.5;
             const tenure = parseFloat(document.getElementById('tenure').value) || 1;
             const compounding = parseFloat(document.getElementById('compounding').value) || 4;
@@ -510,22 +494,6 @@
             calculateFD();
         }
         
-        // Indian number formatting functions
-        function formatIndianRupee(amount) {
-            return '₹' + Math.round(amount).toLocaleString('en-IN');
-        }
-        
-        function formatNumberInput(input) {
-            let value = input.value.replace(/[^\d]/g, '');
-            if (value) {
-                input.value = parseInt(value).toLocaleString('en-IN');
-            }
-        }
-        
-        function parseIndianNumber(str) {
-            return parseFloat(str.replace(/[₹,]/g, '')) || 0;
-        }
-        
         function printResults() {
             window.print();
         }
@@ -534,26 +502,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             calculateFD();
             
-            // Format principal input
-            const principalInput = document.getElementById('principal');
-            if (principalInput) {
-                principalInput.addEventListener('input', function() {
-                    formatNumberInput(this);
-                    calculateFD();
-                });
-                
-                principalInput.addEventListener('blur', function() {
-                    formatNumberInput(this);
-                });
-            }
-            
-            // Auto-calculate on other input changes
-            ['interestRate', 'tenure', 'compounding', 'taxSlab'].forEach(id => {
-                const input = document.getElementById(id);
-                if (input) {
-                    input.addEventListener('input', calculateFD);
-                    input.addEventListener('change', calculateFD);
-                }
+            // Auto-calculate on input change
+            ['principal', 'interestRate', 'tenure', 'compounding', 'taxSlab'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateFD);
+                document.getElementById(id).addEventListener('change', calculateFD);
             });
         });
     </script>

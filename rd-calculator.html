@@ -32,7 +32,6 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="menu.css">
-    <link rel="stylesheet" href="mobile-responsive.css">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -224,21 +223,6 @@
                 margin-top: 90px;
                 padding: 15px;
             }
-            
-            .input-group {
-                margin-bottom: 20px;
-            }
-            
-            .input-field, .select-field {
-                padding: 14px 12px;
-                font-size: 16px;
-                box-sizing: border-box;
-            }
-            
-            .input-label {
-                margin-bottom: 6px;
-                font-size: 14px;
-            }
         }
         
         @media print {
@@ -314,7 +298,7 @@
             <div class="inputs-section">
                 <div class="input-group">
                     <label class="input-label" for="monthlyDeposit">Monthly Deposit (₹)</label>
-                    <input type="text" id="monthlyDeposit" class="input-field" value="5,000" min="100" step="100" inputmode="numeric" placeholder="Enter monthly deposit">
+                    <input type="number" id="monthlyDeposit" class="input-field" value="5000" min="100" step="100">
                 </div>
                 
                 <div class="input-group">
@@ -454,13 +438,12 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/indian-number-format.js"></script>
     <script src="menu.js" defer></script>
     <script>
         let chartInstance = null;
         
         function calculateRD() {
-            const monthlyDeposit = parseIndianNumber(document.getElementById('monthlyDeposit').value) || 5000;
+            const monthlyDeposit = parseFloat(document.getElementById('monthlyDeposit').value) || 5000;
             const rate = parseFloat(document.getElementById('interestRate').value) || 6.5;
             const tenure = parseFloat(document.getElementById('tenure').value) || 5;
             const compounding = parseFloat(document.getElementById('compounding').value) || 4;
@@ -586,12 +569,6 @@
         
         // Calculate on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // Add formatting to amount inputs
-            const monthlyDepositInput = document.getElementById('monthlyDeposit');
-            if (monthlyDepositInput) {
-                formatNumberInput(monthlyDepositInput);
-            }
-            
             calculateRD();
             
             // Auto-calculate on input change

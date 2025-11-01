@@ -32,7 +32,6 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="menu.css">
-    <link rel="stylesheet" href="mobile-responsive.css">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -208,21 +207,6 @@
                 margin-top: 90px;
                 padding: 15px;
             }
-            
-            .input-group {
-                margin-bottom: 20px;
-            }
-            
-            .input-field, .select-field {
-                padding: 14px 12px;
-                font-size: 16px;
-                box-sizing: border-box;
-            }
-            
-            .input-label {
-                margin-bottom: 6px;
-                font-size: 14px;
-            }
         }
         
         @media print {
@@ -303,7 +287,7 @@
                 
                 <div class="input-group">
                     <label class="input-label" for="annualIncome">Annual Income (₹)</label>
-                    <input type="text" id="annualIncome" class="input-field" value="12,00,000" min="0" step="10000" inputmode="numeric" placeholder="Enter annual income">
+                    <input type="number" id="annualIncome" class="input-field" value="1200000" min="0" step="10000">
                 </div>
                 
                 <div class="input-group">
@@ -318,22 +302,22 @@
                 <div id="oldRegimeDeductions" style="display: none;">
                     <div class="deduction-group">
                         <label class="input-label">Deductions under Section 80C</label>
-                        <input type="text" id="section80c" class="input-field" value="1,50,000" max="150000" inputmode="numeric" placeholder="Max: ₹1,50,000">
+                        <input type="number" id="section80c" class="input-field" value="150000" max="150000" placeholder="Max: ₹1,50,000">
                     </div>
                     
                     <div class="deduction-group">
                         <label class="input-label">Section 80D (Health Insurance)</label>
-                        <input type="text" id="section80d" class="input-field" value="25,000" inputmode="numeric" placeholder="Health insurance premium">
+                        <input type="number" id="section80d" class="input-field" value="25000" placeholder="Health insurance premium">
                     </div>
                     
                     <div class="deduction-group">
                         <label class="input-label">HRA Exemption</label>
-                        <input type="text" id="hra" class="input-field" value="0" inputmode="numeric" placeholder="HRA exemption amount">
+                        <input type="number" id="hra" class="input-field" value="0" placeholder="HRA exemption amount">
                     </div>
                     
                     <div class="deduction-group">
                         <label class="input-label">Other Deductions</label>
-                        <input type="text" id="otherDeductions" class="input-field" value="0" inputmode="numeric" placeholder="Other deductions">
+                        <input type="number" id="otherDeductions" class="input-field" value="0" placeholder="Other deductions">
                     </div>
                 </div>
                 
@@ -396,7 +380,6 @@
         <p>&copy; 2025 Skrollmates.com</p>
     </footer>
 
-    <script src="js/indian-number-format.js"></script>
     <script src="menu.js" defer></script>
     <script>
         let currentRegime = 'new';
@@ -431,7 +414,7 @@
         }
         
         function calculateTax() {
-            const annualIncome = parseIndianNumber(document.getElementById('annualIncome').value) || 0;
+            const annualIncome = parseFloat(document.getElementById('annualIncome').value) || 0;
             const age = document.getElementById('age').value;
             
             let taxableIncome = annualIncome;
@@ -442,10 +425,10 @@
                 deductions = 75000; // Standard deduction in new regime
             } else {
                 // Calculate deductions for old regime
-                const section80c = Math.min(parseIndianNumber(document.getElementById('section80c').value) || 0, 150000);
-                const section80d = parseIndianNumber(document.getElementById('section80d').value) || 0;
-                const hra = parseIndianNumber(document.getElementById('hra').value) || 0;
-                const otherDeductions = parseIndianNumber(document.getElementById('otherDeductions').value) || 0;
+                const section80c = Math.min(parseFloat(document.getElementById('section80c').value) || 0, 150000);
+                const section80d = parseFloat(document.getElementById('section80d').value) || 0;
+                const hra = parseFloat(document.getElementById('hra').value) || 0;
+                const otherDeductions = parseFloat(document.getElementById('otherDeductions').value) || 0;
                 
                 deductions = section80c + section80d + hra + otherDeductions + 50000; // Standard deduction
             }
@@ -514,7 +497,7 @@
         }
         
         function showComparison() {
-            const annualIncome = parseIndianNumber(document.getElementById('annualIncome').value) || 0;
+            const annualIncome = parseFloat(document.getElementById('annualIncome').value) || 0;
             
             // Calculate for both regimes
             const oldRegime = currentRegime;
@@ -561,14 +544,6 @@
         
         // Calculate on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // Add formatting to amount inputs
-            ['annualIncome', 'section80c', 'section80d', 'hra', 'otherDeductions'].forEach(id => {
-                const input = document.getElementById(id);
-                if (input) {
-                    formatNumberInput(input);
-                }
-            });
-            
             calculateTax();
             
             // Auto-calculate on input change
