@@ -32,6 +32,7 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="mobile-responsive.css">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -260,6 +261,21 @@
                 margin-top: 90px;
                 padding: 15px;
             }
+            
+            .input-group {
+                margin-bottom: 20px;
+            }
+            
+            .input-field, .select-field {
+                padding: 14px 12px;
+                font-size: 16px;
+                box-sizing: border-box;
+            }
+            
+            .input-label {
+                margin-bottom: 6px;
+                font-size: 14px;
+            }
         }
         
         @media print {
@@ -340,7 +356,7 @@
                 
                 <div class="input-group">
                     <label class="input-label" for="salaryAmount" id="salaryLabel">Annual CTC (₹)</label>
-                    <input type="number" id="salaryAmount" class="input-field" value="1200000" min="0" step="10000">
+                    <input type="text" id="salaryAmount" class="input-field" value="12,00,000" min="0" step="10000" inputmode="numeric" placeholder="Enter annual CTC">
                 </div>
                 
                 <div class="input-group">
@@ -368,7 +384,7 @@
                 
                 <div class="input-group">
                     <label class="input-label" for="otherAllowances">Other Allowances (₹/year)</label>
-                    <input type="number" id="otherAllowances" class="input-field" value="100000" min="0" step="10000">
+                    <input type="text" id="otherAllowances" class="input-field" value="1,00,000" min="0" step="10000" inputmode="numeric" placeholder="Enter other allowances">
                 </div>
                 
                 <div class="comparison-toggle">
@@ -495,6 +511,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/indian-number-format.js"></script>
     <script src="menu.js" defer></script>
     <script>
         let chartInstance = null;
@@ -519,12 +536,12 @@
         }
         
         function calculateSalary() {
-            const salaryAmount = parseFloat(document.getElementById('salaryAmount').value) || 1200000;
+            const salaryAmount = parseIndianNumber(document.getElementById('salaryAmount').value) || 1200000;
             const age = parseInt(document.getElementById('age').value) || 30;
             const taxRegime = document.getElementById('taxRegime').value;
             const basicPercent = parseFloat(document.getElementById('basicPercent').value) || 40;
             const hraPercent = parseFloat(document.getElementById('hraPercent').value) || 20;
-            const otherAllowances = parseFloat(document.getElementById('otherAllowances').value) || 100000;
+            const otherAllowances = parseIndianNumber(document.getElementById('otherAllowances').value) || 100000;
             
             const includeEPF = document.getElementById('includeEPF').checked;
             const includeESI = document.getElementById('includeESI').checked;
@@ -733,6 +750,14 @@
         
         // Calculate on page load
         document.addEventListener('DOMContentLoaded', function() {
+            // Add formatting to amount inputs
+            ['salaryAmount', 'otherAllowances'].forEach(id => {
+                const input = document.getElementById(id);
+                if (input) {
+                    formatNumberInput(input);
+                }
+            });
+            
             calculateSalary();
             
             // Auto-calculate on input change

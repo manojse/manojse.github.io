@@ -21,11 +21,69 @@ function formatIndianNumber(number) {
 
 // Format input fields with commas (for user input)
 function formatNumberInput(input) {
-    if (!input || !input.value) return;
+    if (!input) return;
     
-    let value = input.value.replace(/[^\d]/g, '');
-    if (value) {
-        input.value = parseInt(value).toLocaleString('en-IN');
+    // Add keydown event to prevent non-numeric characters
+    input.addEventListener('keydown', function(e) {
+        // Allow: backspace, delete, tab, escape, enter
+        if ([8, 9, 27, 13, 46].indexOf(e.keyCode) !== -1 ||
+            // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X, Ctrl+Z
+            (e.keyCode === 65 && e.ctrlKey === true) ||
+            (e.keyCode === 67 && e.ctrlKey === true) ||
+            (e.keyCode === 86 && e.ctrlKey === true) ||
+            (e.keyCode === 88 && e.ctrlKey === true) ||
+            (e.keyCode === 90 && e.ctrlKey === true) ||
+            // Allow: home, end, left, right, up, down
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+    
+    // Add input event to format numbers with Indian commas
+    input.addEventListener('input', function(e) {
+        try {
+            const el = e.target;
+            const selStart = el.selectionStart || 0;
+            // Count digits before caret position
+            const digitsBefore = el.value.slice(0, selStart).replace(/\D/g, '').length;
+            // Remove all non-digits
+            let value = el.value.replace(/[^\d]/g, '');
+            if (value) {
+                // Format with Indian commas
+                const formatted = parseInt(value).toLocaleString('en-IN');
+                el.value = formatted;
+                
+                // Restore caret position after formatting
+                let pos = 0, digitCount = 0;
+                while (digitCount < digitsBefore && pos < el.value.length) {
+                    if (/\d/.test(el.value.charAt(pos))) digitCount++;
+                    pos++;
+                }
+                el.setSelectionRange(pos, pos);
+            } else {
+                el.value = '';
+            }
+        } catch (err) {
+            // Fallback: simple formatting
+            let value = e.target.value.replace(/[^\d]/g, '');
+            if (value) {
+                e.target.value = parseInt(value).toLocaleString('en-IN');
+            } else {
+                e.target.value = '';
+            }
+        }
+    });
+    
+    // Format initial value if present
+    if (input.value) {
+        let value = input.value.replace(/[^\d]/g, '');
+        if (value) {
+            input.value = parseInt(value).toLocaleString('en-IN');
+        }
     }
 }
 
@@ -33,6 +91,30 @@ function formatNumberInput(input) {
 function parseIndianNumber(str) {
     if (!str) return 0;
     return parseFloat(str.toString().replace(/[₹,\s]/g, '')) || 0;
+}
+
+// Prevent non-numeric input on any input field
+function restrictToNumericInput(input) {
+    if (!input) return;
+    
+    input.addEventListener('keydown', function(e) {
+        // Allow: backspace, delete, tab, escape, enter
+        if ([8, 9, 27, 13, 46].indexOf(e.keyCode) !== -1 ||
+            // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X, Ctrl+Z
+            (e.keyCode === 65 && e.ctrlKey === true) ||
+            (e.keyCode === 67 && e.ctrlKey === true) ||
+            (e.keyCode === 86 && e.ctrlKey === true) ||
+            (e.keyCode === 88 && e.ctrlKey === true) ||
+            (e.keyCode === 90 && e.ctrlKey === true) ||
+            // Allow: home, end, left, right, up, down
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
 }
 
 // Format decimal numbers with Indian formatting

@@ -32,6 +32,7 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="mobile-responsive.css">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -268,6 +269,21 @@
                 margin-top: 90px;
                 padding: 15px;
             }
+            
+            .input-group {
+                margin-bottom: 20px;
+            }
+            
+            .input-field, .select-field {
+                padding: 14px 12px;
+                font-size: 16px;
+                box-sizing: border-box;
+            }
+            
+            .input-label {
+                margin-bottom: 6px;
+                font-size: 14px;
+            }
         }
         
         @media print {
@@ -352,22 +368,22 @@
                 
                 <div class="input-group">
                     <label class="input-label" for="basicSalary">Basic Salary (₹/month)</label>
-                    <input type="number" id="basicSalary" class="input-field" value="60000" min="0" step="1000">
+                    <input type="text" id="basicSalary" class="input-field" value="60,000" min="0" step="1000" inputmode="numeric" placeholder="Enter basic salary">
                 </div>
                 
                 <div class="input-group">
                     <label class="input-label" for="hraReceived">HRA Received (₹/month)</label>
-                    <input type="number" id="hraReceived" class="input-field" value="24000" min="0" step="1000">
+                    <input type="text" id="hraReceived" class="input-field" value="24,000" min="0" step="1000" inputmode="numeric" placeholder="Enter HRA amount">
                 </div>
                 
                 <div class="input-group">
                     <label class="input-label" for="rentPaid">Rent Paid (₹/month)</label>
-                    <input type="number" id="rentPaid" class="input-field" value="30000" min="0" step="1000">
+                    <input type="text" id="rentPaid" class="input-field" value="30,000" min="0" step="1000" inputmode="numeric" placeholder="Enter rent amount">
                 </div>
                 
                 <div class="input-group">
                     <label class="input-label" for="daAllowance">DA (Dearness Allowance) (₹/month)</label>
-                    <input type="number" id="daAllowance" class="input-field" value="0" min="0" step="1000">
+                    <input type="text" id="daAllowance" class="input-field" value="0" min="0" step="1000" inputmode="numeric" placeholder="Enter DA amount">
                     <small style="color: #666;">Include if DA is part of retirement benefits</small>
                 </div>
                 
@@ -494,6 +510,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/indian-number-format.js"></script>
     <script src="menu.js" defer></script>
     <script>
         let chartInstance = null;
@@ -510,10 +527,10 @@
         }
         
         function calculateHRA() {
-            const basicSalary = parseFloat(document.getElementById('basicSalary').value) || 0;
-            const hraReceived = parseFloat(document.getElementById('hraReceived').value) || 0;
-            const rentPaid = parseFloat(document.getElementById('rentPaid').value) || 0;
-            const daAllowance = parseFloat(document.getElementById('daAllowance').value) || 0;
+            const basicSalary = parseIndianNumber(document.getElementById('basicSalary').value) || 0;
+            const hraReceived = parseIndianNumber(document.getElementById('hraReceived').value) || 0;
+            const rentPaid = parseIndianNumber(document.getElementById('rentPaid').value) || 0;
+            const daAllowance = parseIndianNumber(document.getElementById('daAllowance').value) || 0;
             const taxSlab = parseFloat(document.getElementById('taxSlab').value) || 30;
             
             const totalBasic = basicSalary + daAllowance;
@@ -615,6 +632,12 @@
         
         // Calculate on page load
         document.addEventListener('DOMContentLoaded', function() {
+            // Add formatting to amount inputs
+            ['basicSalary', 'hraReceived', 'rentPaid', 'daAllowance'].forEach(id => {
+                const input = document.getElementById(id);
+                formatNumberInput(input);
+            });
+            
             calculateHRA();
             
             // Auto-calculate on input change
